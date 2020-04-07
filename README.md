@@ -16,26 +16,17 @@ This project was created using html, css, javascript, and bootstrap and jQuery l
 
 # How to Use
 
-This project consists of 3 pages:
-
-"About Me" (index.html)
-This page contains my picture and a short description of my background.
-
-"Portfolio (portfolio.html)
-This page contains links to a few of my projects.
-
-"Contact Me" (contact.html)
-This page contains a contact form to allow you to send me a message.
+TBD
 
 # Credits
 
-I would like to thank all the instructors, TAs, and staff at the University of Utah Coding Bootcamp for the instruction, curriculum, inspiration, and other support provided to assist me in the creation of this project.
+We would like to thank all the instructors, TAs, and staff at the University of Utah Coding Bootcamp for the instruction, curriculum, inspiration, and other support provided to assist me in the creation of this project.
 
 # License
 
 Released under MIT License
 
-Copyright (c) 2020 Jason Mangin
+Copyright (c) 2020 Alex Halstead, Erica Robbins, and Jason Mangin
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
