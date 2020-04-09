@@ -76,21 +76,11 @@ Geolocation autofill and display lists of stores in your area
 
 (8) Must be interactive (i.e. accept and respond to user input)
 
-# To-Do List for Wednesday
+# To-Do List for Saturady
 
-(1) Design Mock-up (complete)
-(2) Finalize project components
-Front-End-All
-Navbar and menu
-
-Front-End-Front-Page
-Picture buttons
-search bar
-trending items dropdown menu
-
-(3) General responsibilities
-Erica - Front Page, Results page, navbar/banner with hamburger menu
-Alex - Modals 1, 2, 3, 4
-Jason - Backend
-
-(4) Timeline - Try to have an initial working copy (or the beginnings of one) by Saturday
+(1) Review Project Kanban board
+(2) Review code files and assignments
+(3) Review how to perform merges and pull requests
+(4) Review progress
+(5) Continue developing front-end design
+(6) Implement js and perform initial testing (if time permits)
