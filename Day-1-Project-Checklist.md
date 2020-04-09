@@ -55,8 +55,14 @@ Geolocation autofill and display lists of stores in your area
 # Project Requirements
 
 (1) Must use at least 2 server-side APIs
+    - 5 Walmart APIs
+    - Lowes (if need a second one)
+    - Google Maps Inlay
+    - Google Maps Geolocator API
 
 (2) Must use a CSS framework other than Bootstrap
+    - UI Kit
+    - Tailwind (maybe later)
 
 (3) Use at least one new third-party API
 
@@ -70,4 +76,21 @@ Geolocation autofill and display lists of stores in your area
 
 (8) Must be interactive (i.e. accept and respond to user input)
 
+# To-Do List for Wednesday
 
+(1) Design Mock-up (complete)
+(2) Finalize project components
+Front-End-All
+Navbar and menu
+
+Front-End-Front-Page
+Picture buttons
+search bar
+trending items dropdown menu
+
+(3) General responsibilities
+Erica - Front Page, Results page, navbar/banner with hamburger menu
+Alex - Modals 1, 2, 3, 4
+Jason - Backend
+
+(4) Timeline - Try to have an initial working copy (or the beginnings of one) by Saturday
