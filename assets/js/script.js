@@ -10,8 +10,7 @@
 // make sure the modal 3 submit button has id of "#modal3Button"
 // make sure the modal 3 input is text type and has id of "#modal3Input"
 
-
-// sample objects
+// sample objects for storing and retrieving store location choices
 
 // storeLocation = {
 //     "name": "XXX",
@@ -37,9 +36,9 @@
         // if results are available, render them and proceed to modal 4 by running display(modal-4)
         // if results are not available, render online only message and proceed to modal 4 by running display(modal-4)
 // modal 4 click event listener
-    // 
-
-
+    // if store locations are not available, proceed is clicked and proceed to results page by running resultsPage()
+    // if store locations are available, the applicable store information from the button click is stored in storeLocation object and proceed to results page by running resultsPage()
+// results page is displayed by running display(results) and applicable store location/Google Maps insert/search item information is displayed based on store location or online-only status
 
 // establish variables
 var searchItem = "";
@@ -129,36 +128,14 @@ function display(page) {
 function resultsPage() {
     // displays results page
     display("results");
-
+    // if storeLocation is NOT "online", run API call using searchItem, storeLocation to retrieve results information
+        // create html elements and append them to search items container
+        // run Google Maps API and update Google Maps insert (including updating container class with "show")
+        // create and append html elements for storeLocation to storeLocation container    
+    // if storeLocation is "online", run API call using searchItem and online only settings to retrieve results information
+        // create html elements and apppend them to search items container
+        // update storeLocation container with online only message and hide Google Maps insert (including updating container class with "hide")
 }
-
-    // (Step 1) modal 1 - ask if you want to use this location
-    // Present location information from local storage or API call return based on browser geolocation information
-    // If "yes" (want to use this location) is pressed, proceed to modal 2 - do you want to make this a favorite store
-    // if "no" is pressed, proceed to modal 3 - input city and state or zip code
-
-    // (Step 2) modal 2 - do you want to make this a favorite store
-    // if "yes" is pressed, add to local storage and proceed to results page
-    // if "no" is pressed, proceed to results page
-
-    // (Step 3) modal 3 - input city and state or zip code
-    // on "submit" button click, trim data, validate that it meets "city and state" or "zip code" requirements for API call, identify as "city and state" or "zip code", if requirements are not met, display error message and reset
-    // if data requirements are met, run API call to return 5 closest store locations and proceed to modal 2 - do you want to make this a favorite store location
-    // if data requirements are met but store locations are not available, proceed to modal 4 - choose location
-
-    // (Step 4) modal 4 - choose location
-    // if store locations are available from API call, generate html elements for store location information and "pick this location" buttons
-    // if store locations are not available, display "no locations available in your area, proceed to online ordering information" message and generate "proceed" button
-    // on "pick this location" click, obtain store information, run API call for item availability at that location and proceed to results page
-    // on "proceed" click, run API call for online-only item availability and proceed to results page
-
-    // (Step 5) results page
-    // create item information html elements and append to item container
-    // if store location is available, update store location information in store location container
-    // if store location is not available, display online-only message in store location container
-    // if store location is available, run Google Maps API to update Google Maps insert
-    // if store location is not available, hide Google Maps insert
-
 
 // event listeners
 
@@ -225,24 +202,29 @@ $(document).on("click", "#modal3Button", function(event) {
     }
     else {
         // run API call using locationInput to retrieve information
-        // if results are available, assign up to top 5 results in storeLocationSearch object, and render html elements to display store location information and associated select this store buttons in modal 4
-        // if results are not available, assign "online" to storeLocation object, render online message and proceed button in modal 4
+        // if results are available, assign up to top 5 results in storeLocationSearch object, and render html elements to display store location information and associated select this store buttons in modal 4 (make sure the buttons have class ".modal-4-buttons" and unique ids)
+        // if results are not available, assign "online" to storeLocation object, render online message and proceed button in modal 4 (make sure the buttons have class ".modal-4-button" and proceed has id "#modal4ProceedButton")
 
         // display modal 4
         display("modal-4");
     }
 });
+// modal 4 - click event for select this location button or proceed button
+$(document).on("click", ".modal-4-button", function(event) {
+    // if proceed button is clicked, proceed to results page
+    if ($(event.target).attr("id") === "modal4ProceedButton") {
+        resultsPage();
+    }
+    // if a select this store button is clicked, assign the location to the storeLocation object and proceed to modal 2 (make this my favorite store)
+    else {
+        // assign selected location to storeLocation object
 
-// modal 3 - "click" for submit button (select by id)
-// modal 4 - "click" for pick this location button (select by class) will need to be added to document since it is generated, "click" for proceed button (select by id) will need to be added to document since it is generated
-
+        // proceed to modal 2
+        display("modal-2");
+    }
+});
 // starting script
 // generate trending items (run trendingItems())
 
-
-
-
 // OTHER ITEMS
 // hamburger menu and navbar considerations - idea is to dynamically build menu options based on where the user is at in the process (is this doable and how?)
-// API calls for Walmart endpoints, research Google Maps API, Lowes API if can't get Google Maps to work
-// local storage function - what data to store and how
