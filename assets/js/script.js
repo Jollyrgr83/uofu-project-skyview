@@ -10,59 +10,115 @@
 // make sure the modal 3 submit button has id of "#modal3Button"
 // make sure the modal 3 input is text type and has id of "#modal3Input"
 
-// sample objects for storing and retrieving store location choices
+// OTHER ITEMS
+// hamburger menu and navbar considerations - idea is to dynamically build menu options based on where the user is at in the process (is this doable and how?)
+// Walmart Open APIs do not have a connection between store locations and inventory availability. It appears that all the inventory APIs only show online items. We will need to figure out an alternate method to accomplish our planned functionality.
 
-// storeLocation = {
-//     "name": "XXX",
-//     "address": "XXX",
-//     "number": "####",
-//     ?
-// }
-
-
-// front matter
-// starting script (trendingItems) is run to run API call to retrieve and render trending items to trending items drop down menu
-// user input (picture button, search bar, or trending items) will store search item in searchItem variable (global) and run locationProcess function to begin the modal progression to pick a store location
-    // if store location is preloaded from local storage or browser location data, proceed to modal 1 and associated click event listeners
-    // if store location is not preloaded, proceed to modal 3 and associated click event listeners
+// SCRIPT FLOW DESCRIPTION
+// starting script
+    // trendingItems() is run call trending items endpoint to retrieve and render trending items to trending items drop down menu on front page
+    // display(front) is run to show front page and hide results page, modal 1, 2, 3, 4
+// from the front page, user input (picture button, search bar, or trending items) will store search item in searchItem variable and run locationProcess() to attempt to identify user location from (1) local storage (favorite store) or (2) browser location information, and begin the modal progression to verify search location
+    // if search location is identified from local storage, proceed to modal 1 (do you want to use this location)
+    // if search location is obtained from browser location data, proceed to modal 4 (select which location to use)
+    // if search location is not obtained, proceed to modal 3 (enter location information)
 // modal 1 click event listener
-    // if yes, proceed to modal 2 - make this your favorite store by running display(modal-2)
-    // if no, proceed to modal 3 - enter location information by running display(modal-3)
+    // if yes, proceed to modal 2 (make this your favorite store)
+    // if no, proceed to modal 3 - (enter location information)
 // modal 2 click event listener
-    // if yes, update local storage with storeLocation object and proceed to results page by running resultsPage()
-    // if no, proceed to results page by running resultsPage()
+    // if yes, update local storage with storeLocation object and proceed to results page
+    // if no, proceed to results page
 // modal 3 click event listener
-    // retrieve user location information, run API call to retrieve closest store locations, 
-        // if results are available, render them and proceed to modal 4 by running display(modal-4)
-        // if results are not available, render online only message and proceed to modal 4 by running display(modal-4)
+    // obtain user location information, call store locator endpoint to retrieve 5 closest store locations, 
+        // if results are available, render them on modal 4 and proceed to modal 4 (select location)
+        // if results are not available, render online only message on modal 4 and proceed to modal 4 (select location)
 // modal 4 click event listener
-    // if store locations are not available, proceed is clicked and proceed to results page by running resultsPage()
-    // if store locations are available, the applicable store information from the button click is stored in storeLocation object and proceed to results page by running resultsPage()
-// results page is displayed by running display(results) and applicable store location/Google Maps insert/search item information is displayed based on store location or online-only status
+    // if store locations are not available, click "proceed" button and proceed to results page
+    // if store locations are available, the applicable store information from the button click is stored in storeLocation object, proceed to results page
+// results page is displayed and applicable store location/Google Maps insert/search item information is displayed based on store location or online-only status
 
-// establish variables
+// VARIABLES
+
 var searchItem = "";
 var storeLocation = {};
 var storeLocationSearch = {};
+var walmartAPIKey = "";
 
-// functions
+// FUNCTIONS
 
 // performs API call to Walmart Trending Items Endpoint, creates html elements for drop-down menu
 function trendingItems() {
     // API call to retrieve top ten trending items
+    var trendingItemsURLhttp = "http://api.walmartlabs.com/v1/trends?apiKey=" + walmartAPIKey + "&format=json";
+    var trendingItemsURLhttps = "https://api.walmartlabs.com/v1/trends?apiKey=" + walmartAPIKey + "&format=json";
+
+
+
     // loop to create html elements
+    
+    
+    
     // append html elements to page
+
+
+
 }
 // runs on user input from front page (item to search for) to progress through modals and obtain location information
 function locationProcess() {
-    // (Step 0) - front page
     // check local storage for existing data
-    // if local storage is present proceed to modal 1 - ask if you want to use this location
-    // if local storage is not present, attempt to obtain location from browser
-    // if location obtained from browser, run API call to obtain closest store location
-    // if a store location is returned from API call, proceed to modal 1 - ask if you want to use this location
-    // if a store location is not returned from API call, proceed to modal 3 - input city and state or zip code
-    // if location is not obtained from either method, proceed to modal 3 - input city and state or zip code
+    if (localStorage.getItem("storeLocation") === null) {
+        storeLocation = {};
+        // store location is not present in local storage, attempt to obtain location from browser
+
+        
+
+        // get lat/lon from browser
+        var lat = "";
+        var lon = "";
+        
+
+
+        if () {
+            // if successful, use lat/lon search url, render top 5 results to modal 4 and proceed to modal 4
+            var storeLocationByLatLonURLhttp = "http://api.walmartlabs.com/v1/stores?apiKey=" + walmartAPIKey + "&lon=" + lon + "&lat=" + lat + "&format=json";
+            var storeLocationByLatLonURLhttps = "https://api.walmartlabs.com/v1/stores?apiKey=" + walmartAPIKey + "&lon=" + lon + "&lat=" + lat + "&format=json";
+
+
+
+
+            if () {
+                // if results are available, assign up to top 5 results in storeLocationSearch object, and render html elements to display store location information and associated select this store buttons in modal 4 (make sure the buttons have class ".modal-4-buttons" and unique ids)
+        
+
+
+                // proceed to modal 4
+                display("modal-4");
+            }
+            else {
+                // if results are not available, assign "online" to storeLocation object, render online message and proceed button in modal 4 (make sure the buttons have class ".modal-4-button" and proceed has id "#modal4ProceedButton")
+
+
+
+                // proceed to modal 4
+                display("modal-4");
+            }
+        }
+        else {    
+        // if unsuccessful, go to modal 3 (enter location information)
+        display("modal-3");
+        }
+    }
+    else {
+        // local storage is present, updates storeLocation with local storage data
+        storeLocation = JSON.parse(localStorage.getItem("storeLocation"));
+        // render storeLocation to modal 1
+
+
+
+
+        // local storage is present proceed to modal 1 - ask if you want to use this location
+        display("modal-1");
+    }
 }
 // displays front page, results page, or applicable modal based on input by updating the show/hide classes for the applicable container elements
 function display(page) {
@@ -129,15 +185,33 @@ function resultsPage() {
     // displays results page
     display("results");
     // if storeLocation is NOT "online", run API call using searchItem, storeLocation to retrieve results information
+
+
+
         // create html elements and append them to search items container
+
+
+
         // run Google Maps API and update Google Maps insert (including updating container class with "show")
+        
+        
+        
         // create and append html elements for storeLocation to storeLocation container    
+    
+    
+    
     // if storeLocation is "online", run API call using searchItem and online only settings to retrieve results information
+        
+    
+    
         // create html elements and apppend them to search items container
+        
+        
+        
         // update storeLocation container with online only message and hide Google Maps insert (including updating container class with "hide")
 }
 
-// event listeners
+// EVENT LISTENERS
 
 // front page - click event listener for the 3 picture buttons
 $(document).on("click", ".picture-button", function(event) {
@@ -200,11 +274,34 @@ $(document).on("click", "#modal3Button", function(event) {
     if (locationInput === "") {
         return;
     }
-    else {
-        // run API call using locationInput to retrieve information
+    // data validation to determine if a zip code was entered
+    else if ($.isNumeric(locationInput)) {
+        // call Store Locator endpoint using zip code
+        var storeLocatorByZipURLhttp = "http://api.walmartlabs.com/v1/stores?apiKey=" + walmartAPIKey + "&zip=" + locationInput + "&format=json";
+        var storeLocatorByZipURLhttps = "https://api.walmartlabs.com/v1/stores?apiKey=" + walmartAPIKey + "&zip=" + locationInput + "&format=json";
         // if results are available, assign up to top 5 results in storeLocationSearch object, and render html elements to display store location information and associated select this store buttons in modal 4 (make sure the buttons have class ".modal-4-buttons" and unique ids)
+        
+        
+        
         // if results are not available, assign "online" to storeLocation object, render online message and proceed button in modal 4 (make sure the buttons have class ".modal-4-button" and proceed has id "#modal4ProceedButton")
 
+
+
+        // display modal 4
+        display("modal-4");
+    }
+    else {
+        // call Store Locator endpoint using city name
+        var storeLocatorByCityURLhttp = "http://api.walmartlabs.com/v1/stores?apiKey=" + walmartAPIKey + "&city=" + locationInput + "&format=json";
+        var storeLocatorByCityURLhttps = "https://api.walmartlabs.com/v1/stores?apiKey=" + walmartAPIKey + "&city=" + locationInput + "&format=json";
+        // if results are available, assign up to top 5 results in storeLocationSearch object, and render html elements to display store location information and associated select this store buttons in modal 4 (make sure the buttons have class ".modal-4-buttons" and unique ids)
+        
+        
+        
+        // if results are not available, assign "online" to storeLocation object, render online message and proceed button in modal 4 (make sure the buttons have class ".modal-4-button" and proceed has id "#modal4ProceedButton")
+
+        
+        
         // display modal 4
         display("modal-4");
     }
@@ -219,12 +316,13 @@ $(document).on("click", ".modal-4-button", function(event) {
     else {
         // assign selected location to storeLocation object
 
+
+
         // proceed to modal 2
         display("modal-2");
     }
 });
-// starting script
-// generate trending items (run trendingItems())
 
-// OTHER ITEMS
-// hamburger menu and navbar considerations - idea is to dynamically build menu options based on where the user is at in the process (is this doable and how?)
+// STARTING SCRIPT
+trendingItems();
+display("front");
