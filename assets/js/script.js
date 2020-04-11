@@ -14,6 +14,12 @@
 // hamburger menu and navbar considerations - idea is to dynamically build menu options based on where the user is at in the process (is this doable and how?)
 // Walmart Open APIs do not have a connection between store locations and inventory availability. It appears that all the inventory APIs only show online items. We will need to figure out an alternate method to accomplish our planned functionality.
 
+
+// NASA API Key: pK24NVUjUgtTgxaMB4IPco4R3xOsBhptCgFQPPSG
+// NASA Account ID: d3651b40-8bb0-47c2-ab26-2df8b2b1e269
+
+
+
 // SCRIPT FLOW DESCRIPTION
 // starting script
     // trendingItems() is run call trending items endpoint to retrieve and render trending items to trending items drop down menu on front page
@@ -43,6 +49,8 @@ var searchItem = "";
 var storeLocation = {};
 var storeLocationSearch = {};
 var walmartAPIKey = "";
+
+var oldAPIurl = "https://search.mobile.walmart.com/v1/products-by-code/UPC/" + upc + "?storeId=" + storeNumber;
 
 // FUNCTIONS
 
