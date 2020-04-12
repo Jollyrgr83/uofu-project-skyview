@@ -38,14 +38,8 @@
 // update html elements in eventSearch() function
 // add API call for NASA Earth events
 // update html elements in NASA Earth events API call
-// add API call for OpenWeather
 // update html elements for OpenWeather API call
-// update modal 3 html element with location in getLocation() function
-// find API to call for city/state from lat/lon
-// add city/state API call
-// update modal 3 html element with location in city/state API call
 // add code in click event for retrieving and updating image urls from storage object
-// update modal 3 html element with location in click event
 // Incorporate Spotify playlist and control functionality into front page elements
 
 // NASA Account ID: d3651b40-8bb0-47c2-ab26-2df8b2b1e269
@@ -346,28 +340,71 @@ function eventSearch() {
             display("results");
         });
     }
-    // run call to OpenWeather ????? endpoint, update weather results modal with information
-    var queryURLWeatherOneCall = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&appid=" + apiKeyWeather;
-    
-    var queryURLWeatherCurrentCity = "https://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&appid=" + apiKeyWeather;
+    // update weather results modal with information
+    if (localStorage.get("userLat") === null) {
+        // if lat/lon are NOT available in local storage, run call to OpenWeather Current endpoint to obtain lat and lon
+        var queryURLWeatherCurrentCity = "https://api.openweathermap.org/data/2.5/weather?q=" + userLocation + "&appid=" + apiKeyWeather;
+        $.ajax({
+            url: queryURLWeatherCurrentCity,
+            method: "GET"
+        }).then(function(response) {
+            lat = response.coord.lat;
+            lon = response.coord.lon;
+            // update local storage with lat/lon
+            localStorage.setItem("userLat", lat);
+            localStorage.setItem("userLon", lon);
+            // run call to OpenWeather One Call endpoint to obtain weather information
+            var queryURLWeatherOneCall = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&appid=" + apiKeyWeather;        
+            $.ajax({
+                url: queryURLWeatherOneCall,
+                method: "GET"
+            }).then(function(response) {
+                // clear existing information in weather results modal
+                
+                
+                
+                
+                // create and update html elements for weather results modal
 
-    var queryURLWeatherCurrentZIP = "https://api.openweathermap.org/data/2.5/weather?zip=" + zipCode + "&appid=" apiKeyWeather;
-    
-    $.ajax({
-        url: queryURLWeather,
-        method: "GET"
-    }).then(function(response) {
-        // clear existing information in weather results modal
+
+
+
+                // append html elements to weather results modal
 
 
 
 
-        // create weather results modal html elements, update with information, append
+
+            });
+        });
+    }
+    else {
+        // if lat/lon are available in local storage, run call to OpenWeather One Call endpoint to obtain weather information
+        var lat = localStorage.getItem("userLat");
+        var lon = localStorage.getItem("userLon");
+        var queryURLWeatherOneCall = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&appid=" + apiKeyWeather;        
+            $.ajax({
+                url: queryURLWeatherOneCall,
+                method: "GET"
+            }).then(function(response) {
+                // clear existing information in weather results modal
+                
+                
+                
+                
+                // create and update html elements for weather results modal
 
 
 
 
-    });
+                // append html elements to weather results modal
+
+
+
+
+
+            });
+    }
 }
 // retrieves location information
 function getLocation() {
@@ -390,6 +427,9 @@ function getLocation() {
         function success(position) {
             var lat = position.coords.latitude;
             var lon = position.coords.longitude;
+            // update local storage with lat/lon
+            localStorage.setItem("userLat", lat);
+            localStorage.setItem("userLon", lon);
             // API call to OpenWeather Current to obtain city name
             var queryURLWeatherCurrentLatLon = "https://api.openweathermap.org/data/2.5/weather?lat=" + lat + "&lon=" + lon + "&appid=" + apiKeyWeather;        
             $.ajax({
