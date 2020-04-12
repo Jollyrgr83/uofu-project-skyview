@@ -33,13 +33,10 @@
 // TO-DO LIST
 // obtain Spotify API key
 // update classes in display() function
-// add API calls for NASA pictures
-// update queryURLs for NASA picture API calls
 // update html elements in eventSearch() function
 // add API call for NASA Earth events
 // update html elements in NASA Earth events API call
 // update html elements for OpenWeather API call
-// add code in click event for retrieving and updating image urls from storage object
 // Incorporate Spotify playlist and control functionality into front page elements
 
 // NASA Account ID: d3651b40-8bb0-47c2-ab26-2df8b2b1e269
@@ -48,7 +45,6 @@
 
 // LIST OF APIS AND ENDPOINTS
 // NASA - Astronomy Picture of the Day (APOD) - used for background images on front page
-// NASA - Earth Polychromatic Imaging Camera (EPIC) - used for background images on front page
 // NASA - Earth Observatory Natural Event Tracker - used for earth-based events search
 // NASA - SSD/CNEOS (and more) - used for space-based events search
 // Open Weather Map - used for weather information
@@ -256,13 +252,18 @@ function display(page) {
 }
 // retrieves background image information from local storage, refreshes images using call to NASA APOD and EPIC endpoints (if applicable), updates local storage (if applicable), and displays modal 1 (welcome).
 function initializePage() {
-    // establishes variable with today's day value as a number
-    var a = new Date().getDate();
+    // build date as string
+    var a = new Date();
+    var yearString = a.getFullYear().toString();
+    var monthString = (a.getMonth() + 1).toString();
+    var dayString = a.getDate().toString();
+    var dateString = yearString + "/" + monthString + "/" + dayString;
     // if local storage is NOT available, initializes backgroundImageObject object
     if (localStorage.getItem("backgroundImageObject") === null) {
         backgroundImageObject = {
             "date" : "yesterday",
-            "images" : {}
+            "APOD-images" : [],
+            "APOD-titles" : [],
         };
     }
     // if local storage is available, stores local storage in backgroundImageObject
@@ -270,33 +271,27 @@ function initializePage() {
         backgroundImageObject = JSON.parse(localStorage.getItem("backgroundImageObject"));
     }
     // check to see if backgroundImageObject is up to date by comparing "date" property with variable a
-    if (a != backgroundImageObject.date) {
-        // call NASA APOD endpoint to get new images and store them in backgroundImageObject
-        var queryURLNASAAPOD = "https://api.nasa.gov/planetary/apod?api_key=" + apiKeyNASA;
-        $.ajax({
-            url: queryURLNASAAPOD,
-            method: "GET"
-        }).then(function(response) {
+    if (dayString != backgroundImageObject.date) {
+        // if not updated today, call NASA APOD endpoint to get images for last 5 days and store them in backgroundImageObject
+        for (let i = 0; i < 10; i++) {
+            if (a.getDate() - i <= 0) {
 
-
-
-
-
-        });
-        // call NASA EPIC endpoint to get new images and store them in backgroundImageObject
-        var queryURLNASAEPIC = "https://api.nasa.gov/EPIC/api/natural/images?api_key=" + apiKeyNASA; 
-        $.ajax({
-            url: queryURLNASAEPIC,
-            method: "GET"
-        }).then(function(response) {
-
-
-
-
-
-        });
+            }
+            else {
+                var newDayString = (a.getDate() - i).toString();
+                var newDateString = yearString + "/" + monthString + "/" + newDayString;
+                var queryURLNASAAPOD = "https://api.nasa.gov/planetary/apod?date=" + newDateString + "?api_key=" + apiKeyNASA;
+                $.ajax({
+                    url: queryURLNASAAPOD,
+                    method: "GET"
+                }).then(function(response) {
+                    backgroundImageObject.APOD-images[i] = response.url;
+                    backgroundImageObject.APOD-titles[i] = response.title;
+                });
+            }
+        }
         // update "date" property
-        backgroundImageObject.date = a;
+        backgroundImageObject.date = dayString;
     }
     // display modal 1 (welcome)
     display("modal-1");
@@ -365,7 +360,7 @@ function eventSearch() {
                 
                 
                 // create and update html elements for weather results modal
-
+                // icon, description, temperature
 
 
 
@@ -393,7 +388,7 @@ function eventSearch() {
                 
                 
                 // create and update html elements for weather results modal
-
+                // icon, description, temperature
 
 
 
@@ -465,7 +460,7 @@ $(document).on("click", ".buttons", function(event) {
         // if "Next" button is clicked, increment the data-index
         if (targetID === "next") {
             // if indexNumber is at the last entry, reset to the first entry
-            if (indexNumber === 10) {
+            if (indexNumber === backgroundImageObject.APOD-images.length - 1) {
                 indexNumber = 0;
             }
         else {
@@ -477,25 +472,16 @@ $(document).on("click", ".buttons", function(event) {
         else if (targetID === "previous") {
             // if indexNumber is at the first entry, reset to the last entry
             if (indexNumber === 0) {
-                indexNumber = 10;
+                indexNumber = backgroundImageObject.APOD-images.length - 1;
             }
             // if indexNumber is NOT at the first entry, decrement to previous entry
             else {
                 indexNumber--;
             }
         }
-        // retrieve the new picture url
-        
-        
-
-
-
         // update the background image element
-        
-        
-        
-        
-        
+        $("#backgroundImage").attr("src", backgroundImageObject.APOD-images[indexNumber]);
+        $("#backgroundImage").attr("alt", backgroundImageObject.APOD-titles[indexNumber]);
         // update the background image element data-index attribute
         $("#backgroundImage").attr("data-index", indexNumber);
     }    
