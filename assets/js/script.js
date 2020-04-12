@@ -31,13 +31,11 @@
 // Research and incorporate Spotify API, playlists, and buttons
 
 // TO-DO LIST
-// obtain Spotify API key
 // update classes in display() function
 // update html elements in eventSearch() function
 // add API call for NASA Earth events
 // update html elements in NASA Earth events API call
 // update html elements for OpenWeather API call
-// Incorporate Spotify playlist and control functionality into front page elements
 
 // NASA Account ID: d3651b40-8bb0-47c2-ab26-2df8b2b1e269
 
@@ -48,7 +46,6 @@
 // NASA - Earth Observatory Natural Event Tracker - used for earth-based events search
 // NASA - SSD/CNEOS (and more) - used for space-based events search
 // Open Weather Map - used for weather information
-// Spotify - used for space-themed background music
 
 // LIST OF HTML MODALS/PAGES
 // front page - contains background image, terms button, previous and next buttons
@@ -107,8 +104,6 @@
 var apiKeyNASA = "pK24NVUjUgtTgxaMB4IPco4R3xOsBhptCgFQPPSG";
 // used in calls to OpenWeather APIs
 var apiKeyWeather = "5f9f4afbfb142ac29ca47b2737de474a";
-// used in calls to Spotify APIs
-var apiKeySpotify = "";
 // used in display() function and terms modal "Close" button click event to track last active window
 var activeWindow = "";
 // used to determine whether to search for space events or earth events
@@ -252,12 +247,14 @@ function display(page) {
 }
 // retrieves background image information from local storage, refreshes images using call to NASA APOD and EPIC endpoints (if applicable), updates local storage (if applicable), and displays modal 1 (welcome).
 function initializePage() {
-    // build date as string
+    // build date as "YYYY-MM-DD" string (used in call to NASA APOD endpoint)
     var a = new Date();
     var yearString = a.getFullYear().toString();
     var monthString = (a.getMonth() + 1).toString();
+    if (monthString.length === 1) {
+        monthstring = "0" + monthString;
+    }
     var dayString = a.getDate().toString();
-    var dateString = yearString + "/" + monthString + "/" + dayString;
     // if local storage is NOT available, initializes backgroundImageObject object
     if (localStorage.getItem("backgroundImageObject") === null) {
         backgroundImageObject = {
@@ -274,12 +271,12 @@ function initializePage() {
     if (dayString != backgroundImageObject.date) {
         // if not updated today, call NASA APOD endpoint to get images for last 5 days and store them in backgroundImageObject
         for (let i = 0; i < 10; i++) {
-            if (a.getDate() - i <= 0) {
-
-            }
-            else {
+            if (a.getDate() - i > 0) {
                 var newDayString = (a.getDate() - i).toString();
-                var newDateString = yearString + "/" + monthString + "/" + newDayString;
+                if (newDayString.length === 1) {
+                    newDayString = "0" + newDayString;
+                }
+                var newDateString = yearString + "-" + monthString + "-" + newDayString;
                 var queryURLNASAAPOD = "https://api.nasa.gov/planetary/apod?date=" + newDateString + "?api_key=" + apiKeyNASA;
                 $.ajax({
                     url: queryURLNASAAPOD,
