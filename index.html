@@ -15,14 +15,28 @@
 
     <!-- NOTES: Update css styling in the ./assets/css/style.css file. It has been updated to include sections for each person -->
     <!-- UIKIT has been linked (but not tested). We do not have bootstrap linked so you will need to research the UIKIT documentation when using it -->
-
+    <div class="page-wrap">
     <header>
 
     <!-- navbar/banner starts (Erica) -->
-
-
-
-
+    <nav class="uk-navbar-container" uk-navbar>
+        <div class="uk-navbar-left">
+            <ul class="uk-navbar-nav">
+                <li class="uk-active"><a href="#">Home</a></li>
+                <li><a href="#" class="nav-item">Item</a></li>
+                <li><a href="#" class="nav-item">Item</a></li>
+                <li><a href="#" class="nav-item">Item</a></li>
+            </ul>
+        </div>
+                <!-- add prev, next and pause bar-->
+        <div class="uk-navbar-right">
+            <ul class="uk-navbar-nav item-buttons">
+                <li><a href="#" class="nav-item" id="previous">Previous</a></li>
+                <li><a href="#" class="nav-item" id="next">Next</a></li>
+                <li><a href="#" class="nav-item" id="pause">Pause</a></li>
+                <li class="uk-nav-divider"></li>
+            </ul>
+        </div>
     <!-- navbar/banner ends -->
 
     </header>

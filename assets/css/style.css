@@ -29,11 +29,17 @@
 /* Erica Code Section */
 
 
-
-
-
-
-
+.nav-item {
+    padding: 30px 30px!important;
+}
+#previous, #next, #pause {
+    color: black;
+    font-weight: 400;
+    font-size: 18px;
+}
+#previous:hover, #next:hover, #pause:hover {
+    color: lightGrey;
+}
 
 
 
