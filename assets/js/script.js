@@ -31,11 +31,9 @@
 // Research and incorporate Spotify API, playlists, and buttons
 
 // TO-DO LIST
+// may need to change "?" to "&" in NASA DONKI API call
+// add dates to both OpenWeather One Call API calls
 // update classes in display() function
-// update html elements in eventSearch() function
-// add API call for NASA Earth events
-// update html elements in NASA Earth events API call
-// update html elements for OpenWeather API call
 
 // NASA Account ID: d3651b40-8bb0-47c2-ab26-2df8b2b1e269
 
@@ -44,7 +42,7 @@
 // LIST OF APIS AND ENDPOINTS
 // NASA - Astronomy Picture of the Day (APOD) - used for background images on front page
 // NASA - Earth Observatory Natural Event Tracker - used for earth-based events search
-// NASA - SSD/CNEOS (and more) - used for space-based events search
+// NASA - Space Weather Database of Notifications, Knowledge, Information (DONKI) - used for space-based events search
 // Open Weather Map - used for weather information
 
 // LIST OF HTML MODALS/PAGES
@@ -112,6 +110,17 @@ var eventType = "";
 var userLocation = "";
 // used to store background images to minimize number of API calls
 var backgroundImageObject = {};
+// used to translate NASA DONKI titles
+var DONKI = {
+    "CME" : "Coronal Mass Ejection",
+    "GST" : "Geomagnetic Storm",
+    "IPS" : "Interplanetary Shock",
+    "FLR" : "Solar Flare",
+    "SEP" : "Solar Energetic Particle",
+    "MPC" : "Magnetopause Crossing",
+    "RBE" : "Radiation Belt Enhancement",
+    "HSS" : "Hight Speed Stream",
+};
 
 // FUNCTIONS
 
@@ -297,37 +306,68 @@ function initializePage() {
 function eventSearch() {
     if (eventType === "space") {
         // run call to NASA SSD/CNEOS endpoint, update event results modal with information
-        var queryURLNASASSD = "";
+        var queryURLNASADONKI = "https://api.nasa.gov/DONKI/notifications?api_key=" + apiKeyNASA;
         $.ajax({
-            url: queryURLNASASSD,
+            url: queryURLNASADONKI,
             method: "GET"
         }).then(function(response) {
             // clear existing information in event results modal 
             $("#eventResultsContainer").empty();
             // create event results modal html elements, update with information, append
-
-
-
-
-
+            for (let i = 0; i < response.length, i++) {
+                var messageTitle = response[i].messageType;
+                var messageURL = response[i].messageURL;
+                var messageBody = response[i].message.messageBody;
+                // if message title is an acronym, reassign full title from DONKI object
+                if (DONKI[messageTitle]) {
+                    messageTitle = DONKI[messageTitle];
+                }
+                // create html elements
+                var titleElement = $("<div>");
+                var urlContainer = $("<div>");
+                var urlElement = $("<a>");
+                var messageElement = $("<div>");
+                // update html elements
+                titleElement.text(messageTitle);
+                urlElement.attr("href", messageURL);
+                urlElement.attr("target", "_blank");
+                messageElement.text(messageBody);
+                // append html elements
+                $("#eventResultsContainer").append(titleElement);
+                $("#eventResultsContainer").append(urlElement);
+                $("#eventResultsContainer").append(messageElement);
+            }
             // display results modal
             display("results");
         });
     }
     else if (eventType === "earth") {
         // run call to NASA Earth Observatory Natural Events Tracker endpoint, update event results modal with information
-        var queryURLNASAEONET = "";
+        var queryURLNASAEONET = "https://eonet.sci.gsfc.nasa.gov/api/v3/events";
         $.ajax({
             url: queryURLNASAEONET,
             method: "GET"
         }).then(function(response) {
             // clear existing information in event results modal
             $("#eventResultsContainer").empty();
-            // create event results modal html elements, update with information, append
-
-
-
-
+            // create and update html elements
+            for (let i = 0; i < response.events.length; i++) {
+                var eventTitle = response.events[i].title;
+                var eventLat = response.events[i].geometry[0].coordinates[0];
+                var eventLon = response.events[i].geometry[0].coordinates[1];
+                var googleEarthURL = "https://earth.google.com/web/search/" + lat + "," + lon + "/";
+                // create html elements
+                var titleElement = $("<div>");
+                var urlContainer = $("<div>");
+                var urlElement = $("<a>");
+                // update attributes
+                titleElement.text(eventTitle);
+                urlElement.attr("href", googleEarthURL);
+                urlElement.attr("target", "_blank");
+                //append elements
+                $("#eventResultsContainer").append(titleElement);
+                $("#eventResultsContainer").append(urlElement);
+            }
             // display results modal
             display("results");
         });
@@ -346,27 +386,34 @@ function eventSearch() {
             localStorage.setItem("userLat", lat);
             localStorage.setItem("userLon", lon);
             // run call to OpenWeather One Call endpoint to obtain weather information
-            var queryURLWeatherOneCall = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&appid=" + apiKeyWeather;        
+            var queryURLWeatherOneCall = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&units=imperial&appid=" + apiKeyWeather;        
             $.ajax({
                 url: queryURLWeatherOneCall,
                 method: "GET"
             }).then(function(response) {
                 // clear existing information in weather results modal
-                
-                
-                
-                
-                // create and update html elements for weather results modal
-                // icon, description, temperature
-
-
-
-                // append html elements to weather results modal
-
-
-
-
-
+                $("#weatherResultsContainer").empty();
+                // create and update html elements
+                for (let i = 0; i < response.daily.length; i++) {
+                    var temp = response.daily[i].temp.max;
+                    var iconID = response.daily[i].weather[0].icon;
+                    var iconURL = "https://openweathermap.org/img/wn/" + iconID + "@2x.png";
+                    var description = response.daily[i].weather[0].description;
+                    var iconAlt = response.daily[i].weather[0].main;
+                    // create html elements
+                    var tempElement = $("<div>");
+                    var iconElement = $("<img>");
+                    var descElement = $("<div>");
+                    // update attributes
+                    tempElement.text(temp + "°F");
+                    iconElement.attr("src", iconURL);
+                    iconElement.attr("alt", iconAlt);
+                    descElement.text(description);
+                    // append html elements to weather results modal
+                    $("#weatherResultsContainer").append(tempElement);
+                    $("#weatherResultsContainer").append(iconElement);
+                    $("#weatherResultsContainer").append(descElement);
+                }
             });
         });
     }
@@ -380,21 +427,27 @@ function eventSearch() {
                 method: "GET"
             }).then(function(response) {
                 // clear existing information in weather results modal
-                
-                
-                
-                
-                // create and update html elements for weather results modal
-                // icon, description, temperature
-
-
-
-                // append html elements to weather results modal
-
-
-
-
-
+                $("#weatherResultsContainer").empty();
+                // create and update html elements
+                for (let i = 0; i < response.daily.length; i++) {
+                    var temp = response.daily[i].temp.max;
+                    var iconID = response.daily[i].weather[0].icon;
+                    var iconURL = "https://openweathermap.org/img/wn/" + iconID + "@2x.png";
+                    var description = response.daily[i].weather[0].description;
+                    var iconAlt = response.daily[i].weather[0].main;
+                    // create html elements
+                    var tempElement = $("<div>");
+                    var iconElement = $("<img>");
+                    var descElement = $("<div>");
+                    // update attributes
+                    tempElement.text(temp + "°F");
+                    iconElement.attr("src", iconURL);
+                    iconElement.attr("alt", iconAlt);
+                    descElement.text(description);
+                    // append html elements to weather results modal
+                    $("#weatherResultsContainer").append(tempElement);
+                    $("#weatherResultsContainer").append(iconElement);
+                    $("#weatherResultsContainer").append(descElement);
             });
     }
 }
