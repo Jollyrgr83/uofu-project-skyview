@@ -261,7 +261,7 @@ function initializePage() {
     var yearString = a.getFullYear().toString();
     var monthString = (a.getMonth() + 1).toString();
     if (monthString.length === 1) {
-        monthstring = "0" + monthString;
+        monthString = "0" + monthString;
     }
     var dayString = a.getDate().toString();
     // if local storage is NOT available, initializes backgroundImageObject object
@@ -286,19 +286,29 @@ function initializePage() {
                     newDayString = "0" + newDayString;
                 }
                 var newDateString = yearString + "-" + monthString + "-" + newDayString;
-                var queryURLNASAAPOD = "https://api.nasa.gov/planetary/apod?date=" + newDateString + "?api_key=" + apiKeyNASA;
+                var queryURLNASAAPOD = "https://api.nasa.gov/planetary/apod?date=" + newDateString + "&api_key=" + apiKeyNASA;
                 $.ajax({
                     url: queryURLNASAAPOD,
                     method: "GET"
                 }).then(function(response) {
-                    backgroundImageObject.APOD-images[i] = response.url;
-                    backgroundImageObject.APOD-titles[i] = response.title;
+                    backgroundImageObject["APOD-images"][i] = response.url;
+                    backgroundImageObject["APOD-titles"][i] = response.title;
+                    if (i === 0) {
+                        // update background image on page load
+                        $("#backgroundImage").attr("src", backgroundImageObject["APOD-images"][0]);
+                        $("#backgroundImage").attr("alt", backgroundImageObject["APOD-titles"][0]);
+                        $("#backgroundImage").attr("data-index", 0);
+                    }
                 });
             }
         }
         // update "date" property
         backgroundImageObject.date = dayString;
     }
+    // update background image on page load
+    $("#backgroundImage").attr("src", backgroundImageObject["APOD-images"][0]);
+    $("#backgroundImage").attr("alt", backgroundImageObject["APOD-titles"][0]);
+    $("#backgroundImage").attr("data-index", 0);
     // display modal 1 (welcome)
     display("modal-1");
 }
@@ -314,10 +324,10 @@ function eventSearch() {
             // clear existing information in event results modal 
             $("#eventResultsContainer").empty();
             // create event results modal html elements, update with information, append
-            for (let i = 0; i < response.length, i++) {
+            for (let i = 0; i < response.length; i++) {
                 var messageTitle = response[i].messageType;
                 var messageURL = response[i].messageURL;
-                var messageBody = response[i].message.messageBody;
+                var messageBody = response[i].messageBody;
                 // if message title is an acronym, reassign full title from DONKI object
                 if (DONKI[messageTitle]) {
                     messageTitle = DONKI[messageTitle];
@@ -353,9 +363,9 @@ function eventSearch() {
             // create and update html elements
             for (let i = 0; i < response.events.length; i++) {
                 var eventTitle = response.events[i].title;
-                var eventLat = response.events[i].geometry[0].coordinates[0];
-                var eventLon = response.events[i].geometry[0].coordinates[1];
-                var googleEarthURL = "https://earth.google.com/web/search/" + lat + "," + lon + "/";
+                var eventLon = response.events[i].geometry[0].coordinates[0];
+                var eventLat = response.events[i].geometry[0].coordinates[1];
+                var googleEarthURL = "https://earth.google.com/web/search/" + eventLat + "," + eventLon + "/";
                 // create html elements
                 var titleElement = $("<div>");
                 var urlContainer = $("<div>");
@@ -364,6 +374,7 @@ function eventSearch() {
                 titleElement.text(eventTitle);
                 urlElement.attr("href", googleEarthURL);
                 urlElement.attr("target", "_blank");
+                urlElement.text(googleEarthURL);
                 //append elements
                 $("#eventResultsContainer").append(titleElement);
                 $("#eventResultsContainer").append(urlElement);
@@ -448,6 +459,7 @@ function eventSearch() {
                     $("#weatherResultsContainer").append(tempElement);
                     $("#weatherResultsContainer").append(iconElement);
                     $("#weatherResultsContainer").append(descElement);
+                }
             });
     }
 }
@@ -510,7 +522,7 @@ $(document).on("click", ".buttons", function(event) {
         // if "Next" button is clicked, increment the data-index
         if (targetID === "next") {
             // if indexNumber is at the last entry, reset to the first entry
-            if (indexNumber === backgroundImageObject.APOD-images.length - 1) {
+            if (indexNumber >= backgroundImageObject["APOD-images"].length - 1) {
                 indexNumber = 0;
             }
         else {
@@ -521,8 +533,8 @@ $(document).on("click", ".buttons", function(event) {
         // otherwise the "Previous" button was clicked, decrement the data-index
         else if (targetID === "previous") {
             // if indexNumber is at the first entry, reset to the last entry
-            if (indexNumber === 0) {
-                indexNumber = backgroundImageObject.APOD-images.length - 1;
+            if (indexNumber <= 0) {
+                indexNumber = backgroundImageObject["APOD-images"].length - 1;
             }
             // if indexNumber is NOT at the first entry, decrement to previous entry
             else {
@@ -530,8 +542,8 @@ $(document).on("click", ".buttons", function(event) {
             }
         }
         // update the background image element
-        $("#backgroundImage").attr("src", backgroundImageObject.APOD-images[indexNumber]);
-        $("#backgroundImage").attr("alt", backgroundImageObject.APOD-titles[indexNumber]);
+        $("#backgroundImage").attr("src", backgroundImageObject["APOD-images"][indexNumber]);
+        $("#backgroundImage").attr("alt", backgroundImageObject["APOD-titles"][indexNumber]);
         // update the background image element data-index attribute
         $("#backgroundImage").attr("data-index", indexNumber);
     }    
@@ -541,7 +553,7 @@ $(document).on("click", ".buttons", function(event) {
         display("terms");
     }    
     // terms modal "Close" button click
-    else if (targetID === "#ermsModalCloseButton") {
+    else if (targetID === "termsModalCloseButton") {
         //displays the modal that was active prior to opening the terms modal
         display(activeWindow);
     }
