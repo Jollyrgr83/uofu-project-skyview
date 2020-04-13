@@ -31,11 +31,7 @@
 // Research and incorporate Spotify API, playlists, and buttons
 
 // TO-DO LIST
-// may need to change "?" to "&" in NASA DONKI API call
-// add dates to both OpenWeather One Call API calls
 // update classes in display() function
-
-// NASA Account ID: d3651b40-8bb0-47c2-ab26-2df8b2b1e269
 
 // FRONT MATTER
 
@@ -120,6 +116,16 @@ var DONKI = {
     "MPC" : "Magnetopause Crossing",
     "RBE" : "Radiation Belt Enhancement",
     "HSS" : "Hight Speed Stream",
+};
+// used to display day in weather forecast
+var dayNames = {
+    1 : "Monday",
+    2 : "Tuesday",
+    3 : "Wednesday",
+    4 : "Thursday",
+    5 : "Friday",
+    6 : "Saturday",
+    7 : "Sunday"
 };
 
 // FUNCTIONS
@@ -405,22 +411,27 @@ function eventSearch() {
                 // clear existing information in weather results modal
                 $("#weatherResultsContainer").empty();
                 // create and update html elements
+                var weekdayNum = (new Date()).getDay();
                 for (let i = 0; i < response.daily.length; i++) {
                     var temp = response.daily[i].temp.max;
                     var iconID = response.daily[i].weather[0].icon;
                     var iconURL = "https://openweathermap.org/img/wn/" + iconID + "@2x.png";
                     var description = response.daily[i].weather[0].description;
                     var iconAlt = response.daily[i].weather[0].main;
+                    var weekdayString = dayNames[weekdayNum + i];
                     // create html elements
                     var tempElement = $("<div>");
                     var iconElement = $("<img>");
                     var descElement = $("<div>");
+                    var dayElement = $("<div>");
                     // update attributes
                     tempElement.text(temp + "°F");
                     iconElement.attr("src", iconURL);
                     iconElement.attr("alt", iconAlt);
                     descElement.text(description);
+                    dayElement.text(weekdayString);
                     // append html elements to weather results modal
+                    $("#weatherResultsContainer").append(dayElement);
                     $("#weatherResultsContainer").append(tempElement);
                     $("#weatherResultsContainer").append(iconElement);
                     $("#weatherResultsContainer").append(descElement);
@@ -440,22 +451,27 @@ function eventSearch() {
                 // clear existing information in weather results modal
                 $("#weatherResultsContainer").empty();
                 // create and update html elements
+                var weekdayNum = (new Date()).getDay();
                 for (let i = 0; i < response.daily.length; i++) {
                     var temp = response.daily[i].temp.max;
                     var iconID = response.daily[i].weather[0].icon;
                     var iconURL = "https://openweathermap.org/img/wn/" + iconID + "@2x.png";
                     var description = response.daily[i].weather[0].description;
                     var iconAlt = response.daily[i].weather[0].main;
+                    var weekdayString = dayNames[weekdayNum + i];
                     // create html elements
                     var tempElement = $("<div>");
                     var iconElement = $("<img>");
                     var descElement = $("<div>");
+                    var dayElement = $("<div>");
                     // update attributes
                     tempElement.text(temp + "°F");
                     iconElement.attr("src", iconURL);
                     iconElement.attr("alt", iconAlt);
                     descElement.text(description);
+                    dayElement.text(weekdayString);
                     // append html elements to weather results modal
+                    $("#weatherResultsContainer").append(dayElement);
                     $("#weatherResultsContainer").append(tempElement);
                     $("#weatherResultsContainer").append(iconElement);
                     $("#weatherResultsContainer").append(descElement);
