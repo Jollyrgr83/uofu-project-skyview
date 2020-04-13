@@ -24,9 +24,16 @@
 // results modal "Events", "Weather", and "Search Again" buttons ids = "#resultsModalEventsButton", "#resultsModalWeatherButton", and "#resultsModalSearchAgainButton"
 // event results modal "Close" button id = "#eventResultsModalCloseButton"
 // weather results modal "Close" button id = "#weatherResultsModalClose Button"
+// modal 3 div containing user location string has id = "#modal3UserLocation"
+// event results modal div containing event results has id = "#eventResultsContainer"
 
-// OTHER ITEMS
+// WISHLIST
 // Research and incorporate Spotify API, playlists, and buttons
+
+// TO-DO LIST
+// may need to change "?" to "&" in NASA DONKI API call
+// add dates to both OpenWeather One Call API calls
+// update classes in display() function
 
 // NASA Account ID: d3651b40-8bb0-47c2-ab26-2df8b2b1e269
 
@@ -34,11 +41,9 @@
 
 // LIST OF APIS AND ENDPOINTS
 // NASA - Astronomy Picture of the Day (APOD) - used for background images on front page
-// NASA - Earth Polychromatic Imaging Camera (EPIC) - used for background images on front page
 // NASA - Earth Observatory Natural Event Tracker - used for earth-based events search
-// NASA - SSD/CNEOS (and more) - used for space-based events search
+// NASA - Space Weather Database of Notifications, Knowledge, Information (DONKI) - used for space-based events search
 // Open Weather Map - used for weather information
-// Spotify - used for space-themed background music
 
 // LIST OF HTML MODALS/PAGES
 // front page - contains background image, terms button, previous and next buttons
@@ -97,8 +102,6 @@
 var apiKeyNASA = "pK24NVUjUgtTgxaMB4IPco4R3xOsBhptCgFQPPSG";
 // used in calls to OpenWeather APIs
 var apiKeyWeather = "5f9f4afbfb142ac29ca47b2737de474a";
-// used in calls to Spotify APIs
-var apiKeySpotify = "";
 // used in display() function and terms modal "Close" button click event to track last active window
 var activeWindow = "";
 // used to determine whether to search for space events or earth events
@@ -107,6 +110,17 @@ var eventType = "";
 var userLocation = "";
 // used to store background images to minimize number of API calls
 var backgroundImageObject = {};
+// used to translate NASA DONKI titles
+var DONKI = {
+    "CME" : "Coronal Mass Ejection",
+    "GST" : "Geomagnetic Storm",
+    "IPS" : "Interplanetary Shock",
+    "FLR" : "Solar Flare",
+    "SEP" : "Solar Energetic Particle",
+    "MPC" : "Magnetopause Crossing",
+    "RBE" : "Radiation Belt Enhancement",
+    "HSS" : "Hight Speed Stream",
+};
 
 // FUNCTIONS
 
@@ -242,13 +256,20 @@ function display(page) {
 }
 // retrieves background image information from local storage, refreshes images using call to NASA APOD and EPIC endpoints (if applicable), updates local storage (if applicable), and displays modal 1 (welcome).
 function initializePage() {
-    // establishes variable with today's day value as a number
-    var a = new Date().getDate();
+    // build date as "YYYY-MM-DD" string (used in call to NASA APOD endpoint)
+    var a = new Date();
+    var yearString = a.getFullYear().toString();
+    var monthString = (a.getMonth() + 1).toString();
+    if (monthString.length === 1) {
+        monthstring = "0" + monthString;
+    }
+    var dayString = a.getDate().toString();
     // if local storage is NOT available, initializes backgroundImageObject object
     if (localStorage.getItem("backgroundImageObject") === null) {
         backgroundImageObject = {
             "date" : "yesterday",
-            "images" : {}
+            "APOD-images" : [],
+            "APOD-titles" : [],
         };
     }
     // if local storage is available, stores local storage in backgroundImageObject
@@ -256,19 +277,27 @@ function initializePage() {
         backgroundImageObject = JSON.parse(localStorage.getItem("backgroundImageObject"));
     }
     // check to see if backgroundImageObject is up to date by comparing "date" property with variable a
-    if (a != backgroundImageObject.date) {
-        // call NASA APOD endpoint to get new images and store them in backgroundImageObject
-
-
-
-
-        // call NASA EPIC endpoint to get new images and store them in backgroundImageObject
-
-
-
-
+    if (dayString != backgroundImageObject.date) {
+        // if not updated today, call NASA APOD endpoint to get images for last 5 days and store them in backgroundImageObject
+        for (let i = 0; i < 10; i++) {
+            if (a.getDate() - i > 0) {
+                var newDayString = (a.getDate() - i).toString();
+                if (newDayString.length === 1) {
+                    newDayString = "0" + newDayString;
+                }
+                var newDateString = yearString + "-" + monthString + "-" + newDayString;
+                var queryURLNASAAPOD = "https://api.nasa.gov/planetary/apod?date=" + newDateString + "?api_key=" + apiKeyNASA;
+                $.ajax({
+                    url: queryURLNASAAPOD,
+                    method: "GET"
+                }).then(function(response) {
+                    backgroundImageObject.APOD-images[i] = response.url;
+                    backgroundImageObject.APOD-titles[i] = response.title;
+                });
+            }
+        }
         // update "date" property
-        backgroundImageObject.date = a;
+        backgroundImageObject.date = dayString;
     }
     // display modal 1 (welcome)
     display("modal-1");
@@ -277,65 +306,150 @@ function initializePage() {
 function eventSearch() {
     if (eventType === "space") {
         // run call to NASA SSD/CNEOS endpoint, update event results modal with information
-        var queryURLNASASSD = "";
+        var queryURLNASADONKI = "https://api.nasa.gov/DONKI/notifications?api_key=" + apiKeyNASA;
         $.ajax({
-            url: queryURLNASASSD,
+            url: queryURLNASADONKI,
             method: "GET"
         }).then(function(response) {
             // clear existing information in event results modal 
-            
-
-
-
-
+            $("#eventResultsContainer").empty();
             // create event results modal html elements, update with information, append
-
-
-
-
-
+            for (let i = 0; i < response.length, i++) {
+                var messageTitle = response[i].messageType;
+                var messageURL = response[i].messageURL;
+                var messageBody = response[i].message.messageBody;
+                // if message title is an acronym, reassign full title from DONKI object
+                if (DONKI[messageTitle]) {
+                    messageTitle = DONKI[messageTitle];
+                }
+                // create html elements
+                var titleElement = $("<div>");
+                var urlContainer = $("<div>");
+                var urlElement = $("<a>");
+                var messageElement = $("<div>");
+                // update html elements
+                titleElement.text(messageTitle);
+                urlElement.attr("href", messageURL);
+                urlElement.attr("target", "_blank");
+                messageElement.text(messageBody);
+                // append html elements
+                $("#eventResultsContainer").append(titleElement);
+                $("#eventResultsContainer").append(urlElement);
+                $("#eventResultsContainer").append(messageElement);
+            }
             // display results modal
             display("results");
         });
     }
     else if (eventType === "earth") {
         // run call to NASA Earth Observatory Natural Events Tracker endpoint, update event results modal with information
-        var queryURLNASAEONET = "";
+        var queryURLNASAEONET = "https://eonet.sci.gsfc.nasa.gov/api/v3/events";
         $.ajax({
             url: queryURLNASAEONET,
             method: "GET"
         }).then(function(response) {
             // clear existing information in event results modal
-
-
-
-
-            // create event results modal html elements, update with information, append
-
-
-
-
+            $("#eventResultsContainer").empty();
+            // create and update html elements
+            for (let i = 0; i < response.events.length; i++) {
+                var eventTitle = response.events[i].title;
+                var eventLat = response.events[i].geometry[0].coordinates[0];
+                var eventLon = response.events[i].geometry[0].coordinates[1];
+                var googleEarthURL = "https://earth.google.com/web/search/" + lat + "," + lon + "/";
+                // create html elements
+                var titleElement = $("<div>");
+                var urlContainer = $("<div>");
+                var urlElement = $("<a>");
+                // update attributes
+                titleElement.text(eventTitle);
+                urlElement.attr("href", googleEarthURL);
+                urlElement.attr("target", "_blank");
+                //append elements
+                $("#eventResultsContainer").append(titleElement);
+                $("#eventResultsContainer").append(urlElement);
+            }
             // display results modal
             display("results");
         });
     }
-    // run call to OpenWeather ????? endpoint, update weather results modal with information
-    var queryURLWeather = "";
-    $.ajax({
-        url: queryURLWeather,
-        method: "GET"
-    }).then(function(response) {
-        // clear existing information in weather results modal
-
-
-
-
-        // create weather results modal html elements, update with information, append
-
-
-
-
-    });
+    // update weather results modal with information
+    if (localStorage.get("userLat") === null) {
+        // if lat/lon are NOT available in local storage, run call to OpenWeather Current endpoint to obtain lat and lon
+        var queryURLWeatherCurrentCity = "https://api.openweathermap.org/data/2.5/weather?q=" + userLocation + "&appid=" + apiKeyWeather;
+        $.ajax({
+            url: queryURLWeatherCurrentCity,
+            method: "GET"
+        }).then(function(response) {
+            lat = response.coord.lat;
+            lon = response.coord.lon;
+            // update local storage with lat/lon
+            localStorage.setItem("userLat", lat);
+            localStorage.setItem("userLon", lon);
+            // run call to OpenWeather One Call endpoint to obtain weather information
+            var queryURLWeatherOneCall = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&units=imperial&appid=" + apiKeyWeather;        
+            $.ajax({
+                url: queryURLWeatherOneCall,
+                method: "GET"
+            }).then(function(response) {
+                // clear existing information in weather results modal
+                $("#weatherResultsContainer").empty();
+                // create and update html elements
+                for (let i = 0; i < response.daily.length; i++) {
+                    var temp = response.daily[i].temp.max;
+                    var iconID = response.daily[i].weather[0].icon;
+                    var iconURL = "https://openweathermap.org/img/wn/" + iconID + "@2x.png";
+                    var description = response.daily[i].weather[0].description;
+                    var iconAlt = response.daily[i].weather[0].main;
+                    // create html elements
+                    var tempElement = $("<div>");
+                    var iconElement = $("<img>");
+                    var descElement = $("<div>");
+                    // update attributes
+                    tempElement.text(temp + "°F");
+                    iconElement.attr("src", iconURL);
+                    iconElement.attr("alt", iconAlt);
+                    descElement.text(description);
+                    // append html elements to weather results modal
+                    $("#weatherResultsContainer").append(tempElement);
+                    $("#weatherResultsContainer").append(iconElement);
+                    $("#weatherResultsContainer").append(descElement);
+                }
+            });
+        });
+    }
+    else {
+        // if lat/lon are available in local storage, run call to OpenWeather One Call endpoint to obtain weather information
+        var lat = localStorage.getItem("userLat");
+        var lon = localStorage.getItem("userLon");
+        var queryURLWeatherOneCall = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&appid=" + apiKeyWeather;        
+            $.ajax({
+                url: queryURLWeatherOneCall,
+                method: "GET"
+            }).then(function(response) {
+                // clear existing information in weather results modal
+                $("#weatherResultsContainer").empty();
+                // create and update html elements
+                for (let i = 0; i < response.daily.length; i++) {
+                    var temp = response.daily[i].temp.max;
+                    var iconID = response.daily[i].weather[0].icon;
+                    var iconURL = "https://openweathermap.org/img/wn/" + iconID + "@2x.png";
+                    var description = response.daily[i].weather[0].description;
+                    var iconAlt = response.daily[i].weather[0].main;
+                    // create html elements
+                    var tempElement = $("<div>");
+                    var iconElement = $("<img>");
+                    var descElement = $("<div>");
+                    // update attributes
+                    tempElement.text(temp + "°F");
+                    iconElement.attr("src", iconURL);
+                    iconElement.attr("alt", iconAlt);
+                    descElement.text(description);
+                    // append html elements to weather results modal
+                    $("#weatherResultsContainer").append(tempElement);
+                    $("#weatherResultsContainer").append(iconElement);
+                    $("#weatherResultsContainer").append(descElement);
+            });
+    }
 }
 // retrieves location information
 function getLocation() {
@@ -344,38 +458,37 @@ function getLocation() {
         // if saved location is available, retrieve from local storage
         userLocation = localStorage.getItem("userLocation");
         // update modal 3 (location confirmation)
-
-
-
-
-
+        $("#modal3UserLocation").text(userLocation);
         // display modal 3 (location confirmation)
         display("modal-3");
     }
     else {
         // saved location is NOT available, attempt to retrieve location from browser
         var options = {
-            enableHighAccuracy: true;
+            enableHighAccuracy: true,
             timeout: 5000,
             maximumAge: 0
         };
-        
         function success(position) {
             var lat = position.coords.latitude;
             var lon = position.coords.longitude;
-            // run API call to ??????????????????????????????????????????????????
-            // to get city and state (or outside US equivalent)
-
-
-
-
-
-            // update userLocation
-
-            // update modal 3 (confirm location) with location information
-
-            // display modal (confirm location)
-
+            // update local storage with lat/lon
+            localStorage.setItem("userLat", lat);
+            localStorage.setItem("userLon", lon);
+            // API call to OpenWeather Current to obtain city name
+            var queryURLWeatherCurrentLatLon = "https://api.openweathermap.org/data/2.5/weather?lat=" + lat + "&lon=" + lon + "&appid=" + apiKeyWeather;        
+            $.ajax({
+                url: queryURLWeatherCurrentLatLon,
+                method: "GET"
+            }).then(function(response) {
+                // update userLocation
+                userLocation = response.name;
+                localStorage.setItem("userLocation", userLocation);
+                // update modal 3 (confirm location) with location information
+                $("#modal3UserLocation").text(userLocation);
+                // display modal (confirm location)
+                display("modal-3");
+            });
         }
         function error(err) {
             // if browser location is not available, displays modal 4 (enter location)
@@ -389,6 +502,7 @@ function getLocation() {
 
 $(document).on("click", ".buttons", function(event) {
     var targetID = $(event.target).attr("id");
+    console.log("Button Click - ", targetID);
     // front page "Next" and "Previous" button click
     if (targetID === "next" || targetID === "previous") {
         //retrieve data-index property from background image element
@@ -396,37 +510,28 @@ $(document).on("click", ".buttons", function(event) {
         // if "Next" button is clicked, increment the data-index
         if (targetID === "next") {
             // if indexNumber is at the last entry, reset to the first entry
-            if (indexNumber === 10) {
+            if (indexNumber === backgroundImageObject.APOD-images.length - 1) {
                 indexNumber = 0;
             }
-        }
         else {
             // if indexNumber is NOT at the last entry, increment to next entry
             indexNumber++;
+            }
         }
         // otherwise the "Previous" button was clicked, decrement the data-index
         else if (targetID === "previous") {
             // if indexNumber is at the first entry, reset to the last entry
             if (indexNumber === 0) {
-                indexNumber = 10;
+                indexNumber = backgroundImageObject.APOD-images.length - 1;
             }
             // if indexNumber is NOT at the first entry, decrement to previous entry
             else {
                 indexNumber--;
             }
         }
-        // retrieve the new picture url
-        
-        
-
-
-
         // update the background image element
-        
-        
-        
-        
-        
+        $("#backgroundImage").attr("src", backgroundImageObject.APOD-images[indexNumber]);
+        $("#backgroundImage").attr("alt", backgroundImageObject.APOD-titles[indexNumber]);
         // update the background image element data-index attribute
         $("#backgroundImage").attr("data-index", indexNumber);
     }    
@@ -436,12 +541,12 @@ $(document).on("click", ".buttons", function(event) {
         display("terms");
     }    
     // terms modal "Close" button click
-    else if (targetID === "#termsModalCloseButton") {
+    else if (targetID === "#ermsModalCloseButton") {
         //displays the modal that was active prior to opening the terms modal
         display(activeWindow);
     }
     // modal 1 (welcome) "Get Started" button click
-    else if (targetID === "#modal1GetStartedButton") {
+    else if (targetID === "modal1GetStartedButton") {
         // displays modal 2
         display("modal-2");
     }
@@ -471,7 +576,7 @@ $(document).on("click", ".buttons", function(event) {
         display("modal-4");
     }
     // modal 4 (enter location) "Submit" button click
-    else if (targetID === "#modal4SubmitButton") {
+    else if (targetID === "modal4SubmitButton") {
         // retrieves user input from text input
         var userInput = $("#modal4Input").val().trim();
         // data validation to prevent empty search
@@ -482,10 +587,7 @@ $(document).on("click", ".buttons", function(event) {
             // store user input in userLocation
             userLocation = $("#modal4Input").val().trim();
             // update modal 3 (location confirmation) with location information
-
-
-
-
+            $("#modal3UserLocation").text(userLocation);
             // display modal 3 (location confirmation)
             display("modal-3");
         }
@@ -518,12 +620,12 @@ $(document).on("click", ".buttons", function(event) {
         display("modal-1");
     }
     // event results modal "Close" button click
-    else if (targetID === "#eventResultsModalCloseButton") {
+    else if (targetID === "eventResultsModalCloseButton") {
         // display results modal
         display("results");
     }
     // weather results modal "Close" button click
-    else if (targetID === "#weatherResultsModalCloseButton") {
+    else if (targetID === "weatherResultsModalCloseButton") {
         // display results modal
         display("results");
     }
