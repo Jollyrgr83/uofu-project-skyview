@@ -43,68 +43,115 @@
         <!-- front page ends -->
         <!-- ======================================= -->
         <!-- modal 1 (Alex) -->
+     
+        <!-- Trigger/Open Modal 2 -->
+<button id="getStarted">Welcome Message</button>
+
+<!-- Modal 1 -->
+<div id="getModal1" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <p>Welcome to our Nasa App. Our app uses a culmination of Google & Nasa API's to display upcoming astral events. Give it a go. Simply click below to get started.</p>
+  </div>
+
+</div>   
+<!--Below is the JavaScript we can use for closing out of Modals or clicking X for a better user experience--> 
+<!-- }
+// When a user clicks on X, close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+// When a user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+} -->
         
-        
-        
-
-
-
-
-
-
-
         <!-- modal 1 ends -->
         <!-- ======================================= -->
         <!-- modal 2 (Alex) -->
+
+        <!-- Trigger/Open Modal 3 -->
+        <button id="spaceBtn">Space</button>
+
+        <!-- Trigger/Open Modal 3 -->
+        <button id="earthBtn">Earth</button>
+
+        <div id="getModal2" class="modal">
+
+            <!-- Modal content -->
+            <div class="modal-content">
+              <span class="close">&times;</span>
+            </div>
+
         
-
-
-
-
-
-
-
-
-
+          </div>     
         <!-- modal 2 ends -->
         <!-- ======================================= -->
         <!-- modal 3 (Alex) -->
-        
 
+<!--Need Javascript call here to autopopulate City, State-->
 
+        <!-- Trigger/Open Modal 4 -->
+        <button id="yesBtnCon">Yes</button>
 
+        <!-- Trigger/Open Modal 4 -->
+        <button id="noBtnCon">No</button>
 
+        <div id="getModal3" class="modal">
 
-
-
-
+            <!-- Modal content -->
+            <div class="modal-content">
+              <span class="close">&times;</span>
+              <p></p>
+            </div>
+          
+          </div>            
 
         <!-- modal 3 ends -->
         <!-- ======================================= -->
         <!-- modal 4 (Alex) -->
         
+        <div id="getModal4" class="modal">
 
+            <!-- Modal content -->
+            <div class="modal-content">
+              <span class="close">&times;</span>
+              <p></p>
+            </div>
 
-
-
-
-
-
-
+<!--I don't believe this should be a TextArea but instead two seperate input boxes (different from the mock up). We also may want to Limit inputs for City/States. Some logic (if a city for example is not found). Discuss. -Alex-->
+            <label for="textBox">Enter your City and State:</label>
+            <textarea id="textboxModal2" name="textBox" rows="10" cols="40">
+            Input Answer Here.
+            </textarea>
+          
+          </div>     
         
         <!-- modal 4 ends -->
         <!-- ======================================= -->
         <!-- modal 5 (Alex) -->
         
+         <!-- Trigger/Open Results -->
+         <button id="yesBtnStore">Yes</button>
 
-
-
-
-
-
-
-
+         <!-- Trigger/Open Results -->
+         <button id="noBtnStore">No</button>
         
+        <div id="getModal5" class="modal">
+
+            <!-- Modal content -->
+            <div class="modal-content">
+              <span class="close">&times;</span>
+              <p></p>
+            </div>
+          
+          </div>     
+
         <!-- modal 5 ends -->
         <!-- ======================================= -->
         <!-- results modal (Erica) -->
@@ -147,6 +194,10 @@
         <!-- weather results modal ends -->
         <!-- ======================================= -->
         <!-- terms to know modal (Alex) -->
+<header>Terms to Know</header>
+<li>
+
+</li>
 
 
 
@@ -154,9 +205,7 @@
 
 
 
-
-
-
+        <button id="closeBtn">Close</button>
         <!-- terms to know modal ends -->
 
     </main>
