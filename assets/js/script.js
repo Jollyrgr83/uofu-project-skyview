@@ -303,8 +303,7 @@ function initializePage() {
                     backgroundImageObject["APOD-titles"][i] = response.title;
                     if (i === 0) {
                         // update background image on page load
-                        $("#backgroundImage").attr("src", backgroundImageObject["APOD-images"][0]);
-                        $("#backgroundImage").attr("alt", backgroundImageObject["APOD-titles"][0]);
+                        $("#backgroundImage").attr("style", "background-image: url(" + backgroundImageObject["APOD-images"][0] + ");");
                         $("#backgroundImage").attr("data-index", 0);
                     }
                 });
@@ -314,8 +313,7 @@ function initializePage() {
         backgroundImageObject.date = dayString;
     }
     // update background image on page load
-    $("#backgroundImage").attr("src", backgroundImageObject["APOD-images"][0]);
-    $("#backgroundImage").attr("alt", backgroundImageObject["APOD-titles"][0]);
+    $("#backgroundImage").attr("style", "background-image: url(" + backgroundImageObject["APOD-images"][0] + ");");
     $("#backgroundImage").attr("data-index", 0);
     // display modal 1 (welcome)
     display("modal-1");
@@ -340,16 +338,25 @@ function eventSearch() {
                 if (DONKI[messageTitle]) {
                     messageTitle = DONKI[messageTitle];
                 }
+                // parse message into components nad remove IDs, Notes, and Disclaimers
+                var messageElement = $("<div>");
+                var messageBodyArray = messageBody.split("##");
+                for (let j = 0; j < messageBodyArray.length; j++) {
+                    if (messageBodyArray[j].indexOf("Message ID:") === -1 && messageBodyArray[j].indexOf("Disclaimer:") === -1 && messageBodyArray[j].indexOf("Notes:") === -1) {
+                        var divElement = $("<div>");
+                        divElement.text(messageBodyArray[j]);
+                        divElement.attr("class", "box");
+                        messageElement.append(divElement);
+                    }
+                }
                 // create html elements
                 var titleElement = $("<div>");
                 var urlContainer = $("<div>");
                 var urlElement = $("<a>");
-                var messageElement = $("<div>");
                 // update html elements
                 titleElement.text(messageTitle);
                 urlElement.attr("href", messageURL);
                 urlElement.attr("target", "_blank");
-                messageElement.text(messageBody);
                 // append html elements
                 $("#eventResultsContainer").append(titleElement);
                 $("#eventResultsContainer").append(urlElement);
@@ -415,11 +422,14 @@ function eventSearch() {
                 // create and update html elements
                 var weekdayNum = (new Date()).getDay();
                 for (let i = 0; i < response.daily.length; i++) {
-                    var temp = response.daily[i].temp.max;
+                    var temp = (((response.daily[i].temp.max) - 273.15) * (9 / 5) + 32).toFixed(0);
                     var iconID = response.daily[i].weather[0].icon;
                     var iconURL = "https://openweathermap.org/img/wn/" + iconID + "@2x.png";
                     var description = response.daily[i].weather[0].description;
                     var iconAlt = response.daily[i].weather[0].main;
+                    if (weekdayNum + i > 7) {
+                        weekdayNum = weekdayNum - 7;
+                    }
                     var weekdayString = dayNames[weekdayNum + i];
                     // create html elements
                     var tempElement = $("<div>");
@@ -455,11 +465,14 @@ function eventSearch() {
                 // create and update html elements
                 var weekdayNum = (new Date()).getDay();
                 for (let i = 0; i < response.daily.length; i++) {
-                    var temp = response.daily[i].temp.max;
+                    var temp = (((response.daily[i].temp.max) - 273.15) * (9 / 5) + 32).toFixed(0);
                     var iconID = response.daily[i].weather[0].icon;
                     var iconURL = "https://openweathermap.org/img/wn/" + iconID + "@2x.png";
                     var description = response.daily[i].weather[0].description;
                     var iconAlt = response.daily[i].weather[0].main;
+                    if (weekdayNum + i > 7) {
+                        weekdayNum = weekdayNum - 7;
+                    }
                     var weekdayString = dayNames[weekdayNum + i];
                     // create html elements
                     var tempElement = $("<div>");
@@ -560,8 +573,7 @@ $(document).on("click", ".buttons", function(event) {
             }
         }
         // update the background image element
-        $("#backgroundImage").attr("src", backgroundImageObject["APOD-images"][indexNumber]);
-        $("#backgroundImage").attr("alt", backgroundImageObject["APOD-titles"][indexNumber]);
+        $("#backgroundImage").attr("style", "background-image: url(" + backgroundImageObject["APOD-images"][indexNumber] + ");");
         // update the background image element data-index attribute
         $("#backgroundImage").attr("data-index", indexNumber);
     }    
