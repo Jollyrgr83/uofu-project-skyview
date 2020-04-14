@@ -31,11 +31,9 @@
 // Research and incorporate Spotify API, playlists, and buttons
 
 // TO-DO LIST
-// may need to change "?" to "&" in NASA DONKI API call
-// add dates to both OpenWeather One Call API calls
 // update classes in display() function
-
-// NASA Account ID: d3651b40-8bb0-47c2-ab26-2df8b2b1e269
+// troubleshoot dates in weather forecast (may have to use moment.js)
+// troubleshoot other . . . 
 
 // FRONT MATTER
 
@@ -120,6 +118,16 @@ var DONKI = {
     "MPC" : "Magnetopause Crossing",
     "RBE" : "Radiation Belt Enhancement",
     "HSS" : "Hight Speed Stream",
+};
+// used to display day in weather forecast
+var dayNames = {
+    1 : "Monday",
+    2 : "Tuesday",
+    3 : "Wednesday",
+    4 : "Thursday",
+    5 : "Friday",
+    6 : "Saturday",
+    7 : "Sunday"
 };
 
 // FUNCTIONS
@@ -261,7 +269,7 @@ function initializePage() {
     var yearString = a.getFullYear().toString();
     var monthString = (a.getMonth() + 1).toString();
     if (monthString.length === 1) {
-        monthstring = "0" + monthString;
+        monthString = "0" + monthString;
     }
     var dayString = a.getDate().toString();
     // if local storage is NOT available, initializes backgroundImageObject object
@@ -286,19 +294,29 @@ function initializePage() {
                     newDayString = "0" + newDayString;
                 }
                 var newDateString = yearString + "-" + monthString + "-" + newDayString;
-                var queryURLNASAAPOD = "https://api.nasa.gov/planetary/apod?date=" + newDateString + "?api_key=" + apiKeyNASA;
+                var queryURLNASAAPOD = "https://api.nasa.gov/planetary/apod?date=" + newDateString + "&api_key=" + apiKeyNASA;
                 $.ajax({
                     url: queryURLNASAAPOD,
                     method: "GET"
                 }).then(function(response) {
-                    backgroundImageObject.APOD-images[i] = response.url;
-                    backgroundImageObject.APOD-titles[i] = response.title;
+                    backgroundImageObject["APOD-images"][i] = response.url;
+                    backgroundImageObject["APOD-titles"][i] = response.title;
+                    if (i === 0) {
+                        // update background image on page load
+                        $("#backgroundImage").attr("src", backgroundImageObject["APOD-images"][0]);
+                        $("#backgroundImage").attr("alt", backgroundImageObject["APOD-titles"][0]);
+                        $("#backgroundImage").attr("data-index", 0);
+                    }
                 });
             }
         }
         // update "date" property
         backgroundImageObject.date = dayString;
     }
+    // update background image on page load
+    $("#backgroundImage").attr("src", backgroundImageObject["APOD-images"][0]);
+    $("#backgroundImage").attr("alt", backgroundImageObject["APOD-titles"][0]);
+    $("#backgroundImage").attr("data-index", 0);
     // display modal 1 (welcome)
     display("modal-1");
 }
@@ -314,10 +332,10 @@ function eventSearch() {
             // clear existing information in event results modal 
             $("#eventResultsContainer").empty();
             // create event results modal html elements, update with information, append
-            for (let i = 0; i < response.length, i++) {
+            for (let i = 0; i < response.length; i++) {
                 var messageTitle = response[i].messageType;
                 var messageURL = response[i].messageURL;
-                var messageBody = response[i].message.messageBody;
+                var messageBody = response[i].messageBody;
                 // if message title is an acronym, reassign full title from DONKI object
                 if (DONKI[messageTitle]) {
                     messageTitle = DONKI[messageTitle];
@@ -353,9 +371,9 @@ function eventSearch() {
             // create and update html elements
             for (let i = 0; i < response.events.length; i++) {
                 var eventTitle = response.events[i].title;
-                var eventLat = response.events[i].geometry[0].coordinates[0];
-                var eventLon = response.events[i].geometry[0].coordinates[1];
-                var googleEarthURL = "https://earth.google.com/web/search/" + lat + "," + lon + "/";
+                var eventLon = response.events[i].geometry[0].coordinates[0];
+                var eventLat = response.events[i].geometry[0].coordinates[1];
+                var googleEarthURL = "https://earth.google.com/web/search/" + eventLat + "," + eventLon + "/";
                 // create html elements
                 var titleElement = $("<div>");
                 var urlContainer = $("<div>");
@@ -364,6 +382,7 @@ function eventSearch() {
                 titleElement.text(eventTitle);
                 urlElement.attr("href", googleEarthURL);
                 urlElement.attr("target", "_blank");
+                urlElement.text(googleEarthURL);
                 //append elements
                 $("#eventResultsContainer").append(titleElement);
                 $("#eventResultsContainer").append(urlElement);
@@ -373,7 +392,7 @@ function eventSearch() {
         });
     }
     // update weather results modal with information
-    if (localStorage.get("userLat") === null) {
+    if (localStorage.getItem("userLat") === null) {
         // if lat/lon are NOT available in local storage, run call to OpenWeather Current endpoint to obtain lat and lon
         var queryURLWeatherCurrentCity = "https://api.openweathermap.org/data/2.5/weather?q=" + userLocation + "&appid=" + apiKeyWeather;
         $.ajax({
@@ -394,22 +413,27 @@ function eventSearch() {
                 // clear existing information in weather results modal
                 $("#weatherResultsContainer").empty();
                 // create and update html elements
+                var weekdayNum = (new Date()).getDay();
                 for (let i = 0; i < response.daily.length; i++) {
                     var temp = response.daily[i].temp.max;
                     var iconID = response.daily[i].weather[0].icon;
                     var iconURL = "https://openweathermap.org/img/wn/" + iconID + "@2x.png";
                     var description = response.daily[i].weather[0].description;
                     var iconAlt = response.daily[i].weather[0].main;
+                    var weekdayString = dayNames[weekdayNum + i];
                     // create html elements
                     var tempElement = $("<div>");
                     var iconElement = $("<img>");
                     var descElement = $("<div>");
+                    var dayElement = $("<div>");
                     // update attributes
                     tempElement.text(temp + "°F");
                     iconElement.attr("src", iconURL);
                     iconElement.attr("alt", iconAlt);
                     descElement.text(description);
+                    dayElement.text(weekdayString);
                     // append html elements to weather results modal
+                    $("#weatherResultsContainer").append(dayElement);
                     $("#weatherResultsContainer").append(tempElement);
                     $("#weatherResultsContainer").append(iconElement);
                     $("#weatherResultsContainer").append(descElement);
@@ -429,25 +453,31 @@ function eventSearch() {
                 // clear existing information in weather results modal
                 $("#weatherResultsContainer").empty();
                 // create and update html elements
+                var weekdayNum = (new Date()).getDay();
                 for (let i = 0; i < response.daily.length; i++) {
                     var temp = response.daily[i].temp.max;
                     var iconID = response.daily[i].weather[0].icon;
                     var iconURL = "https://openweathermap.org/img/wn/" + iconID + "@2x.png";
                     var description = response.daily[i].weather[0].description;
                     var iconAlt = response.daily[i].weather[0].main;
+                    var weekdayString = dayNames[weekdayNum + i];
                     // create html elements
                     var tempElement = $("<div>");
                     var iconElement = $("<img>");
                     var descElement = $("<div>");
+                    var dayElement = $("<div>");
                     // update attributes
                     tempElement.text(temp + "°F");
                     iconElement.attr("src", iconURL);
                     iconElement.attr("alt", iconAlt);
                     descElement.text(description);
+                    dayElement.text(weekdayString);
                     // append html elements to weather results modal
+                    $("#weatherResultsContainer").append(dayElement);
                     $("#weatherResultsContainer").append(tempElement);
                     $("#weatherResultsContainer").append(iconElement);
                     $("#weatherResultsContainer").append(descElement);
+                }
             });
     }
 }
@@ -510,7 +540,7 @@ $(document).on("click", ".buttons", function(event) {
         // if "Next" button is clicked, increment the data-index
         if (targetID === "next") {
             // if indexNumber is at the last entry, reset to the first entry
-            if (indexNumber === backgroundImageObject.APOD-images.length - 1) {
+            if (indexNumber >= backgroundImageObject["APOD-images"].length - 1) {
                 indexNumber = 0;
             }
         else {
@@ -521,8 +551,8 @@ $(document).on("click", ".buttons", function(event) {
         // otherwise the "Previous" button was clicked, decrement the data-index
         else if (targetID === "previous") {
             // if indexNumber is at the first entry, reset to the last entry
-            if (indexNumber === 0) {
-                indexNumber = backgroundImageObject.APOD-images.length - 1;
+            if (indexNumber <= 0) {
+                indexNumber = backgroundImageObject["APOD-images"].length - 1;
             }
             // if indexNumber is NOT at the first entry, decrement to previous entry
             else {
@@ -530,8 +560,8 @@ $(document).on("click", ".buttons", function(event) {
             }
         }
         // update the background image element
-        $("#backgroundImage").attr("src", backgroundImageObject.APOD-images[indexNumber]);
-        $("#backgroundImage").attr("alt", backgroundImageObject.APOD-titles[indexNumber]);
+        $("#backgroundImage").attr("src", backgroundImageObject["APOD-images"][indexNumber]);
+        $("#backgroundImage").attr("alt", backgroundImageObject["APOD-titles"][indexNumber]);
         // update the background image element data-index attribute
         $("#backgroundImage").attr("data-index", indexNumber);
     }    
@@ -541,7 +571,7 @@ $(document).on("click", ".buttons", function(event) {
         display("terms");
     }    
     // terms modal "Close" button click
-    else if (targetID === "#ermsModalCloseButton") {
+    else if (targetID === "termsModalCloseButton") {
         //displays the modal that was active prior to opening the terms modal
         display(activeWindow);
     }
