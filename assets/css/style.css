@@ -29,32 +29,21 @@
 /* Erica Code Section */
 
 
-<<<<<<< HEAD
-=======
-
->>>>>>> acf42c491f571fa2daa82efddbf5f41a422dc41d
 .nav-item {
     padding: 30px 30px!important;
 }
 #previous, #next, #pause {
     color: black;
-<<<<<<< HEAD
-    font-weight: 400;
-    font-size: 18px;
-=======
     font-size: 14px;
     font-weight: lighter;
     text-transform: uppercase;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif!important;
     border-color: lightgray;
     margin: 5px 5px;
->>>>>>> acf42c491f571fa2daa82efddbf5f41a422dc41d
 }
 #previous:hover, #next:hover, #pause:hover {
     color: lightGrey;
 }
-<<<<<<< HEAD
-=======
 body {
     background-image: url(../../images/nasaBack.jpg);
     width: auto;
@@ -66,7 +55,6 @@ body {
 
 
 
->>>>>>> acf42c491f571fa2daa82efddbf5f41a422dc41d
 
 
 

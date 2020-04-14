@@ -32,8 +32,6 @@
 
 // TO-DO LIST
 // update classes in display() function
-// troubleshoot dates in weather forecast (may have to use moment.js)
-// troubleshoot other . . . 
 
 // FRONT MATTER
 
@@ -71,9 +69,7 @@
     // checks local storage for saved location
         // if saved location is available, updates userLocation variable and modal 3 (location confirmation) with save location, displays modal 3 (location confirmation)
         // if saved location is not available, attempts to retrieve location information from browser
-            // if browser location is available, runs API call to ??????????????????????????
-
-            // to retrieve city and state (or outside US equivalent), updates userLocation variable and modal 3 (location confirmation) with location, displays modal 3 (location confirmation)
+            // if browser location is available, runs call to OpenWeather Current endpoint to obtain city name, updates userLocation variable and modal 3 (location confirmation) with location, displays modal 3 (location confirmation)
             // if browser location is not available, displays modal 4 (enter location)
 // Modal 3 (location confirmation) - displays location information
     // if "Yes" button is clicked 
@@ -309,10 +305,10 @@ function initializePage() {
                 });
             }
         }
-        // update "date" property
+        // update "date" property in backgroundImageObject
         backgroundImageObject.date = dayString;
     }
-    // update background image on page load
+    // update background image and data-index on page load
     $("#backgroundImage").attr("style", "background-image: url(" + backgroundImageObject["APOD-images"][0] + ");");
     $("#backgroundImage").attr("data-index", 0);
     // display modal 1 (welcome)
@@ -422,14 +418,17 @@ function eventSearch() {
                 // create and update html elements
                 var weekdayNum = (new Date()).getDay();
                 for (let i = 0; i < response.daily.length; i++) {
+                    // convert temperature to Fahrenheit
                     var temp = (((response.daily[i].temp.max) - 273.15) * (9 / 5) + 32).toFixed(0);
                     var iconID = response.daily[i].weather[0].icon;
                     var iconURL = "https://openweathermap.org/img/wn/" + iconID + "@2x.png";
                     var description = response.daily[i].weather[0].description;
                     var iconAlt = response.daily[i].weather[0].main;
+                    // resets weekdayNum if it goes past 7 (number of key values in dayNames object)
                     if (weekdayNum + i > 7) {
                         weekdayNum = weekdayNum - 7;
                     }
+                    // obtains dayname string from dayNames object
                     var weekdayString = dayNames[weekdayNum + i];
                     // create html elements
                     var tempElement = $("<div>");
@@ -465,14 +464,17 @@ function eventSearch() {
                 // create and update html elements
                 var weekdayNum = (new Date()).getDay();
                 for (let i = 0; i < response.daily.length; i++) {
+                    // convert temperature to Fahrenheit
                     var temp = (((response.daily[i].temp.max) - 273.15) * (9 / 5) + 32).toFixed(0);
                     var iconID = response.daily[i].weather[0].icon;
                     var iconURL = "https://openweathermap.org/img/wn/" + iconID + "@2x.png";
                     var description = response.daily[i].weather[0].description;
                     var iconAlt = response.daily[i].weather[0].main;
+                    // resets weekdayNum if it goes past 7 (number of key values in dayNames object)
                     if (weekdayNum + i > 7) {
                         weekdayNum = weekdayNum - 7;
                     }
+                    // obtains dayname string from dayNames object
                     var weekdayString = dayNames[weekdayNum + i];
                     // create html elements
                     var tempElement = $("<div>");
