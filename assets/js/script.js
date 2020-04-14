@@ -32,6 +32,8 @@
 
 // TO-DO LIST
 // update classes in display() function
+// troubleshoot dates in weather forecast (may have to use moment.js)
+// troubleshoot other . . . 
 
 // FRONT MATTER
 
@@ -390,7 +392,7 @@ function eventSearch() {
         });
     }
     // update weather results modal with information
-    if (localStorage.get("userLat") === null) {
+    if (localStorage.getItem("userLat") === null) {
         // if lat/lon are NOT available in local storage, run call to OpenWeather Current endpoint to obtain lat and lon
         var queryURLWeatherCurrentCity = "https://api.openweathermap.org/data/2.5/weather?q=" + userLocation + "&appid=" + apiKeyWeather;
         $.ajax({
