@@ -1,7 +1,7 @@
 
 # project-1
 
-This project is a search engine that uses your location and desired inputs to provide you with a weather forecast and associated information regarding current and upcoming space and earth events in order to maximize your viewing experience all against a backdrop of striking visuals provided to you by NASA's Astronomical Picture of the Day. 
+This project is a search engine that uses your location and desired inputs to provide you with a weather forecast and associated information regarding current and upcoming space and earth events in order to maximize your viewing experience all against a backdrop of striking visuals provided to you by NASA's Astronomy Picture of the Day.
 
 # Requirements
 
