@@ -326,7 +326,9 @@ function eventSearch() {
             // clear existing information in event results modal 
             $("#eventResultsContainer").empty();
             // create event results modal html elements, update with information, append
-            for (let i = 0; i < response.length; i++) {
+            for (let i = 0; i < 10; i++) {
+                // for full list, change the "10" above to respnse.length
+                // to change list length, change "10"
                 var messageTitle = response[i].messageType;
                 var messageURL = response[i].messageURL;
                 var messageBody = response[i].messageBody;
@@ -334,7 +336,7 @@ function eventSearch() {
                 if (DONKI[messageTitle]) {
                     messageTitle = DONKI[messageTitle];
                 }
-                // parse message into components nad remove IDs, Notes, and Disclaimers
+                // parse message into components and remove IDs, Notes, and Disclaimers
                 var messageElement = $("<div>");
                 var messageBodyArray = messageBody.split("##");
                 for (let j = 0; j < messageBodyArray.length; j++) {
@@ -372,7 +374,9 @@ function eventSearch() {
             // clear existing information in event results modal
             $("#eventResultsContainer").empty();
             // create and update html elements
-            for (let i = 0; i < response.events.length; i++) {
+            for (let i = 0; i < 20; i++) {
+                // for full list, change 20 to response.events.length
+                // to change list length, change 20
                 var eventTitle = response.events[i].title;
                 var eventLon = response.events[i].geometry[0].coordinates[0];
                 var eventLat = response.events[i].geometry[0].coordinates[1];
