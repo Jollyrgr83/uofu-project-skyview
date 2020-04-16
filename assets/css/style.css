@@ -48,7 +48,7 @@ body {
     background-image: url(../../images/nasaBack.jpg);
     width: auto;
 }
-=======
+
 
 
 
@@ -81,4 +81,30 @@ body {
 }
 .hide {
     display: none;
+}
+.big-box {
+    margin: 1%;
+    padding: 1%;
+    border: solid 1pt black;
+}
+.small-box {
+    margin: 1%;
+    padding: 1%;
+    border: solid 1pt black;
+}
+.image {
+    width: 100%;
+    height: auto;
+    z-index: -1;
+}
+.local-modal {
+    width: 75%;
+    height: auto;
+    padding: 2.5%;
+}
+.local-modal-inner {
+    margin: 25%;
+}
+.local-modal-results {
+    width: auto;
 }
