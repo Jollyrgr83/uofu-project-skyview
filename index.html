@@ -6,315 +6,84 @@
     <title>Title Goes Here</title>
     <!-- favicon -->
     <link rel="icon" type="image/png" href="./images/favicon.png"/>
-    <!-- UIkit CSS -->
+    <!-- UIkit css library -->
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/uikit@3.3.7/dist/css/uikit.min.css"/>
     <!-- local style sheet -->
     <link rel="stylesheet" type="text/css" href="./assets/css/style.css"/>
 </head>
-<style>
-    body {
-        background-color: black;
-    }
-</style>
 
 <body>
 
-    <!-- NOTES: Update css styling in the ./assets/css/style.css file. It has been updated to include sections for each person -->
-    <!-- UIKIT has been linked (but not tested). We do not have bootstrap linked so you will need to research the UIKIT documentation when using it -->
-    <div class="page-wrap">
     <header>
-
-    <!-- navbar/banner starts (Erica) -->
-    <nav class="uk-navbar-container" uk-navbar>
-        <div class="uk-navbar-left">
-            <ul class="uk-navbar-nav">
-                <li class="uk-active"><a href="#">Home</a></li>
-                <li><a href="#" class="nav-item">Item</a></li>
-                <li><a href="#" class="nav-item">Item</a></li>
-                <li><a href="#" class="nav-item">Item</a></li>
-            </ul>
-        </div>
-                <!-- add prev, next and pause bar-->
-        <div class="uk-navbar-right">
-            <ul class="uk-navbar-nav item-buttons">
-                <li><button href="#" class="nav-item" id="previous">Previous</button></li>
-                <li><button href="#" class="nav-item" id="next">Next</button></li>
-                <li><button href="#" class="nav-item" id="pause">Pause</button></li>
-                <li class="uk-nav-divider"></li>
-            </ul>
-        </div>
-=======
-
-    <header>
-
-    <!-- navbar/banner starts (Erica) -->
-
-
-
-
-
-    <!-- navbar/banner ends -->
-
+      <!-- navbar/banner starts (Erica) -->
+      <div class="uk-navbar-right">
+        <!-- Previous and next buttons used to change pictures -->
+        <button id="previous">Previous</button>
+        <button id="next">Next</button>
+      </div>
     </header>
-    
+
     <main>
     
         <!-- front page (Erica) -->
 
-<!-- <img src="https://images-assets.nasa.gov/image/PIA19821/PIA19821~orig.jpg" alt="star"> -->
-=======
-
-
-
-
-
-
-
-
-
-
+        <!-- <img src="https://images-assets.nasa.gov/image/PIA19821/PIA19821~orig.jpg" alt="star"> -->
 
         <!-- front page ends -->
         <!-- ======================================= -->
         <!-- modal 1 (Alex) -->
-      <div class="container modal-container mx-auto m-3 p3"
-       id="modal1Container">
-        <div class="row">
-          <p>
-            Welcome to our Nasa App. Our app uses a culmination of Google & Nasa API's to display upcoming astral events. Give it a go. Simply click below to get started.
-          </p>
-          <div class="mx-auto">
-            <button class="text-center id="modal1GetStartedButton>Get Started</button>
+        <div class="container modal-container mx-auto m-3 p-3" id="modal1Container">
+          <div class="row">
+            <p>Welcome to our Nasa App. Our app uses a culmination of Google & Nasa API's to display upcoming astral events. Give it a go. Simply click below to get started.</p>
+            <div class="mx-auto">
+              <button class="text-center id="modal1GetStartedButton>Get Started</button>
+            </div>
           </div>
-
         </div>
-      
-      </div>
-        
-        
-
-
-
-
-
-
-
         <!-- modal 1 ends -->
         <!-- ======================================= -->
         <!-- modal 2 (Alex) -->
-        <div class="container modal-container mx-auto m-3 p3"
-        id="modal1Container">
-         <div class="row">
-           <p>
- 
-           </p>
-           <div class="mx-auto">
-             <button class="text-center id="modal1GetStartedButton>Get Started</button>
+        <div class="container modal-container mx-auto m-3 p-3" id="modal1Container">
+          <div class="row">
+            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Labore aliquam ea dicta delectus dolorum tenetur quia porro. Necessitatibus non numquam ipsa quas, velit quia veritatis ipsam officia suscipit quo! Minima.</p>
+            <div class="mx-auto">
+              <button class="text-center" id="modal1GetStartedButton">Get Started</button>
            </div>
- 
          </div>
-       
        </div> 
-
-
-
-
-
-
-
-
-
         <!-- modal 2 ends -->
         <!-- ======================================= -->
         <!-- modal 3 (Alex) -->
-        <div class="container modal-container mx-auto m-3 p3"
-       id="modal1Container">
-        <div class="row">
-          <p>
-
-          </p>
-          <div class="mx-auto">
-            <button class="text-center id="modal1GetStartedButton>Get Started</button>
+        <div class="container modal-container mx-auto m-3 p-3" id="modal1Container">
+          <div class="row">
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente a quibusdam repudiandae iste aliquid impedit, quisquam dolore, dolor provident ipsam sunt, quaerat natus harum sed? Dolores saepe omnis temporibus minima?</p>
+            <div class="mx-auto">
+              <button class="text-center id="modal1GetStartedButton>Get Started</button>
+            </div>
           </div>
-
         </div>
-      
-      </div>
-
-
-
-
-
-
-
-
-=======
-     
-        <!-- Trigger/Open Modal 2 -->
-<button id="getStarted">Welcome Message</button>
-
-<!-- Modal 1 -->
-<div id="getModal1" class="uk-position-center">
-
-  <!-- Modal content -->
-  <div class="modal-content">
-    <span class="close"></span>
-    <p>Welcome to our Nasa App. Our app uses a culmination of Google & Nasa API's to display upcoming astral events. Give it a go. Simply click below to get started.</p>
-  </div>
-</div>
-
-</div>   
-<!--Below is the JavaScript we can use for closing out of Modals or clicking X for a better user experience--> 
-<!-- }
-// When a user clicks on X, close the modal
-span.onclick = function() {
-  modal.style.display = "none";
-}
-
-// When a user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
-  if (event.target == modal) {
-    modal.style.display = "none";
-  }
-} -->
-        
-        <!-- modal 1 ends -->
-        <!-- ======================================= -->
-        <!-- modal 2 (Alex) -->
-
-        <!-- Trigger/Open Modal 3 -->
-        <button id="spaceBtn">Space</button>
-
-        <!-- Trigger/Open Modal 3 -->
-        <button id="earthBtn">Earth</button>
-
-        <div id="getModal2" class="modal">
-
-            <!-- Modal content -->
-            <div class="modal-content">
-              <span class="close"></span>
-            </div>
-
-        
-          </div>     
-        <!-- modal 2 ends -->
-        <!-- ======================================= -->
-        <!-- modal 3 (Alex) -->
-
-<!--Need Javascript call here to autopopulate City, State-->
-
-        <!-- Trigger/Open Modal 4 -->
-        <button id="yesBtnCon">Yes</button>
-
-        <!-- Trigger/Open Modal 4 -->
-        <button id="noBtnCon">No</button>
-
-        <div id="getModal3" class="modal">
-
-            <!-- Modal content -->
-            <div class="modal-content">
-              <span class="close"></span>
-              <p></p>
-            </div>
-          
-          </div>            
-
-
         <!-- modal 3 ends -->
         <!-- ======================================= -->
         <!-- modal 4 (Alex) -->
-        <div class="container modal-container mx-auto m-3 p3"
-       id="modal1Container">
-        <div class="row">
-          <p>
-
-          </p>
-          <div class="mx-auto">
-            <button class="text-center id="modal1GetStartedButton>Get Started</button>
-          </div>
-
-        </div>
-      
-      </div>
-
-
-
-
-
-
-
-
-
-=======
-        <div id="getModal4" class="modal">
-
-            <!-- Modal content -->
-            <div class="modal-content">
-              <span class="close"></span>
-              <p></p>
+        <div class="container modal-container mx-auto m-3 p-3" id="modal1Container">
+          <div class="row">
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam sunt ipsum, laboriosam incidunt eaque quis itaque distinctio deserunt natus qui aperiam veritatis obcaecati animi facere, voluptates veniam sequi? Est, provident.</p>
+            <div class="mx-auto">
+              <button class="text-center id="modal1GetStartedButton>Get Started</button>
             </div>
-
-<!--I don't believe this should be a TextArea but instead two seperate input boxes (different from the mock up). We also may want to Limit inputs for City/States. Some logic (if a city for example is not found). Discuss. -Alex-->
-            <label for="textBox">Enter your City and State:</label>
-            <textarea id="textboxModal2" name="textBox" rows="10" cols="40">
-            Input Answer Here.
-            </textarea>
-          
-          </div>     
-
-        
+          </div>
+        </div>    
         <!-- modal 4 ends -->
         <!-- ======================================= -->
         <!-- modal 5 (Alex) -->
-        <div class="container modal-container mx-auto m-3 p3"
-       id="modal1Container">
-        <div class="row">
-          <p>
-
-          </p>
-          <div class="mx-auto">
-            <button class="text-center id="modal1GetStartedButton>Get Started</button>
-          </div>
-
-        </div>
-      
-      </div>
-
-
-
-
-
-
-
-
-
-        
-        <!-- modal 5 ends -->
-        <!-- ======================================= -->
-        <!-- results modal (Erica) -->
-<div class="result-modal">
-    <!-- add 
-    content
-    here 
-    please!  -->
-</div>
-=======
-         <!-- Trigger/Open Results -->
-         <button id="yesBtnStore">Yes</button>
-
-         <!-- Trigger/Open Results -->
-         <button id="noBtnStore">No</button>
-        
-        <div id="getModal5" class="modal">
-
-            <!-- Modal content -->
-            <div class="modal-content">
-              <span class="close"></span>
-              <p></p>
+        <div class="container modal-container mx-auto m-3 p-3" id="modal1Container">
+          <div class="row">
+            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nesciunt, a ipsam incidunt cum qui perferendis praesentium odio obcaecati iusto eligendi magnam inventore similique molestias soluta rem magni alias nobis voluptatum.</p>
+            <div class="mx-auto">
+              <button class="text-center id="modal1GetStartedButton>Get Started</button>
             </div>
-          
-          </div>     
-
+          </div>
+        </div>
         <!-- modal 5 ends -->
         <!-- ======================================= -->
         <!-- results modal (Erica) -->
@@ -332,14 +101,10 @@ window.onclick = function(event) {
         <!-- results modal ends -->
         <!-- ======================================= -->
         <!-- event results modal (Erica) -->
+        <div class="event-result-modal">
+        <!-- add content here please! -->
+        </div>
 
-<div class="event-result-modal">
-    <!-- add 
-    content
-    here 
-    please! -->
-</div>
-=======
 
 
 
@@ -355,13 +120,10 @@ window.onclick = function(event) {
         <!-- ======================================= -->
         <!-- weather results modal (Erica) -->
 
-<div class="weather-result-modal">
-    <!-- add 
-    content
-    here 
-    please!-->
-</div>
-=======
+        <div class="weather-result-modal">
+        <!-- add content here please!-->
+        </div>
+
 
 
 
@@ -376,34 +138,20 @@ window.onclick = function(event) {
         <!-- weather results modal ends -->
         <!-- ======================================= -->
         <!-- terms to know modal (Alex) -->
-
-
-=======
-<header>Terms to Know</header>
-<ol>
-  <li>"CME" : "Coronal Mass Ejection": Is a significant release of plasma and accompanying magnetic field from the solar corona (eye).</li>
-  <li>"GST" : "Geomagnetic Storm": A geomagnetic storm is a temporary disturbance of the Earth's magnetosphere caused by a solar wind shock wave and/or cloud of magnetic field that interacts with the Earth's magnetic field.</li>
-  <li>"IPS" : "Interplanetary Shock": Interplanetary shocks are a type of collisionless shock — ones where particles transfer energy through electromagnetic fields instead of directly bouncing into one another.</li>
-  <li>"FLR" : "Solar Flare": A solar flare is a sudden flash of increased brightness on the Sun, usually observed near its surface and in close proximity to a sunspot group.</li>
-  <li>"SEP" : "Solar Energetic Particle": Solar energetic particles are high-energy radiation emitted from the sun during solar flares or coronal mass ejections. Once they are released from the sun, they travel through the magnetic fields of the solar corona and interplanetary medium.</li>
-  <li>"MPC" : "Magnetopause Crossing": The magnetopause is the boundary of the magnetosphere and it's crossing</li>
-  <li>"RBE" : "Radiation Belt Enhancement": The radiation belts are regions of space around the Earth that are known for their high‐energy particle populations, this is an enhancement of those areas</li>
-  <li>"HSS" : "Hight Speed Stream": This open, magnetic field line structure allows the solar wind to escape more readily into space, resulting in streams of relatively fast solar wind and is often referred to as a high speed stream.</li>
-</ol>
-
-
-
-
-
-
-
-
-
-
-
-=======
+        <div class="modal" id="termsModalContainer">
+          <h2>Terms to Know</h2>
+          <ol>
+            <li>"CME" : "Coronal Mass Ejection": Is a significant release of plasma and accompanying magnetic field from the solar corona (eye).</li>
+            <li>"GST" : "Geomagnetic Storm": A geomagnetic storm is a temporary disturbance of the Earth's magnetosphere caused by a solar wind shock wave and/or cloud of magnetic field that interacts with the Earth's magnetic field.</li>
+            <li>"IPS" : "Interplanetary Shock": Interplanetary shocks are a type of collisionless shock — ones where particles transfer energy through electromagnetic fields instead of directly bouncing into one another.</li>
+            <li>"FLR" : "Solar Flare": A solar flare is a sudden flash of increased brightness on the Sun, usually observed near its surface and in close proximity to a sunspot group.</li>
+            <li>"SEP" : "Solar Energetic Particle": Solar energetic particles are high-energy radiation emitted from the sun during solar flares or coronal mass ejections. Once they are released from the sun, they travel through the magnetic fields of the solar corona and interplanetary medium.</li>
+            <li>"MPC" : "Magnetopause Crossing": The magnetopause is the boundary of the magnetosphere and it's crossing</li>
+            <li>"RBE" : "Radiation Belt Enhancement": The radiation belts are regions of space around the Earth that are known for their high‐energy particle populations, this is an enhancement of those areas</li>
+            <li>"HSS" : "Hight Speed Stream": This open, magnetic field line structure allows the solar wind to escape more readily into space, resulting in streams of relatively fast solar wind and is often referred to as a high speed stream.</li>
+          </ol>
+        </div>
         <button id="closeBtn">Close</button>
-
         <!-- terms to know modal ends -->
 
     </main>
