@@ -8,31 +8,29 @@
     <link rel="icon" type="image/png" href="./images/favicon.png"/>
     <!-- UIkit css library -->
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/uikit@3.3.7/dist/css/uikit.min.css"/>
+    <!-- bootstrap style sheet -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"/>
     <!-- local style sheet -->
     <link rel="stylesheet" type="text/css" href="./assets/css/style.css"/>
 </head>
 
-<body id="backgroundImage">
+<body>
 
     <header>
 
       <!-- navbar/banner starts (Erica) -->
 
-      <div class="row" style="width: 100%">
-
-        <div class="uk-navbar-right mx-3">
+      <div class="uk-navbar-container uk-navbar-transparent uk-position-top" style="width: 100%;">
 
           <!-- Previous and next buttons used to change pictures -->
 
-          <button id="previous" class="buttons uk-button-primary p-1"><</button>
+          <button id="previous" class="buttons uk-button-primary m-1 p-1"><</button>
 
-          <p class="uk-card-primary p-1 m-3">Image</p>
-
-          <button id="next" class="buttons uk-button-primary p-1">></button>
+          <button id="next" class="buttons uk-button-primary m-1 p-1">></button>
 
           <!-- open the terms to know modal -->
 
-          <button id="termsModalOpenButton" class="buttons uk-button-primary p-1">Terms to Know</button>
+          <button id="termsModalOpenButton" class="buttons uk-button-primary uk-align-right m-1 p-1">Terms to Know</button>
 
         </div>
 
@@ -40,7 +38,7 @@
 
     </header>
 
- 
+    <img id="backgroundImage" class="image"/>
 
     <main>
 
@@ -48,21 +46,15 @@
 
         <div class="uk-position-center" id="modal1Container">
 
-          <div class="uk-card-primary uk-card-hover mx-auto local-modal">
+          <div class="uk-card-primary uk-card-hover uk-modal-body mx-auto local-modal">
 
             <p>Welcome to our Nasa App. Our app uses a culmination of Google & Nasa API's to display upcoming astral events. Give it a go. Simply click below to get started.</p>
 
-            <div class="text-center">
-
-              <button class="buttons uk-button-default" id="modal1GetStartedButton">Get Started</button>
-
-            </div>
+            <button class="buttons uk-button-default uk-align-center" id="modal1GetStartedButton">Get Started</button>
 
           </div>
 
         </div>
-
- 
 
         <!-- modal 1 ends -->
 
@@ -76,21 +68,13 @@
 
             <p>Do you want to find out about upcoming space events or earth events?</p>
 
-            <div class="text-center">
+            <button class="buttons uk-button-default uk-align-left" id="modal2SpaceButton">Space</button>
 
-              <button class="buttons uk-button-default" id="modal2SpaceButton">Space</button>
-
-              <button class="buttons uk-button-default" id="modal2EarthButton">Earth</button>
-
-            </div>
+            <button class="buttons uk-button-default uk-align-right" id="modal2EarthButton">Earth</button>
 
           </div>
 
         </div>
-
-    
-
- 
 
         <!-- modal 2 ends -->
 
@@ -106,13 +90,9 @@
 
             <p id="modal3UserLocation"></p>
 
-            <div class="text-center">
+            <button class="buttons uk-button-default uk-align-left" id="modal3YesButton">Yes</button>
 
-              <button class="buttons uk-button-default" id="modal3YesButton">Yes</button>
-
-              <button class="buttons uk-button-default" id="modal3NoButton">No</button>
-
-            </div>
+            <button class="buttons uk-button-default uk-align-right" id="modal3NoButton">No</button>
 
           </div>
 
@@ -130,13 +110,9 @@
 
             <p>Enter your city:</p>
 
-            <input type="text" id="modal4Input"></p>
+            <input type="text" id="modal4Input" style="color: black;"></p>
 
-            <div class="text-center">
-
-              <button class="buttons uk-button-default" id="modal4SubmitButton">Submit</button>
-
-            </div>
+            <button class="buttons uk-button-default uk-align-center" id="modal4SubmitButton">Submit</button>
 
           </div>
 
@@ -154,13 +130,9 @@
 
             <p>Do you want to save this location for future use?</p>
 
-            <div class="text-center">
+            <button class="buttons uk-button-default uk-align-left" id="modal5YesButton">Yes</button>
 
-              <button class="buttons uk-button-default" id="modal5YesButton">Yes</button>
-
-              <button class="buttons uk-button-default" id="modal5NoButton">No</button>
-
-            </div>
+            <button class="buttons uk-button-default uk-align-right" id="modal5NoButton">No</button>
 
           </div>
 
@@ -172,17 +144,19 @@
 
         <!-- results modal (Erica) -->
 
-    
+        <div class="uk-position-center" id="resultsModalContainer">
 
+          <div class="uk-card-primary uk-card-hover mx-auto local-modal">
 
+              <button class="buttons uk-button-default uk-align-left" id="resultsModalEventsButton">Events</button>
 
+              <button class="buttons uk-button-default uk-align-center" id="resultsModalWeatherButton">Weather</button>
 
+              <button class="buttons uk-button-default uk-align-right" id="resultsModalSearchAgainButton">Search Again</button>
 
+          </div>
 
-
-
-
-
+        </div> 
 
         <!-- results modal ends -->
 
@@ -190,23 +164,17 @@
 
         <!-- event results modal (Erica) -->
 
-        <div class="event-result-modal">
+        <div class="uk-position-center" id="eventResultsModalContainer">
 
-        <!-- add content here please! -->
+          <div class="uk-card-primary uk-card-hover mx-auto local-modal">
 
-        </div>
+            <div id="eventResultsContainer"></div>
 
+            <button class="buttons uk-button-default uk-align-center" id="eventResultsModalCloseButton">Close</button>
 
+          </div>
 
-
-
-
-
-
-
-
-
-
+        </div> 
 
         <!--event results modal ends -->
 
@@ -214,25 +182,17 @@
 
         <!-- weather results modal (Erica) -->
 
- 
+        <div class="uk-position-center" id="weatherResultsModalContainer">
 
-        <div class="weather-result-modal">
+          <div class="uk-card-primary uk-card-hover mx-auto local-modal">
 
-        <!-- add content here please!-->
+            <div id="weatherResultsContainer" class="row"></div>
+
+            <button class="buttons uk-button-default uk-align-center" id="weatherResultsModalCloseButton">Close</button>
+
+          </div>
 
         </div>
-
-
-
-
-
-
-
-
-
-
-
-
 
         <!-- weather results modal ends -->
 
@@ -266,21 +226,11 @@
 
             </ul>
 
-            <div class="text-center">
-
-              <button class="buttons uk-button-default" id="termsModalCloseButton">Close</button>
-
-            </div>
+            <button class="buttons uk-button-default uk-align-center" id="termsModalCloseButton">Close</button>
 
           </div>
 
         </div>  
-
- 
-
- 
-
- 
 
         <!-- terms to know modal ends -->
 
@@ -290,6 +240,7 @@
     <!-- UIkit JS -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/uikit@3.3.7/dist/js/uikit.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/uikit@3.3.7/dist/js/uikit-icons.min.js"></script>
+    <!-- local script -->
     <script type="text/javascript" src="./assets/js/script.js"></script>
 </body>
 </html>
