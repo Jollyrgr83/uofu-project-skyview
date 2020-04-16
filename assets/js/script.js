@@ -1,38 +1,3 @@
-// TO-DO LIST FOR FRONT-END
-// modal 1 container id = "#modal1Container"
-// modal 2 container id = "#modal2Container"
-// modal 3 container id = "#modal3Container"
-// modal 4 container id = "#modal4Container"
-// modal 5 container id = "#modal5Container"
-// results modal container id = "#resultsModalContainer"
-// event results modal container id = "#eventResultsModalContainer"
-// weather results modal container id = "#weatherResultsModalContainer"
-// terms container id = "#termsModalContainer"
-// all buttons have class = ".buttons"
-// front page "Next" button id = "#next"
-// front page "Previous" button id = "#previous"
-// front page background image element has id = "#backgroundImage"
-// front page background image element has "data-index" attribute with starting value of 0 (number data type)
-// front page "Terms to Know" button id = "termsModalOpenButton"
-// terms modal "Close" button id = "termsModalCloseButton"
-// modal 1 "Get Started" button id = "#modal1GetStartedButton"
-// modal 2 "Space" and "Earth" buttons ids = "#modal2SpaceButton" and "#modal2EarthButton"
-// modal 3 "Yes" and "No" buttons ids = "#modal3YesButton" and "#modal3NoButton"
-// modal 4 "Submit" button id = "#modal4SubmitButton"
-// modal 4 text input id = "#modal4Input"
-// modal 5 "Yes" and "No" ids = "#modal5YesButton" and "#modal5NoButton"
-// results modal "Events", "Weather", and "Search Again" buttons ids = "#resultsModalEventsButton", "#resultsModalWeatherButton", and "#resultsModalSearchAgainButton"
-// event results modal "Close" button id = "#eventResultsModalCloseButton"
-// weather results modal "Close" button id = "#weatherResultsModalClose Button"
-// modal 3 div containing user location string has id = "#modal3UserLocation"
-// event results modal div containing event results has id = "#eventResultsContainer"
-
-// WISHLIST
-// Research and incorporate Spotify API, playlists, and buttons
-
-// TO-DO LIST
-// update classes in display() function
-
 // FRONT MATTER
 
 // LIST OF APIS AND ENDPOINTS
@@ -89,6 +54,7 @@
 
 // (4) Other
 // display() function - uses a switch statement to hide and show html container elements by dynamically updating the elements' class with the .hide or .show class as applicable
+// render functions - create, update, and append html elements for weather, space, and earth events
 
 // VARIABLES
 
@@ -130,131 +96,132 @@ var dayNames = {
 
 // displays modals based on input by updating the show/hide classes for the applicable container elements
 function display(page) {
+    var className = "uk-position-center"
     switch (page) {
         case "modal-1":
             // show: modal 1
             // hide: modals 2, 3, 4, 5, results, event results, weather results, terms
-            $("#modal1Container").attr("class", "XXXX show");
-            $("#modal2Container").attr("class", "XXXX hide");
-            $("#modal3Container").attr("class", "XXXX hide");
-            $("#modal4Container").attr("class", "XXXX hide");
-            $("#modal5Container").attr("class", "XXXX hide");
-            $("#resultsModalContainer").attr("class", "XXXX hide");
-            $("#eventResultsModalContainer").attr("class", "XXXX hide");
-            $("#weatherResultsModalContainer").attr("class", "XXXX hide");
-            $("#termsModalContainer").attr("class", "XXXX hide");
+            $("#modal1Container").attr("class", className + " show");
+            $("#modal2Container").attr("class", className + " hide");
+            $("#modal3Container").attr("class", className + " hide");
+            $("#modal4Container").attr("class", className + " hide");
+            $("#modal5Container").attr("class", className + " hide");
+            $("#resultsModalContainer").attr("class", className + " hide");
+            $("#eventResultsModalContainer").attr("class", className + " hide");
+            $("#weatherResultsModalContainer").attr("class", className + " hide");
+            $("#termsModalContainer").attr("class", className + " hide");
             activeWindow = "modal-1";
             break;
         case "modal-2":
             // show: modal 2
             // hide: modals 1, 3, 4, 5, results, event results, weather results, terms
-            $("#modal2Container").attr("class", "XXXX show");
-            $("#modal1Container").attr("class", "XXXX hide");
-            $("#modal3Container").attr("class", "XXXX hide");
-            $("#modal4Container").attr("class", "XXXX hide");
-            $("#modal5Container").attr("class", "XXXX hide");
-            $("#resultsModalContainer").attr("class", "XXXX hide");
-            $("#eventResultsModalContainer").attr("class", "XXXX hide");
-            $("#weatherResultsModalContainer").attr("class", "XXXX hide");
-            $("#termsModalContainer").attr("class", "XXXX hide");
+            $("#modal2Container").attr("class", className + " show");
+            $("#modal1Container").attr("class", className + " hide");
+            $("#modal3Container").attr("class", className + " hide");
+            $("#modal4Container").attr("class", className + " hide");
+            $("#modal5Container").attr("class", className + " hide");
+            $("#resultsModalContainer").attr("class", className + " hide");
+            $("#eventResultsModalContainer").attr("class", className + " hide");
+            $("#weatherResultsModalContainer").attr("class", className + " hide");
+            $("#termsModalContainer").attr("class", className + " hide");
             activeWindow = "modal-2";
             break;
         case "modal-3":
             // show: modal 3
             // hide: modals 1, 2, 4, 5, results, event results, weather results, terms
-            $("#modal3Container").attr("class", "XXXX show");
-            $("#modal1Container").attr("class", "XXXX hide");
-            $("#modal2Container").attr("class", "XXXX hide");
-            $("#modal4Container").attr("class", "XXXX hide");
-            $("#modal5Container").attr("class", "XXXX hide");
-            $("#resultsModalContainer").attr("class", "XXXX hide");
-            $("#eventResultsModalContainer").attr("class", "XXXX hide");
-            $("#weatherResultsModalContainer").attr("class", "XXXX hide");
-            $("#termsModalContainer").attr("class", "XXXX hide");
+            $("#modal3Container").attr("class", className + " show");
+            $("#modal1Container").attr("class", className + " hide");
+            $("#modal2Container").attr("class", className + " hide");
+            $("#modal4Container").attr("class", className + " hide");
+            $("#modal5Container").attr("class", className + " hide");
+            $("#resultsModalContainer").attr("class", className + " hide");
+            $("#eventResultsModalContainer").attr("class", className + " hide");
+            $("#weatherResultsModalContainer").attr("class", className + " hide");
+            $("#termsModalContainer").attr("class", className + " hide");
             activeWindow = "modal-3";
             break;
         case "modal-4":
             // show: modal 4
             // hide: modals 1, 2, 3, 5, results, event results, weather results, terms
-            $("#modal4Container").attr("class", "XXXX show");
-            $("#modal1Container").attr("class", "XXXX hide");
-            $("#modal2Container").attr("class", "XXXX hide");
-            $("#modal3Container").attr("class", "XXXX hide");
-            $("#modal5Container").attr("class", "XXXX hide");
-            $("#resultsModalContainer").attr("class", "XXXX hide");
-            $("#eventResultsModalContainer").attr("class", "XXXX hide");
-            $("#weatherResultsModalContainer").attr("class", "XXXX hide");
-            $("#termsModalContainer").attr("class", "XXXX hide");
+            $("#modal4Container").attr("class", className + " show");
+            $("#modal1Container").attr("class", className + " hide");
+            $("#modal2Container").attr("class", className + " hide");
+            $("#modal3Container").attr("class", className + " hide");
+            $("#modal5Container").attr("class", className + " hide");
+            $("#resultsModalContainer").attr("class", className + " hide");
+            $("#eventResultsModalContainer").attr("class", className + " hide");
+            $("#weatherResultsModalContainer").attr("class", className + " hide");
+            $("#termsModalContainer").attr("class", className + " hide");
             activeWindow = "modal-4";
             break;    
         case "modal-5":
             // show: modal 5
             // hide: modals 1, 2, 3, 4, results, event results, weather results, terms
-            $("#modal5Container").attr("class", "XXXX show");
-            $("#modal1Container").attr("class", "XXXX hide");
-            $("#modal2Container").attr("class", "XXXX hide");
-            $("#modal3Container").attr("class", "XXXX hide");
-            $("#modal4Container").attr("class", "XXXX hide");
-            $("#resultsModalContainer").attr("class", "XXXX hide");
-            $("#eventResultsModalContainer").attr("class", "XXXX hide");
-            $("#weatherResultsModalContainer").attr("class", "XXXX hide");
-            $("#termsModalContainer").attr("class", "XXXX hide");
+            $("#modal5Container").attr("class", className + " show");
+            $("#modal1Container").attr("class", className + " hide");
+            $("#modal2Container").attr("class", className + " hide");
+            $("#modal3Container").attr("class", className + " hide");
+            $("#modal4Container").attr("class", className + " hide");
+            $("#resultsModalContainer").attr("class", className + " hide");
+            $("#eventResultsModalContainer").attr("class", className + " hide");
+            $("#weatherResultsModalContainer").attr("class", className + " hide");
+            $("#termsModalContainer").attr("class", className + " hide");
             activeWindow = "modal-5";
             break;    
         case "results":
             // show: results modal
             // hide: modals 1, 2, 3, 4, 5, event results, weather results, terms
-            $("#resultsModalContainer").attr("class", "XXXX show");
-            $("#modal1Container").attr("class", "XXXX hide");
-            $("#modal2Container").attr("class", "XXXX hide");
-            $("#modal3Container").attr("class", "XXXX hide");
-            $("#modal4Container").attr("class", "XXXX hide");
-            $("#modal5Container").attr("class", "XXXX hide");
-            $("#eventResultsModalContainer").attr("class", "XXXX hide");
-            $("#weatherResultsModalContainer").attr("class", "XXXX hide");
-            $("#termsModalContainer").attr("class", "XXXX hide");
+            $("#resultsModalContainer").attr("class", className + " show");
+            $("#modal1Container").attr("class", className + " hide");
+            $("#modal2Container").attr("class", className + " hide");
+            $("#modal3Container").attr("class", className + " hide");
+            $("#modal4Container").attr("class", className + " hide");
+            $("#modal5Container").attr("class", className + " hide");
+            $("#eventResultsModalContainer").attr("class", className + " hide");
+            $("#weatherResultsModalContainer").attr("class", className + " hide");
+            $("#termsModalContainer").attr("class", className + " hide");
             activeWindow = "results";
             break;   
         case "event-results":
             // show: event results modal
             // hide: modals 1, 2, 3, 4, 5, results, weather results, terms
-            $("#eventResultsModalContainer").attr("class", "XXXX show");
-            $("#modal1Container").attr("class", "XXXX hide");
-            $("#modal2Container").attr("class", "XXXX hide");
-            $("#modal3Container").attr("class", "XXXX hide");
-            $("#modal4Container").attr("class", "XXXX hide");
-            $("#modal5Container").attr("class", "XXXX hide");
-            $("#resultsModalContainer").attr("class", "XXXX hide");
-            $("#weatherResultsModalContainer").attr("class", "XXXX hide");
-            $("#termsModalContainer").attr("class", "XXXX hide");
+            $("#eventResultsModalContainer").attr("class", className + " show");
+            $("#modal1Container").attr("class", className + " hide");
+            $("#modal2Container").attr("class", className + " hide");
+            $("#modal3Container").attr("class", className + " hide");
+            $("#modal4Container").attr("class", className + " hide");
+            $("#modal5Container").attr("class", className + " hide");
+            $("#resultsModalContainer").attr("class", className + " hide");
+            $("#weatherResultsModalContainer").attr("class", className + " hide");
+            $("#termsModalContainer").attr("class", className + " hide");
             activeWindow = "event-results";
             break;
         case "weather-results":
             // show: weather results modal
             // hide: modals 1, 2, 3, 4, 5, results, event results, terms
-            $("#weatherResultsModalContainer").attr("class", "XXXX show");
-            $("#modal1Container").attr("class", "XXXX hide");
-            $("#modal2Container").attr("class", "XXXX hide");
-            $("#modal3Container").attr("class", "XXXX hide");
-            $("#modal4Container").attr("class", "XXXX hide");
-            $("#modal5Container").attr("class", "XXXX hide");
-            $("#resultsModalContainer").attr("class", "XXXX hide");
-            $("#eventResultsModalContainer").attr("class", "XXXX hide");
-            $("#termsModalContainer").attr("class", "XXXX hide");
+            $("#weatherResultsModalContainer").attr("class", className + " show");
+            $("#modal1Container").attr("class", className + " hide");
+            $("#modal2Container").attr("class", className + " hide");
+            $("#modal3Container").attr("class", className + " hide");
+            $("#modal4Container").attr("class", className + " hide");
+            $("#modal5Container").attr("class", className + " hide");
+            $("#resultsModalContainer").attr("class", className + " hide");
+            $("#eventResultsModalContainer").attr("class", className + " hide");
+            $("#termsModalContainer").attr("class", className + " hide");
             activeWindow = "weather-results";
             break;   
         case "terms":
             // show: terms modal
             // hide: modals 1, 2, 3, 4, 5, results, event results, weather results
-            $("#termsModalContainer").attr("class", "XXXX show");
-            $("#modal1Container").attr("class", "XXXX hide");
-            $("#modal2Container").attr("class", "XXXX hide");
-            $("#modal3Container").attr("class", "XXXX hide");
-            $("#modal4Container").attr("class", "XXXX hide");
-            $("#modal5Container").attr("class", "XXXX hide");
-            $("#resultsModalContainer").attr("class", "XXXX hide");
-            $("#eventResultsModalContainer").attr("class", "XXXX hide");
-            $("#weatherResultsModalContainer").attr("class", "XXXX hide");
+            $("#termsModalContainer").attr("class", className + " show");
+            $("#modal1Container").attr("class", className + " hide");
+            $("#modal2Container").attr("class", className + " hide");
+            $("#modal3Container").attr("class", className + " hide");
+            $("#modal4Container").attr("class", className + " hide");
+            $("#modal5Container").attr("class", className + " hide");
+            $("#resultsModalContainer").attr("class", className + " hide");
+            $("#eventResultsModalContainer").attr("class", className + " hide");
+            $("#weatherResultsModalContainer").attr("class", className + " hide");
             break;    
     }
 }
@@ -299,7 +266,8 @@ function initializePage() {
                     backgroundImageObject["APOD-titles"][i] = response.title;
                     if (i === 0) {
                         // update background image on page load
-                        $("#backgroundImage").attr("style", "background-image: url(" + backgroundImageObject["APOD-images"][0] + ");");
+                        // $("#backgroundImage").attr("style", "background-image: url(" + backgroundImageObject["APOD-images"][0] + ");");
+                        $("#backgroundImage").attr("src", backgroundImageObject["APOD-images"][0]);
                         $("#backgroundImage").attr("data-index", 0);
                     }
                 });
@@ -308,9 +276,12 @@ function initializePage() {
         // update "date" property in backgroundImageObject
         backgroundImageObject.date = dayString;
     }
-    // update background image and data-index on page load
-    $("#backgroundImage").attr("style", "background-image: url(" + backgroundImageObject["APOD-images"][0] + ");");
-    $("#backgroundImage").attr("data-index", 0);
+    else {
+        // update background image and data-index on page load
+        // $("#backgroundImage").attr("style", "background-image: url(" + backgroundImageObject["APOD-images"][0] + ");");
+        $("#backgroundImage").attr("src", backgroundImageObject["APOD-images"][0]);
+        $("#backgroundImage").attr("data-index", 0);
+    }
     // display modal 1 (welcome)
     display("modal-1");
 }
@@ -323,43 +294,8 @@ function eventSearch() {
             url: queryURLNASADONKI,
             method: "GET"
         }).then(function(response) {
-            // clear existing information in event results modal 
-            $("#eventResultsContainer").empty();
-            // create event results modal html elements, update with information, append
-            for (let i = 0; i < 10; i++) {
-                // for full list, change the "10" above to respnse.length
-                // to change list length, change "10"
-                var messageTitle = response[i].messageType;
-                var messageURL = response[i].messageURL;
-                var messageBody = response[i].messageBody;
-                // if message title is an acronym, reassign full title from DONKI object
-                if (DONKI[messageTitle]) {
-                    messageTitle = DONKI[messageTitle];
-                }
-                // parse message into components and remove IDs, Notes, and Disclaimers
-                var messageElement = $("<div>");
-                var messageBodyArray = messageBody.split("##");
-                for (let j = 0; j < messageBodyArray.length; j++) {
-                    if (messageBodyArray[j].indexOf("Message ID:") === -1 && messageBodyArray[j].indexOf("Disclaimer:") === -1 && messageBodyArray[j].indexOf("Notes:") === -1) {
-                        var divElement = $("<div>");
-                        divElement.text(messageBodyArray[j]);
-                        divElement.attr("class", "box");
-                        messageElement.append(divElement);
-                    }
-                }
-                // create html elements
-                var titleElement = $("<div>");
-                var urlContainer = $("<div>");
-                var urlElement = $("<a>");
-                // update html elements
-                titleElement.text(messageTitle);
-                urlElement.attr("href", messageURL);
-                urlElement.attr("target", "_blank");
-                // append html elements
-                $("#eventResultsContainer").append(titleElement);
-                $("#eventResultsContainer").append(urlElement);
-                $("#eventResultsContainer").append(messageElement);
-            }
+            localStorage.setItem("spaceEventsObject", JSON.stringify(response));
+            renderSpaceEvents(response, 0);
             // display results modal
             display("results");
         });
@@ -371,29 +307,8 @@ function eventSearch() {
             url: queryURLNASAEONET,
             method: "GET"
         }).then(function(response) {
-            // clear existing information in event results modal
-            $("#eventResultsContainer").empty();
-            // create and update html elements
-            for (let i = 0; i < 20; i++) {
-                // for full list, change 20 to response.events.length
-                // to change list length, change 20
-                var eventTitle = response.events[i].title;
-                var eventLon = response.events[i].geometry[0].coordinates[0];
-                var eventLat = response.events[i].geometry[0].coordinates[1];
-                var googleEarthURL = "https://earth.google.com/web/search/" + eventLat + "," + eventLon + "/";
-                // create html elements
-                var titleElement = $("<div>");
-                var urlContainer = $("<div>");
-                var urlElement = $("<a>");
-                // update attributes
-                titleElement.text(eventTitle);
-                urlElement.attr("href", googleEarthURL);
-                urlElement.attr("target", "_blank");
-                urlElement.text(googleEarthURL);
-                //append elements
-                $("#eventResultsContainer").append(titleElement);
-                $("#eventResultsContainer").append(urlElement);
-            }
+            localStorage.setItem("earthEventsObject", JSON.stringify(response));
+            renderEarthEvents(response, 0);
             // display results modal
             display("results");
         });
@@ -417,40 +332,7 @@ function eventSearch() {
                 url: queryURLWeatherOneCall,
                 method: "GET"
             }).then(function(response) {
-                // clear existing information in weather results modal
-                $("#weatherResultsContainer").empty();
-                // create and update html elements
-                var weekdayNum = (new Date()).getDay();
-                for (let i = 0; i < response.daily.length; i++) {
-                    // convert temperature to Fahrenheit
-                    var temp = (((response.daily[i].temp.max) - 273.15) * (9 / 5) + 32).toFixed(0);
-                    var iconID = response.daily[i].weather[0].icon;
-                    var iconURL = "https://openweathermap.org/img/wn/" + iconID + "@2x.png";
-                    var description = response.daily[i].weather[0].description;
-                    var iconAlt = response.daily[i].weather[0].main;
-                    // resets weekdayNum if it goes past 7 (number of key values in dayNames object)
-                    if (weekdayNum + i > 7) {
-                        weekdayNum = weekdayNum - 7;
-                    }
-                    // obtains dayname string from dayNames object
-                    var weekdayString = dayNames[weekdayNum + i];
-                    // create html elements
-                    var tempElement = $("<div>");
-                    var iconElement = $("<img>");
-                    var descElement = $("<div>");
-                    var dayElement = $("<div>");
-                    // update attributes
-                    tempElement.text(temp + "°F");
-                    iconElement.attr("src", iconURL);
-                    iconElement.attr("alt", iconAlt);
-                    descElement.text(description);
-                    dayElement.text(weekdayString);
-                    // append html elements to weather results modal
-                    $("#weatherResultsContainer").append(dayElement);
-                    $("#weatherResultsContainer").append(tempElement);
-                    $("#weatherResultsContainer").append(iconElement);
-                    $("#weatherResultsContainer").append(descElement);
-                }
+                renderWeather(response);
             });
         });
     }
@@ -463,42 +345,137 @@ function eventSearch() {
                 url: queryURLWeatherOneCall,
                 method: "GET"
             }).then(function(response) {
-                // clear existing information in weather results modal
-                $("#weatherResultsContainer").empty();
-                // create and update html elements
-                var weekdayNum = (new Date()).getDay();
-                for (let i = 0; i < response.daily.length; i++) {
-                    // convert temperature to Fahrenheit
-                    var temp = (((response.daily[i].temp.max) - 273.15) * (9 / 5) + 32).toFixed(0);
-                    var iconID = response.daily[i].weather[0].icon;
-                    var iconURL = "https://openweathermap.org/img/wn/" + iconID + "@2x.png";
-                    var description = response.daily[i].weather[0].description;
-                    var iconAlt = response.daily[i].weather[0].main;
-                    // resets weekdayNum if it goes past 7 (number of key values in dayNames object)
-                    if (weekdayNum + i > 7) {
-                        weekdayNum = weekdayNum - 7;
-                    }
-                    // obtains dayname string from dayNames object
-                    var weekdayString = dayNames[weekdayNum + i];
-                    // create html elements
-                    var tempElement = $("<div>");
-                    var iconElement = $("<img>");
-                    var descElement = $("<div>");
-                    var dayElement = $("<div>");
-                    // update attributes
-                    tempElement.text(temp + "°F");
-                    iconElement.attr("src", iconURL);
-                    iconElement.attr("alt", iconAlt);
-                    descElement.text(description);
-                    dayElement.text(weekdayString);
-                    // append html elements to weather results modal
-                    $("#weatherResultsContainer").append(dayElement);
-                    $("#weatherResultsContainer").append(tempElement);
-                    $("#weatherResultsContainer").append(iconElement);
-                    $("#weatherResultsContainer").append(descElement);
-                }
+                renderWeather(response);
             });
     }
+}
+// renders weather information
+function renderWeather(response) {
+    // clear existing information in weather results modal
+    $("#weatherResultsContainer").empty();
+    // create and update html elements
+    var weekdayNum = (new Date()).getDay();
+    for (let i = 0; i < response.daily.length; i++) {
+        // convert temperature to Fahrenheit
+        var temp = (((response.daily[i].temp.max) - 273.15) * (9 / 5) + 32).toFixed(0);
+        var iconID = response.daily[i].weather[0].icon;
+        var iconURL = "https://openweathermap.org/img/wn/" + iconID + "@2x.png";
+        var description = response.daily[i].weather[0].description;
+        var iconAlt = response.daily[i].weather[0].main;
+        // resets weekdayNum if it goes past 7 (number of key values in dayNames object)
+        if (weekdayNum + i > 7) {
+            weekdayNum = weekdayNum - 7;
+        }
+        // obtains dayname string from dayNames object
+        var weekdayString = dayNames[weekdayNum + i];
+        // create html elements
+        var tempElement = $("<div>");
+        var iconElement = $("<img>");
+        var descElement = $("<div>");
+        var dayElement = $("<div>");
+        var weatherContainerElement = $("<div>");
+        // update attributes
+        tempElement.text(temp + "°F");
+        iconElement.attr("src", iconURL);
+        iconElement.attr("alt", iconAlt);
+        descElement.text(description);
+        dayElement.text(weekdayString);
+        weatherContainerElement.attr("class", "big-box col-sm-2");
+        // append html elements to weather results modal
+        
+        weatherContainerElement.append(dayElement);
+        weatherContainerElement.append(tempElement);
+        weatherContainerElement.append(iconElement);
+        weatherContainerElement.append(descElement);
+
+        $("#weatherResultsContainer").append(weatherContainerElement);
+    }
+}
+// render earth events information
+function renderEarthEvents(response, earthIndexNumber) {
+    // clear existing information in event results modal
+    $("#eventResultsContainer").empty();
+    // update data-index attribute
+    $("#eventResultsContainer").attr("data-index", earthIndexNumber);
+    // create and update html elements    
+    var eventTitle = response.events[0].title;
+    var eventLon = response.events[earthIndexNumber].geometry[0].coordinates[0];
+    var eventLat = response.events[earthIndexNumber].geometry[0].coordinates[1];
+    var googleEarthURL = "https://earth.google.com/web/search/" + eventLat + "," + eventLon + "/";
+    // create html elements
+    var titleElement = $("<div>");
+    var urlContainer = $("<div>");
+    var urlElement = $("<a>");
+    var nextButtonElement = $("<button>");
+    var previousButtonElement = $("<button>");
+    // update attributes
+    titleElement.text(eventTitle);
+    urlElement.attr("href", googleEarthURL);
+    urlElement.attr("target", "_blank");
+    urlElement.text(googleEarthURL);
+    nextButtonElement.text("Next");
+    previousButtonElement.text("Previous");
+    nextButtonElement.attr("id", "eventsNextButton");
+    previousButtonElement.attr("id", "eventsPreviousButton");
+    nextButtonElement.attr("class", "uk-button-primary buttons");
+    previousButtonElement.attr("class", "uk-button-primary buttons");
+    //append elements
+    $("#eventResultsContainer").append(titleElement);
+    $("#eventResultsContainer").append(urlElement);
+    $("#eventResultsContainer").append(previousButtonElement);
+    $("#eventResultsContainer").append(nextButtonElement);
+}
+// render space events information
+function renderSpaceEvents(response, spaceIndexNumber) {
+    // clear existing information in event results modal 
+    $("#eventResultsContainer").empty();
+    // update data-index attribute
+    $("#eventResultsContainer").attr("data-index", spaceIndexNumber);
+    // create event results modal html elements, update with information, append
+    var messageTitle = response[spaceIndexNumber].messageType;
+    var messageURL = response[spaceIndexNumber].messageURL;
+    var messageBody = response[spaceIndexNumber].messageBody;
+    // if message title is an acronym, reassign full title from DONKI object
+    if (DONKI[messageTitle]) {
+        messageTitle = DONKI[messageTitle];
+    }
+    // parse message into components and remove IDs, Notes, and Disclaimers
+    var messageElement = $("<div>");
+    var messageBodyArray = messageBody.split("##");
+    for (let j = 0; j < messageBodyArray.length; j++) {
+        if (messageBodyArray[j].indexOf("Message ID:") === -1 && messageBodyArray[j].indexOf("Disclaimer:") === -1 && messageBodyArray[j].indexOf("Notes:") === -1) {
+            var divElement = $("<div>");
+            divElement.text(messageBodyArray[j]);
+            divElement.attr("class", "box");
+            messageElement.append(divElement);
+        }
+    }
+    // create html elements
+    var titleElement = $("<div>");
+    var urlContainer = $("<div>");
+    var urlElement = $("<a>");
+    var nextButtonElement = $("<button>");
+    var previousButtonElement = $("<button>");
+    // update html elements
+    titleElement.text(messageTitle);
+    urlElement.attr("href", messageURL);
+    urlElement.attr("target", "_blank");
+    urlElement.text(messageURL);
+    nextButtonElement.text("Next");
+    previousButtonElement.text("Previous");
+    nextButtonElement.attr("id", "eventsNextButton");
+    previousButtonElement.attr("id", "eventsPreviousButton");
+    nextButtonElement.attr("class", "uk-button-primary buttons");
+    previousButtonElement.attr("class", "uk-button-primary buttons");
+    // append html elements
+    var containerElement = $("<div>");
+    containerElement.attr("class", "box");
+    containerElement.append(titleElement);
+    containerElement.append(urlElement);
+    containerElement.append(messageElement);
+    $("#eventResultsContainer").append(containerElement);
+    $("#eventResultsContainer").append(previousButtonElement);
+    $("#eventResultsContainer").append(nextButtonElement);
 }
 // retrieves location information
 function getLocation() {
@@ -579,7 +556,8 @@ $(document).on("click", ".buttons", function(event) {
             }
         }
         // update the background image element
-        $("#backgroundImage").attr("style", "background-image: url(" + backgroundImageObject["APOD-images"][indexNumber] + ");");
+        // $("#backgroundImage").attr("style", "background-image: url(" + backgroundImageObject["APOD-images"][indexNumber] + ");");
+        $("#backgroundImage").attr("src", backgroundImageObject["APOD-images"][indexNumber]);
         // update the background image element data-index attribute
         $("#backgroundImage").attr("data-index", indexNumber);
     }    
@@ -676,6 +654,55 @@ $(document).on("click", ".buttons", function(event) {
     else if (targetID === "weatherResultsModalCloseButton") {
         // display results modal
         display("results");
+    }
+    else if (targetID === "eventsPreviousButton") {
+        if (eventType === "earth") {
+            var earthEventsObject = JSON.parse(localStorage.getItem("earthEventsObject")); 
+            var earthIndexNumber = $("#eventResultsContainer").attr("data-index");
+            if (earthIndexNumber <= 0) {
+                earthIndexNumber = earthEventsObject.events.length - 1;
+            }
+            else {
+                earthIndexNumber--;
+            }
+            renderEarthEvents(earthEventsObject, earthIndexNumber);
+        }
+        else {
+            var spaceEventsObject = JSON.parse(localStorage.getItem("spaceEventsObject"));
+            var spaceIndexNumber = $("#eventResultsContainer").attr("data-index");
+            if (spaceIndexNumber <= 0) {
+                spaceIndexNumber = spaceEventsObject.length - 1;
+            }
+            else {
+                spaceIndexNumber--;
+            }
+            renderSpaceEvents(spaceEventsObject, spaceIndexNumber);
+        }
+    }
+    else if (targetID === "eventsNextButton") {
+        if (eventType === "earth") {
+            var earthEventsObject = JSON.parse(localStorage.getItem("earthEventsObject")); 
+            var earthIndexNumber = $("#eventResultsContainer").attr("data-index");
+            if (earthIndexNumber >= earthEventsObject.events.length - 1) {
+                earthIndexNumber = 0;
+            }
+            else {
+                earthIndexNumber++;
+            }
+            renderEarthEvents(earthEventsObject, earthIndexNumber);
+        }
+        else {
+            var spaceEventsObject = JSON.parse(localStorage.getItem("spaceEventsObject"));
+            var spaceIndexNumber = $("#eventResultsContainer").attr("data-index");
+            if (spaceIndexNumber >= spaceEventsObject.length - 1) {
+                console.log("length", spaceEventsObject.length);
+                spaceIndexNumber = 0;
+            }
+            else {
+                spaceIndexNumber++;
+            }
+            renderSpaceEvents(spaceEventsObject, spaceIndexNumber);     
+        }
     }
 });
 // STARTING SCRIPT
