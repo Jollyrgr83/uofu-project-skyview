@@ -266,8 +266,10 @@ function initializePage() {
                     backgroundImageObject["APOD-titles"][i] = response.title;
                     if (i === 0) {
                         // update background image on page load
-                        // $("#backgroundImage").attr("style", "background-image: url(" + backgroundImageObject["APOD-images"][0] + ");");
                         $("#backgroundImage").attr("src", backgroundImageObject["APOD-images"][0]);
+                        // update background image element alt attribute
+                        $("#backgroundImage").attr("alt", backgroundImageObject["APOD-titles"][0]);
+                        // update background image element data-index attribute
                         $("#backgroundImage").attr("data-index", 0);
                     }
                 });
@@ -277,9 +279,11 @@ function initializePage() {
         backgroundImageObject.date = dayString;
     }
     else {
-        // update background image and data-index on page load
-        // $("#backgroundImage").attr("style", "background-image: url(" + backgroundImageObject["APOD-images"][0] + ");");
+        // update background image on page load
         $("#backgroundImage").attr("src", backgroundImageObject["APOD-images"][0]);
+        // update background image element alt attribute
+        $("#backgroundImage").attr("alt", backgroundImageObject["APOD-titles"][0]);
+        // update background image element data-index attribute
         $("#backgroundImage").attr("data-index", 0);
     }
     // display modal 1 (welcome)
@@ -398,7 +402,7 @@ function renderEarthEvents(response, earthIndexNumber) {
     // update data-index attribute
     $("#eventResultsContainer").attr("data-index", earthIndexNumber);
     // create and update html elements    
-    var eventTitle = response.events[0].title;
+    var eventTitle = response.events[earthIndexNumber].title;
     var eventLon = response.events[earthIndexNumber].geometry[0].coordinates[0];
     var eventLat = response.events[earthIndexNumber].geometry[0].coordinates[1];
     var googleEarthURL = "https://earth.google.com/web/search/" + eventLat + "," + eventLon + "/";
@@ -556,8 +560,9 @@ $(document).on("click", ".buttons", function(event) {
             }
         }
         // update the background image element
-        // $("#backgroundImage").attr("style", "background-image: url(" + backgroundImageObject["APOD-images"][indexNumber] + ");");
         $("#backgroundImage").attr("src", backgroundImageObject["APOD-images"][indexNumber]);
+        // update the background image element alt attribute
+        $("#backgroundImage").attr("alt", backgroundImageObject["APOD-titles"][indexNumber]);
         // update the background image element data-index attribute
         $("#backgroundImage").attr("data-index", indexNumber);
     }    
