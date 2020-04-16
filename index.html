@@ -14,83 +14,170 @@
 
 <body>
 
+  <body id="backgroundImage">
+
+ 
+
     <header>
+
       <!-- navbar/banner starts (Erica) -->
-      <div class="uk-navbar-right">
-        <!-- Previous and next buttons used to change pictures -->
-        <button id="previous">Previous</button>
-        <button id="next">Next</button>
-      </div>
+
+      <div class="row" style="width: 100%">
+
+        <div class="uk-navbar-right mx-3">
+
+          <!-- Previous and next buttons used to change pictures -->
+
+          <button id="previous" class="buttons uk-button-primary p-1"><</button>
+
+          <p class="uk-card-primary p-1 m-3">Image</p>
+
+          <button id="next" class="buttons uk-button-primary p-1">></button>
+
+          <!-- open the terms to know modal -->
+
+          <button id="termsModalOpenButton" class="buttons uk-button-primary p-1">Terms to Know</button>
+
+        </div>
+
+      <div>
+
     </header>
 
+ 
+
     <main>
-    
-        <!-- front page (Erica) -->
 
-        <!-- <img src="https://images-assets.nasa.gov/image/PIA19821/PIA19821~orig.jpg" alt="star"> -->
-
-        <!-- front page ends -->
-        <!-- ======================================= -->
         <!-- modal 1 (Alex) -->
-        <div class="container modal-container mx-auto m-3 p-3" id="modal1Container">
-          <div class="row">
+
+        <div class="uk-position-center" id="modal1Container">
+
+          <div class="uk-card-primary uk-card-hover mx-auto local-modal">
+
             <p>Welcome to our Nasa App. Our app uses a culmination of Google & Nasa API's to display upcoming astral events. Give it a go. Simply click below to get started.</p>
-            <div class="mx-auto">
-              <button class="text-center id="modal1GetStartedButton>Get Started</button>
+
+            <div class="text-center">
+
+              <button class="buttons uk-button-default" id="modal1GetStartedButton">Get Started</button>
+
             </div>
+
           </div>
+
         </div>
+
+ 
+
         <!-- modal 1 ends -->
+
         <!-- ======================================= -->
+
         <!-- modal 2 (Alex) -->
-        <div class="container modal-container mx-auto m-3 p-3" id="modal1Container">
-          <div class="row">
+
+        <div class="uk-position-center" id="modal2Container">
+
+          <div class="uk-card-primary uk-card-hover mx-auto local-modal">
+
             <p>Do you want to find out about upcoming space events or earth events?</p>
-            <div class="mx-auto">
-              <button class="text-center" id="modal2SpaceButton">Space</button>
-              <button class="text-center" id="modal2EarthButton">Earth</button>
-           </div>
-         </div>
-       </div> 
-        <!-- modal 2 ends -->
-        <!-- ======================================= -->
-        <!-- modal 3 (Alex) -->
-        <div class="container modal-container mx-auto m-3 p-3" id="modal1Container">
-          <div class="row">
-            <p>Do you want to use this location:</p>
-            <div class="mx-auto">
-              <button class="text-center" id="modal3YesButton">Yes?</button>
-              <button class="text-center" id="modal3NoButton">No?</button>
+
+            <div class="text-center">
+
+              <button class="buttons uk-button-default" id="modal2SpaceButton">Space</button>
+
+              <button class="buttons uk-button-default" id="modal2EarthButton">Earth</button>
+
             </div>
+
           </div>
+
         </div>
-        <!-- modal 3 ends -->
-        <!-- ======================================= -->
-        <!-- modal 4 (Alex) -->
-        <div class="container modal-container mx-auto m-3 p-3" id="modal1Container">
-          <div class="row">
-            <p>Enter your City:</p>
-            <div class="mx-auto">
-              <button class="text-center id="modal4Submit>Submit</button>
-            </div>
-          </div>
-        </div>    
-        <!-- modal 4 ends -->
-        <!-- ======================================= -->
-        <!-- modal 5 (Alex) -->
-        <div class="container modal-container mx-auto m-3 p-3" id="modal1Container">
-          <div class="row">
-            <p>Do you want to save this location for future use?</p>
-            <div class="mx-auto">
-              <button class="text-center" id="modal3YesButton">Yes?</button>
-              <button class="text-center" id="modal3NoButton">No?</button>
-            </div>
-          </div>
-        </div>
-        <!-- modal 5 ends -->
-        <!-- ======================================= -->
-        <!-- results modal (Erica) -->
+
     
+
+ 
+
+        <!-- modal 2 ends -->
+
+        <!-- ======================================= -->
+
+        <!-- modal 3 (Alex) -->
+
+        <div class="uk-position-center" id="modal3Container">
+
+          <div class="uk-card-primary uk-card-hover mx-auto local-modal">
+
+            <p>Do you want to use this location?</p>
+
+            <p id="modal3UserLocation"></p>
+
+            <div class="text-center">
+
+              <button class="buttons uk-button-default" id="modal3YesButton">Yes</button>
+
+              <button class="buttons uk-button-default" id="modal3NoButton">No</button>
+
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- modal 3 ends -->
+
+        <!-- ======================================= -->
+
+        <!-- modal 4 (Alex) -->
+
+        <div class="uk-position-center" id="modal4Container">
+
+          <div class="uk-card-primary uk-card-hover mx-auto local-modal">
+
+            <p>Enter your city:</p>
+
+            <input type="text" id="modal4Input"></p>
+
+            <div class="text-center">
+
+              <button class="buttons uk-button-default" id="modal4SubmitButton">Submit</button>
+
+            </div>
+
+          </div>
+
+        </div>   
+
+        <!-- modal 4 ends -->
+
+        <!-- ======================================= -->
+
+        <!-- modal 5 (Alex) -->
+
+        <div class="uk-position-center" id="modal5Container">
+
+          <div class="uk-card-primary uk-card-hover mx-auto local-modal">
+
+            <p>Do you want to save this location for future use?</p>
+
+            <div class="text-center">
+
+              <button class="buttons uk-button-default" id="modal5YesButton">Yes</button>
+
+              <button class="buttons uk-button-default" id="modal5NoButton">No</button>
+
+            </div>
+
+          </div>
+
+        </div>   
+
+        <!-- modal 5 ends -->
+
+        <!-- ======================================= -->
+
+        <!-- results modal (Erica) -->
+
+    
+
 
 
 
@@ -102,11 +189,17 @@
 
 
         <!-- results modal ends -->
+
         <!-- ======================================= -->
+
         <!-- event results modal (Erica) -->
+
         <div class="event-result-modal">
+
         <!-- add content here please! -->
+
         </div>
+
 
 
 
@@ -120,12 +213,19 @@
 
 
         <!--event results modal ends -->
+
         <!-- ======================================= -->
+
         <!-- weather results modal (Erica) -->
 
+ 
+
         <div class="weather-result-modal">
+
         <!-- add content here please!-->
+
         </div>
+
 
 
 
@@ -139,22 +239,53 @@
 
 
         <!-- weather results modal ends -->
+
         <!-- ======================================= -->
+
         <!-- terms to know modal (Alex) -->
-        <div class="modal" id="termsModalContainer">
-          <h2>Terms to Know</h2>
-          <ol>
-            <li>"CME" : "Coronal Mass Ejection": Is a significant release of plasma and accompanying magnetic field from the solar corona (eye).</li>
-            <li>"GST" : "Geomagnetic Storm": A geomagnetic storm is a temporary disturbance of the Earth's magnetosphere caused by a solar wind shock wave and/or cloud of magnetic field that interacts with the Earth's magnetic field.</li>
-            <li>"IPS" : "Interplanetary Shock": Interplanetary shocks are a type of collisionless shock — ones where particles transfer energy through electromagnetic fields instead of directly bouncing into one another.</li>
-            <li>"FLR" : "Solar Flare": A solar flare is a sudden flash of increased brightness on the Sun, usually observed near its surface and in close proximity to a sunspot group.</li>
-            <li>"SEP" : "Solar Energetic Particle": Solar energetic particles are high-energy radiation emitted from the sun during solar flares or coronal mass ejections. Once they are released from the sun, they travel through the magnetic fields of the solar corona and interplanetary medium.</li>
-            <li>"MPC" : "Magnetopause Crossing": The magnetopause is the boundary of the magnetosphere and it's crossing</li>
-            <li>"RBE" : "Radiation Belt Enhancement": The radiation belts are regions of space around the Earth that are known for their high‐energy particle populations, this is an enhancement of those areas</li>
-            <li>"HSS" : "Hight Speed Stream": This open, magnetic field line structure allows the solar wind to escape more readily into space, resulting in streams of relatively fast solar wind and is often referred to as a high speed stream.</li>
-          </ol>
-        </div>
-        <button id="closeBtn">Close</button>
+
+        <div class="uk-position-center" id="termsModalContainer">
+
+          <div class="uk-card-primary uk-card-hover mx-auto local-modal">
+
+            <h2>Terms to Know</h2>
+
+            <ul>
+
+              <li>"CME" : "Coronal Mass Ejection": Is a significant release of plasma and accompanying magnetic field from the solar corona (eye).</li>
+
+              <li>"GST" : "Geomagnetic Storm": A geomagnetic storm is a temporary disturbance of the Earth's magnetosphere caused by a solar wind shock wave and/or cloud of magnetic field that interacts with the Earth's magnetic field.</li>
+
+              <li>"IPS" : "Interplanetary Shock": Interplanetary shocks are a type of collisionless shock — ones where particles transfer energy through electromagnetic fields instead of directly bouncing into one another.</li>
+
+              <li>"FLR" : "Solar Flare": A solar flare is a sudden flash of increased brightness on the Sun, usually observed near its surface and in close proximity to a sunspot group.</li>
+
+              <li>"SEP" : "Solar Energetic Particle": Solar energetic particles are high-energy radiation emitted from the sun during solar flares or coronal mass ejections. Once they are released from the sun, they travel through the magnetic fields of the solar corona and interplanetary medium.</li>
+
+              <li>"MPC" : "Magnetopause Crossing": The magnetopause is the boundary of the magnetosphere and it's crossing</li>
+
+              <li>"RBE" : "Radiation Belt Enhancement": The radiation belts are regions of space around the Earth that are known for their high‐energy particle populations, this is an enhancement of those areas</li>
+
+              <li>"HSS" : "Hight Speed Stream": This open, magnetic field line structure allows the solar wind to escape more readily into space, resulting in streams of relatively fast solar wind and is often referred to as a high speed stream.</li>
+
+            </ul>
+
+            <div class="text-center">
+
+              <button class="buttons uk-button-default" id="termsModalCloseButton">Close</button>
+
+            </div>
+
+          </div>
+
+        </div>  
+
+ 
+
+ 
+
+ 
+
         <!-- terms to know modal ends -->
 
     </main>
