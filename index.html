@@ -38,21 +38,21 @@
 
     </header>
 
-    <img id="backgroundImage" class="image"/>
+    <img id="backgroundImage" class="image uk-background-top-center"/>
 
-    <main>
+    <main> 
 
         <!-- modal 1 (Alex) -->
 
         <div class="uk-position-center" id="modal1Container">
 
-          <div class="uk-card-primary uk-card-hover uk-modal-body mx-auto local-modal">
+          <div class="mx-auto local-modal">
 
             <p>Welcome to our Nasa App. Our app uses a culmination of Google & Nasa API's to display upcoming astral events. Give it a go. Simply click below to get started.</p>
-
-            <button class="buttons uk-button-default uk-align-center" id="modal1GetStartedButton">Get Started</button>
-
+            
           </div>
+          
+          <button class="buttons uk-button-primary uk-align-center" id="modal1GetStartedButton">Get Started</button>
 
         </div>
 
@@ -64,15 +64,16 @@
 
         <div class="uk-position-center" id="modal2Container">
 
-          <div class="uk-card-primary uk-card-hover mx-auto local-modal">
+          <div class="mx-auto local-modal">
 
             <p>Do you want to find out about upcoming space events or earth events?</p>
-
-            <button class="buttons uk-button-default uk-align-left" id="modal2SpaceButton">Space</button>
-
-            <button class="buttons uk-button-default uk-align-right" id="modal2EarthButton">Earth</button>
-
+            
           </div>
+
+          <button class="buttons uk-button-primary uk-align-left" id="modal2SpaceButton">Space</button>
+
+          <button class="buttons uk-button-primary uk-align-right" id="modal2EarthButton">Earth</button>
+
 
         </div>
 
@@ -84,17 +85,17 @@
 
         <div class="uk-position-center" id="modal3Container">
 
-          <div class="uk-card-primary uk-card-hover mx-auto local-modal">
+          <div class="mx-auto local-modal">
 
             <p>Do you want to use this location?</p>
 
             <p id="modal3UserLocation"></p>
 
-            <button class="buttons uk-button-default uk-align-left" id="modal3YesButton">Yes</button>
-
-            <button class="buttons uk-button-default uk-align-right" id="modal3NoButton">No</button>
-
           </div>
+            
+          <button class="buttons uk-button-primary uk-align-left" id="modal3YesButton">Yes</button>
+
+          <button class="buttons uk-button-danger uk-align-right" id="modal3NoButton">No</button>
 
         </div>
 
@@ -106,15 +107,15 @@
 
         <div class="uk-position-center" id="modal4Container">
 
-          <div class="uk-card-primary uk-card-hover mx-auto local-modal">
+          <div class="mx-auto local-modal">
 
             <p>Enter your city:</p>
 
             <input type="text" id="modal4Input" style="color: black;"></p>
-
-            <button class="buttons uk-button-default uk-align-center" id="modal4SubmitButton">Submit</button>
-
+            
           </div>
+           
+          <button class="buttons uk-button-primary uk-align-center" id="modal4SubmitButton">Submit</button>
 
         </div>   
 
@@ -126,15 +127,15 @@
 
         <div class="uk-position-center" id="modal5Container">
 
-          <div class="uk-card-primary uk-card-hover mx-auto local-modal">
+          <div class="mx-auto local-modal">
 
             <p>Do you want to save this location for future use?</p>
 
-            <button class="buttons uk-button-default uk-align-left" id="modal5YesButton">Yes</button>
-
-            <button class="buttons uk-button-default uk-align-right" id="modal5NoButton">No</button>
-
           </div>
+            
+          <button class="buttons uk-button-primary uk-align-left" id="modal5YesButton">Yes</button>
+
+          <button class="buttons uk-button-danger uk-align-right" id="modal5NoButton">No</button>
 
         </div>   
 
@@ -146,13 +147,13 @@
 
         <div class="uk-position-center" id="resultsModalContainer">
 
-          <div class="uk-card-primary uk-card-hover mx-auto local-modal">
+          <div class="mx-auto local-modal">
 
-              <button class="buttons uk-button-default uk-align-left" id="resultsModalEventsButton">Events</button>
+              <button class="buttons uk-button-primary uk-align-left" id="resultsModalEventsButton">Events</button>
 
-              <button class="buttons uk-button-default uk-align-center" id="resultsModalWeatherButton">Weather</button>
+              <button class="buttons uk-button-primary uk-align-center" id="resultsModalWeatherButton">Weather</button>
 
-              <button class="buttons uk-button-default uk-align-right" id="resultsModalSearchAgainButton">Search Again</button>
+              <button class="buttons uk-button-primary uk-align-right" id="resultsModalSearchAgainButton">Search Again</button>
 
           </div>
 
@@ -166,11 +167,19 @@
 
         <div class="uk-position-center" id="eventResultsModalContainer">
 
-          <div class="uk-card-primary uk-card-hover mx-auto local-modal">
+          <div class="mx-auto local-modal">
 
+            <div class="uk-navbar-container uk-navbar-transparent" style="width: 100%;">
+
+              <button class="buttons uk-button-primary" id="eventsPreviousButton"><</button>
+
+              <button class="buttons uk-button-primary" id="eventsNextButton">></button>
+
+              <button class="buttons uk-button-default uk-align-right" id="eventResultsModalCloseButton">x</button>
+
+            </div>
+            
             <div id="eventResultsContainer"></div>
-
-            <button class="buttons uk-button-default uk-align-center" id="eventResultsModalCloseButton">Close</button>
 
           </div>
 
@@ -184,11 +193,12 @@
 
         <div class="uk-position-center" id="weatherResultsModalContainer">
 
-          <div class="uk-card-primary uk-card-hover mx-auto local-modal">
+          <div class="mx-auto local-modal">
 
+            <button class="buttons uk-button-default uk-align-right" id="weatherResultsModalCloseButton">x</button>
+            
             <div id="weatherResultsContainer" class="row"></div>
 
-            <button class="buttons uk-button-default uk-align-center" id="weatherResultsModalCloseButton">Close</button>
 
           </div>
 
@@ -199,11 +209,13 @@
         <!-- ======================================= -->
 
         <!-- terms to know modal (Alex) -->
-
+        
         <div class="uk-position-center" id="termsModalContainer">
-
-          <div class="uk-card-primary uk-card-hover mx-auto local-modal">
-
+          
+          <div class="mx-auto local-modal">
+            
+            <button class="buttons uk-button-default uk-align-right" id="termsModalCloseButton">x</button>
+            
             <h2>Terms to Know</h2>
 
             <ul>
@@ -225,8 +237,6 @@
               <li>"HSS" : "Hight Speed Stream": This open, magnetic field line structure allows the solar wind to escape more readily into space, resulting in streams of relatively fast solar wind and is often referred to as a high speed stream.</li>
 
             </ul>
-
-            <button class="buttons uk-button-default uk-align-center" id="termsModalCloseButton">Close</button>
 
           </div>
 

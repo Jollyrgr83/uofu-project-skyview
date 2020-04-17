@@ -44,33 +44,6 @@
 #previous:hover, #next:hover, #pause:hover {
     color: lightGrey;
 }
-body {
-    background-image: url(../../images/nasaBack.jpg);
-    width: auto;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 /* End Erica Code Section */
 
@@ -100,7 +73,8 @@ body {
 .local-modal {
     width: 75%;
     height: auto;
-    padding: 2.5%;
+    padding: 5%;
+    background-color: lightslategray;
 }
 .local-modal-inner {
     margin: 25%;

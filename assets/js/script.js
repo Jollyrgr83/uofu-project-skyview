@@ -96,132 +96,133 @@ var dayNames = {
 
 // displays modals based on input by updating the show/hide classes for the applicable container elements
 function display(page) {
-    var className = "uk-position-center"
+    var inputModalClassName = "uk-position-large uk-position-top-center"
+    var resultsModalClassName = "uk-position-large uk-position-top-center"
     switch (page) {
         case "modal-1":
             // show: modal 1
             // hide: modals 2, 3, 4, 5, results, event results, weather results, terms
-            $("#modal1Container").attr("class", className + " show");
-            $("#modal2Container").attr("class", className + " hide");
-            $("#modal3Container").attr("class", className + " hide");
-            $("#modal4Container").attr("class", className + " hide");
-            $("#modal5Container").attr("class", className + " hide");
-            $("#resultsModalContainer").attr("class", className + " hide");
-            $("#eventResultsModalContainer").attr("class", className + " hide");
-            $("#weatherResultsModalContainer").attr("class", className + " hide");
-            $("#termsModalContainer").attr("class", className + " hide");
+            $("#modal1Container").attr("class", inputModalClassName + " show");
+            $("#modal2Container").attr("class", inputModalClassName + " hide");
+            $("#modal3Container").attr("class", inputModalClassName + " hide");
+            $("#modal4Container").attr("class", inputModalClassName + " hide");
+            $("#modal5Container").attr("class", inputModalClassName + " hide");
+            $("#resultsModalContainer").attr("class", resultsModalClassName + " hide");
+            $("#eventResultsModalContainer").attr("class", resultsModalClassName + " hide");
+            $("#weatherResultsModalContainer").attr("class", resultsModalClassName + " hide");
+            $("#termsModalContainer").attr("class", inputModalClassName + " hide");
             activeWindow = "modal-1";
             break;
         case "modal-2":
             // show: modal 2
             // hide: modals 1, 3, 4, 5, results, event results, weather results, terms
-            $("#modal2Container").attr("class", className + " show");
-            $("#modal1Container").attr("class", className + " hide");
-            $("#modal3Container").attr("class", className + " hide");
-            $("#modal4Container").attr("class", className + " hide");
-            $("#modal5Container").attr("class", className + " hide");
-            $("#resultsModalContainer").attr("class", className + " hide");
-            $("#eventResultsModalContainer").attr("class", className + " hide");
-            $("#weatherResultsModalContainer").attr("class", className + " hide");
-            $("#termsModalContainer").attr("class", className + " hide");
+            $("#modal2Container").attr("class", inputModalClassName + " show");
+            $("#modal1Container").attr("class", inputModalClassName + " hide");
+            $("#modal3Container").attr("class", inputModalClassName + " hide");
+            $("#modal4Container").attr("class", inputModalClassName + " hide");
+            $("#modal5Container").attr("class", inputModalClassName + " hide");
+            $("#resultsModalContainer").attr("class", resultsModalClassName + " hide");
+            $("#eventResultsModalContainer").attr("class", resultsModalClassName + " hide");
+            $("#weatherResultsModalContainer").attr("class", resultsModalClassName + " hide");
+            $("#termsModalContainer").attr("class", inputModalClassName + " hide");
             activeWindow = "modal-2";
             break;
         case "modal-3":
             // show: modal 3
             // hide: modals 1, 2, 4, 5, results, event results, weather results, terms
-            $("#modal3Container").attr("class", className + " show");
-            $("#modal1Container").attr("class", className + " hide");
-            $("#modal2Container").attr("class", className + " hide");
-            $("#modal4Container").attr("class", className + " hide");
-            $("#modal5Container").attr("class", className + " hide");
-            $("#resultsModalContainer").attr("class", className + " hide");
-            $("#eventResultsModalContainer").attr("class", className + " hide");
-            $("#weatherResultsModalContainer").attr("class", className + " hide");
-            $("#termsModalContainer").attr("class", className + " hide");
+            $("#modal3Container").attr("class", inputModalClassName + " show");
+            $("#modal1Container").attr("class", inputModalClassName + " hide");
+            $("#modal2Container").attr("class", inputModalClassName + " hide");
+            $("#modal4Container").attr("class", inputModalClassName + " hide");
+            $("#modal5Container").attr("class", inputModalClassName + " hide");
+            $("#resultsModalContainer").attr("class", resultsModalClassName + " hide");
+            $("#eventResultsModalContainer").attr("class", resultsModalClassName + " hide");
+            $("#weatherResultsModalContainer").attr("class", resultsModalClassName + " hide");
+            $("#termsModalContainer").attr("class", inputModalClassName + " hide");
             activeWindow = "modal-3";
             break;
         case "modal-4":
             // show: modal 4
             // hide: modals 1, 2, 3, 5, results, event results, weather results, terms
-            $("#modal4Container").attr("class", className + " show");
-            $("#modal1Container").attr("class", className + " hide");
-            $("#modal2Container").attr("class", className + " hide");
-            $("#modal3Container").attr("class", className + " hide");
-            $("#modal5Container").attr("class", className + " hide");
-            $("#resultsModalContainer").attr("class", className + " hide");
-            $("#eventResultsModalContainer").attr("class", className + " hide");
-            $("#weatherResultsModalContainer").attr("class", className + " hide");
-            $("#termsModalContainer").attr("class", className + " hide");
+            $("#modal4Container").attr("class", inputModalClassName + " show");
+            $("#modal1Container").attr("class", inputModalClassName + " hide");
+            $("#modal2Container").attr("class", inputModalClassName + " hide");
+            $("#modal3Container").attr("class", inputModalClassName + " hide");
+            $("#modal5Container").attr("class", inputModalClassName + " hide");
+            $("#resultsModalContainer").attr("class", resultsModalClassName + " hide");
+            $("#eventResultsModalContainer").attr("class", resultsModalClassName + " hide");
+            $("#weatherResultsModalContainer").attr("class", resultsModalClassName + " hide");
+            $("#termsModalContainer").attr("class", inputModalClassName + " hide");
             activeWindow = "modal-4";
             break;    
         case "modal-5":
             // show: modal 5
             // hide: modals 1, 2, 3, 4, results, event results, weather results, terms
-            $("#modal5Container").attr("class", className + " show");
-            $("#modal1Container").attr("class", className + " hide");
-            $("#modal2Container").attr("class", className + " hide");
-            $("#modal3Container").attr("class", className + " hide");
-            $("#modal4Container").attr("class", className + " hide");
-            $("#resultsModalContainer").attr("class", className + " hide");
-            $("#eventResultsModalContainer").attr("class", className + " hide");
-            $("#weatherResultsModalContainer").attr("class", className + " hide");
-            $("#termsModalContainer").attr("class", className + " hide");
+            $("#modal5Container").attr("class", inputModalClassName + " show");
+            $("#modal1Container").attr("class", inputModalClassName + " hide");
+            $("#modal2Container").attr("class", inputModalClassName + " hide");
+            $("#modal3Container").attr("class", inputModalClassName + " hide");
+            $("#modal4Container").attr("class", inputModalClassName + " hide");
+            $("#resultsModalContainer").attr("class", resultsModalClassName + " hide");
+            $("#eventResultsModalContainer").attr("class", resultsModalClassName + " hide");
+            $("#weatherResultsModalContainer").attr("class", resultsModalClassName + " hide");
+            $("#termsModalContainer").attr("class", inputModalClassName + " hide");
             activeWindow = "modal-5";
             break;    
         case "results":
             // show: results modal
             // hide: modals 1, 2, 3, 4, 5, event results, weather results, terms
-            $("#resultsModalContainer").attr("class", className + " show");
-            $("#modal1Container").attr("class", className + " hide");
-            $("#modal2Container").attr("class", className + " hide");
-            $("#modal3Container").attr("class", className + " hide");
-            $("#modal4Container").attr("class", className + " hide");
-            $("#modal5Container").attr("class", className + " hide");
-            $("#eventResultsModalContainer").attr("class", className + " hide");
-            $("#weatherResultsModalContainer").attr("class", className + " hide");
-            $("#termsModalContainer").attr("class", className + " hide");
+            $("#resultsModalContainer").attr("class", resultsModalClassName + " show");
+            $("#modal1Container").attr("class", inputModalClassName + " hide");
+            $("#modal2Container").attr("class", inputModalClassName + " hide");
+            $("#modal3Container").attr("class", inputModalClassName + " hide");
+            $("#modal4Container").attr("class", inputModalClassName + " hide");
+            $("#modal5Container").attr("class", inputModalClassName + " hide");
+            $("#eventResultsModalContainer").attr("class", resultsModalClassName + " hide");
+            $("#weatherResultsModalContainer").attr("class", resultsModalClassName + " hide");
+            $("#termsModalContainer").attr("class", inputModalClassName + " hide");
             activeWindow = "results";
             break;   
         case "event-results":
             // show: event results modal
             // hide: modals 1, 2, 3, 4, 5, results, weather results, terms
-            $("#eventResultsModalContainer").attr("class", className + " show");
-            $("#modal1Container").attr("class", className + " hide");
-            $("#modal2Container").attr("class", className + " hide");
-            $("#modal3Container").attr("class", className + " hide");
-            $("#modal4Container").attr("class", className + " hide");
-            $("#modal5Container").attr("class", className + " hide");
-            $("#resultsModalContainer").attr("class", className + " hide");
-            $("#weatherResultsModalContainer").attr("class", className + " hide");
-            $("#termsModalContainer").attr("class", className + " hide");
+            $("#eventResultsModalContainer").attr("class", resultsModalClassName + " show");
+            $("#modal1Container").attr("class", inputModalClassName + " hide");
+            $("#modal2Container").attr("class", inputModalClassName + " hide");
+            $("#modal3Container").attr("class", inputModalClassName + " hide");
+            $("#modal4Container").attr("class", inputModalClassName + " hide");
+            $("#modal5Container").attr("class", inputModalClassName + " hide");
+            $("#resultsModalContainer").attr("class", resultsModalClassName + " hide");
+            $("#weatherResultsModalContainer").attr("class", resultsModalClassName + " hide");
+            $("#termsModalContainer").attr("class", inputModalClassName + " hide");
             activeWindow = "event-results";
             break;
         case "weather-results":
             // show: weather results modal
             // hide: modals 1, 2, 3, 4, 5, results, event results, terms
-            $("#weatherResultsModalContainer").attr("class", className + " show");
-            $("#modal1Container").attr("class", className + " hide");
-            $("#modal2Container").attr("class", className + " hide");
-            $("#modal3Container").attr("class", className + " hide");
-            $("#modal4Container").attr("class", className + " hide");
-            $("#modal5Container").attr("class", className + " hide");
-            $("#resultsModalContainer").attr("class", className + " hide");
-            $("#eventResultsModalContainer").attr("class", className + " hide");
-            $("#termsModalContainer").attr("class", className + " hide");
+            $("#weatherResultsModalContainer").attr("class", resultsModalClassName + " show");
+            $("#modal1Container").attr("class", inputModalClassName + " hide");
+            $("#modal2Container").attr("class", inputModalClassName + " hide");
+            $("#modal3Container").attr("class", inputModalClassName + " hide");
+            $("#modal4Container").attr("class", inputModalClassName + " hide");
+            $("#modal5Container").attr("class", inputModalClassName + " hide");
+            $("#resultsModalContainer").attr("class", resultsModalClassName + " hide");
+            $("#eventResultsModalContainer").attr("class", resultsModalClassName + " hide");
+            $("#termsModalContainer").attr("class", inputModalClassName + " hide");
             activeWindow = "weather-results";
             break;   
         case "terms":
             // show: terms modal
             // hide: modals 1, 2, 3, 4, 5, results, event results, weather results
-            $("#termsModalContainer").attr("class", className + " show");
-            $("#modal1Container").attr("class", className + " hide");
-            $("#modal2Container").attr("class", className + " hide");
-            $("#modal3Container").attr("class", className + " hide");
-            $("#modal4Container").attr("class", className + " hide");
-            $("#modal5Container").attr("class", className + " hide");
-            $("#resultsModalContainer").attr("class", className + " hide");
-            $("#eventResultsModalContainer").attr("class", className + " hide");
-            $("#weatherResultsModalContainer").attr("class", className + " hide");
+            $("#termsModalContainer").attr("class", inputModalClassName + " show");
+            $("#modal1Container").attr("class", inputModalClassName + " hide");
+            $("#modal2Container").attr("class", inputModalClassName + " hide");
+            $("#modal3Container").attr("class", inputModalClassName + " hide");
+            $("#modal4Container").attr("class", inputModalClassName + " hide");
+            $("#modal5Container").attr("class", inputModalClassName + " hide");
+            $("#resultsModalContainer").attr("class", resultsModalClassName + " hide");
+            $("#eventResultsModalContainer").attr("class", resultsModalClassName + " hide");
+            $("#weatherResultsModalContainer").attr("class", resultsModalClassName + " hide");
             break;    
     }
 }
@@ -410,24 +411,14 @@ function renderEarthEvents(response, earthIndexNumber) {
     var titleElement = $("<div>");
     var urlContainer = $("<div>");
     var urlElement = $("<a>");
-    var nextButtonElement = $("<button>");
-    var previousButtonElement = $("<button>");
     // update attributes
     titleElement.text(eventTitle);
     urlElement.attr("href", googleEarthURL);
     urlElement.attr("target", "_blank");
     urlElement.text(googleEarthURL);
-    nextButtonElement.text("Next");
-    previousButtonElement.text("Previous");
-    nextButtonElement.attr("id", "eventsNextButton");
-    previousButtonElement.attr("id", "eventsPreviousButton");
-    nextButtonElement.attr("class", "uk-button-primary buttons");
-    previousButtonElement.attr("class", "uk-button-primary buttons");
     //append elements
     $("#eventResultsContainer").append(titleElement);
     $("#eventResultsContainer").append(urlElement);
-    $("#eventResultsContainer").append(previousButtonElement);
-    $("#eventResultsContainer").append(nextButtonElement);
 }
 // render space events information
 function renderSpaceEvents(response, spaceIndexNumber) {
@@ -458,19 +449,11 @@ function renderSpaceEvents(response, spaceIndexNumber) {
     var titleElement = $("<div>");
     var urlContainer = $("<div>");
     var urlElement = $("<a>");
-    var nextButtonElement = $("<button>");
-    var previousButtonElement = $("<button>");
     // update html elements
     titleElement.text(messageTitle);
     urlElement.attr("href", messageURL);
     urlElement.attr("target", "_blank");
     urlElement.text(messageURL);
-    nextButtonElement.text("Next");
-    previousButtonElement.text("Previous");
-    nextButtonElement.attr("id", "eventsNextButton");
-    previousButtonElement.attr("id", "eventsPreviousButton");
-    nextButtonElement.attr("class", "uk-button-primary buttons");
-    previousButtonElement.attr("class", "uk-button-primary buttons");
     // append html elements
     var containerElement = $("<div>");
     containerElement.attr("class", "box");
@@ -478,8 +461,6 @@ function renderSpaceEvents(response, spaceIndexNumber) {
     containerElement.append(urlElement);
     containerElement.append(messageElement);
     $("#eventResultsContainer").append(containerElement);
-    $("#eventResultsContainer").append(previousButtonElement);
-    $("#eventResultsContainer").append(nextButtonElement);
 }
 // retrieves location information
 function getLocation() {
