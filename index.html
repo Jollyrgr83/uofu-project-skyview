@@ -20,7 +20,7 @@
 
       <!-- navbar/banner starts (Erica) -->
 
-      <div class="uk-navbar-container uk-navbar-transparent uk-position-top" style="width: 100%;">
+      <div class="uk-navbar-container uk-navbar-transparent uk-position-top">
 
           <!-- Previous and next buttons used to change pictures -->
 
@@ -73,7 +73,6 @@
           <button class="buttons uk-button-primary uk-align-left" id="modal2SpaceButton">Space</button>
 
           <button class="buttons uk-button-primary uk-align-right" id="modal2EarthButton">Earth</button>
-
 
         </div>
 
@@ -147,13 +146,13 @@
 
         <div class="uk-position-center" id="resultsModalContainer">
 
-          <div class="mx-auto local-modal">
+          <div class="mx-auto local-modal-results">
 
-              <button class="buttons uk-button-primary uk-align-left" id="resultsModalEventsButton">Events</button>
+              <button class="buttons result-button uk-button-primary uk-align-center" id="resultsModalEventsButton">Events</button>
 
-              <button class="buttons uk-button-primary uk-align-center" id="resultsModalWeatherButton">Weather</button>
+              <button class="buttons result-button uk-button-primary uk-align-center" id="resultsModalWeatherButton">Weather</button>
 
-              <button class="buttons uk-button-primary uk-align-right" id="resultsModalSearchAgainButton">Search Again</button>
+              <button class="buttons result-button uk-button-primary uk-align-center" id="resultsModalSearchAgainButton">Search Again</button>
 
           </div>
 
@@ -167,19 +166,19 @@
 
         <div class="uk-position-center" id="eventResultsModalContainer">
 
-          <div class="mx-auto local-modal">
+          <div class="mx-auto local-modal-results">
 
-            <div class="uk-navbar-container uk-navbar-transparent" style="width: 100%;">
+            <div class="uk-navbar-container uk-navbar-transparent local-navbar">
 
               <button class="buttons uk-button-primary" id="eventsPreviousButton"><</button>
 
               <button class="buttons uk-button-primary" id="eventsNextButton">></button>
 
-              <button class="buttons uk-button-default uk-align-right" id="eventResultsModalCloseButton">x</button>
+              <button class="buttons uk-button-primary uk-align-right" id="eventResultsModalCloseButton">x</button>
 
             </div>
             
-            <div id="eventResultsContainer"></div>
+            <div id="eventResultsContainer" class="big-box"></div>
 
           </div>
 
@@ -193,12 +192,19 @@
 
         <div class="uk-position-center" id="weatherResultsModalContainer">
 
-          <div class="mx-auto local-modal">
+          <div class="mx-auto local-modal-results">
 
-            <button class="buttons uk-button-default uk-align-right" id="weatherResultsModalCloseButton">x</button>
+            <div class="uk-navbar-container uk-navbar-transparent local-navbar">
+
+              <button class="buttons uk-button-primary" id="weatherPreviousButton"><</button>
+
+              <button class="buttons uk-button-primary" id="weatherNextButton">></button>
+
+              <button class="buttons uk-button-primary uk-align-right" id="weatherResultsModalCloseButton">x</button>
+
+            </div>
             
-            <div id="weatherResultsContainer" class="row"></div>
-
+            <div id="weatherResultsContainer"></div>
 
           </div>
 

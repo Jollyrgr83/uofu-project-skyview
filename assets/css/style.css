@@ -56,14 +56,25 @@
     display: none;
 }
 .big-box {
-    margin: 1%;
-    padding: 1%;
+    margin: 2.5%;
+    padding: 2.5%;
     border: solid 1pt black;
+    background-color: lightsteelblue;
 }
 .small-box {
     margin: 1%;
     padding: 1%;
     border: solid 1pt black;
+    background-color: whitesmoke;
+    overflow-wrap: break-word;
+}
+.weather-small-box {
+    text-align: center;
+    background-color: lightsteelblue;
+    margin: 1%;
+    padding: 1%;
+    overflow-wrap: break-word;
+    width: 150px;
 }
 .image {
     width: 100%;
@@ -81,4 +92,18 @@
 }
 .local-modal-results {
     width: auto;
+    background-color: none;
+}
+.outer-container {
+    width: 100%;
+}
+.result-button {
+    width: 25%;
+}
+.results-modal {
+    background-color: none;
+}
+.local-navbar {
+    margin: 2.5% 2.5% 0 2.5%;
+    padding: 2.5% 0 0 0;
 }

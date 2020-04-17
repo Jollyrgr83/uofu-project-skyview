@@ -96,8 +96,8 @@ var dayNames = {
 
 // displays modals based on input by updating the show/hide classes for the applicable container elements
 function display(page) {
-    var inputModalClassName = "uk-position-large uk-position-top-center"
-    var resultsModalClassName = "uk-position-large uk-position-top-center"
+    var inputModalClassName = "uk-position-large uk-position-top-center uk-container outer-container"
+    var resultsModalClassName = "uk-position-large uk-position-top-center uk-container outer-container results-modal"
     switch (page) {
         case "modal-1":
             // show: modal 1
@@ -337,7 +337,8 @@ function eventSearch() {
                 url: queryURLWeatherOneCall,
                 method: "GET"
             }).then(function(response) {
-                renderWeather(response);
+                localStorage.setItem("weatherObject", JSON.stringify(response));
+                renderWeather(response, 0);
             });
         });
     }
@@ -350,51 +351,50 @@ function eventSearch() {
                 url: queryURLWeatherOneCall,
                 method: "GET"
             }).then(function(response) {
-                renderWeather(response);
+                localStorage.setItem("weatherObject", JSON.stringify(response));
+                renderWeather(response, 0);
             });
     }
 }
 // renders weather information
-function renderWeather(response) {
+function renderWeather(response, weatherIndexNumber) {
     // clear existing information in weather results modal
     $("#weatherResultsContainer").empty();
+    // update data-index attribute
+    $("#weatherResultsContainer").attr("data-index", weatherIndexNumber);
     // create and update html elements
     var weekdayNum = (new Date()).getDay();
-    for (let i = 0; i < response.daily.length; i++) {
-        // convert temperature to Fahrenheit
-        var temp = (((response.daily[i].temp.max) - 273.15) * (9 / 5) + 32).toFixed(0);
-        var iconID = response.daily[i].weather[0].icon;
-        var iconURL = "https://openweathermap.org/img/wn/" + iconID + "@2x.png";
-        var description = response.daily[i].weather[0].description;
-        var iconAlt = response.daily[i].weather[0].main;
-        // resets weekdayNum if it goes past 7 (number of key values in dayNames object)
-        if (weekdayNum + i > 7) {
-            weekdayNum = weekdayNum - 7;
-        }
-        // obtains dayname string from dayNames object
-        var weekdayString = dayNames[weekdayNum + i];
-        // create html elements
-        var tempElement = $("<div>");
-        var iconElement = $("<img>");
-        var descElement = $("<div>");
-        var dayElement = $("<div>");
-        var weatherContainerElement = $("<div>");
-        // update attributes
-        tempElement.text(temp + "°F");
-        iconElement.attr("src", iconURL);
-        iconElement.attr("alt", iconAlt);
-        descElement.text(description);
-        dayElement.text(weekdayString);
-        weatherContainerElement.attr("class", "big-box col-sm-2");
-        // append html elements to weather results modal
-        
-        weatherContainerElement.append(dayElement);
-        weatherContainerElement.append(tempElement);
-        weatherContainerElement.append(iconElement);
-        weatherContainerElement.append(descElement);
-
-        $("#weatherResultsContainer").append(weatherContainerElement);
+    // convert temperature to Fahrenheit
+    var temp = (((response.daily[weatherIndexNumber].temp.max) - 273.15) * (9 / 5) + 32).toFixed(0);
+    var iconID = response.daily[weatherIndexNumber].weather[0].icon;
+    var iconURL = "https://openweathermap.org/img/wn/" + iconID + "@2x.png";
+    var description = response.daily[weatherIndexNumber].weather[0].description;
+    var iconAlt = response.daily[weatherIndexNumber].weather[0].main;
+    // resets weekdayNum if it goes past 7 (number of key values in dayNames object)
+    if (weekdayNum + weatherIndexNumber > 7) {
+        weekdayNum = weekdayNum - 7;
     }
+    // obtains dayname string from dayNames object
+    var weekdayString = dayNames[weekdayNum + weatherIndexNumber];
+    // create html elements
+    var tempElement = $("<div>");
+    var iconElement = $("<img>");
+    var descElement = $("<div>");
+    var dayElement = $("<div>");
+    var weatherContainerElement = $("<div>");
+    // update attributes
+    tempElement.text(temp + "°F");
+    iconElement.attr("src", iconURL);
+    iconElement.attr("alt", iconAlt);
+    descElement.text(description);
+    dayElement.text(weekdayString);
+    weatherContainerElement.attr("class", "weather-small-box mx-auto");
+    // append html elements to weather results modal
+    weatherContainerElement.append(dayElement);
+    weatherContainerElement.append(tempElement);
+    weatherContainerElement.append(iconElement);
+    weatherContainerElement.append(descElement);
+    $("#weatherResultsContainer").append(weatherContainerElement);
 }
 // render earth events information
 function renderEarthEvents(response, earthIndexNumber) {
@@ -416,9 +416,12 @@ function renderEarthEvents(response, earthIndexNumber) {
     urlElement.attr("href", googleEarthURL);
     urlElement.attr("target", "_blank");
     urlElement.text(googleEarthURL);
+    titleElement.attr("class", "small-box");
+    urlContainer.attr("class", "small-box");
     //append elements
+    urlContainer.append(urlElement);
     $("#eventResultsContainer").append(titleElement);
-    $("#eventResultsContainer").append(urlElement);
+    $("#eventResultsContainer").append(urlContainer);
 }
 // render space events information
 function renderSpaceEvents(response, spaceIndexNumber) {
@@ -434,33 +437,29 @@ function renderSpaceEvents(response, spaceIndexNumber) {
     if (DONKI[messageTitle]) {
         messageTitle = DONKI[messageTitle];
     }
-    // parse message into components and remove IDs, Notes, and Disclaimers
+    // create html elements
     var messageElement = $("<div>");
+    var urlElement = $("<a>");
+    var urlContainer = $("<div>");
+    // update html elements
+    urlElement.attr("href", messageURL);
+    urlElement.attr("target", "_blank");
+    urlElement.text("Link to full message: " + messageURL);
+    urlContainer.attr("class", "small-box");
+    // parse message into components and remove IDs, Notes, Disclaimers, and blanks and add to html elements
     var messageBodyArray = messageBody.split("##");
     for (let j = 0; j < messageBodyArray.length; j++) {
-        if (messageBodyArray[j].indexOf("Message ID:") === -1 && messageBodyArray[j].indexOf("Disclaimer:") === -1 && messageBodyArray[j].indexOf("Notes:") === -1) {
+        if (messageBodyArray[j].indexOf("Message ID:") === -1 && messageBodyArray[j].indexOf("Disclaimer:") === -1 && messageBodyArray[j].indexOf("Notes:") === -1 && messageBodyArray[j] != "" && messageBodyArray[j] != " " && messageBodyArray[j] != null && messageBodyArray[j] != undefined && messageBodyArray[j] != "\n") {
             var divElement = $("<div>");
             divElement.text(messageBodyArray[j]);
-            divElement.attr("class", "box");
+            divElement.attr("class", "small-box");
             messageElement.append(divElement);
         }
     }
-    // create html elements
-    var titleElement = $("<div>");
-    var urlContainer = $("<div>");
-    var urlElement = $("<a>");
-    // update html elements
-    titleElement.text(messageTitle);
-    urlElement.attr("href", messageURL);
-    urlElement.attr("target", "_blank");
-    urlElement.text(messageURL);
     // append html elements
-    var containerElement = $("<div>");
-    containerElement.attr("class", "box");
-    containerElement.append(titleElement);
-    containerElement.append(urlElement);
-    containerElement.append(messageElement);
-    $("#eventResultsContainer").append(containerElement);
+    urlContainer.append(urlElement);
+    messageElement.append(urlContainer);
+    $("#eventResultsContainer").append(messageElement);
 }
 // retrieves location information
 function getLocation() {
@@ -689,6 +688,28 @@ $(document).on("click", ".buttons", function(event) {
             }
             renderSpaceEvents(spaceEventsObject, spaceIndexNumber);     
         }
+    }
+    else if (targetID === "weatherPreviousButton") {
+        var weatherObject = JSON.parse(localStorage.getItem("weatherObject"));
+        var weatherIndexNumber = $("#weatherResultsContainer").attr("data-index");
+        if (weatherIndexNumber <= 0) {
+            weatherIndexNumber = weatherObject.daily.length -1;
+        }
+        else {
+            weatherIndexNumber--;
+        }
+        renderWeather(weatherObject, weatherIndexNumber);
+    }
+    else if (targetID === "weatherNextButton") {
+        var weatherObject = JSON.parse(localStorage.getItem("weatherObject"));
+        var weatherIndexNumber = $("#weatherResultsContainer").attr("data-index");
+        if (weatherIndexNumber >= weatherObject.daily.length - 1) {
+            weatherIndexNumber = 0;
+        }
+        else {
+            weatherIndexNumber++;
+        }
+        renderWeather(weatherObject, weatherIndexNumber);
     }
 });
 // STARTING SCRIPT
