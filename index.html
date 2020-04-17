@@ -24,13 +24,13 @@
 
           <!-- Previous and next buttons used to change pictures -->
 
-          <button id="previous" class="buttons uk-button-primary m-1 p-1"><</button>
+          <button id="previous" class="buttons uk-button-primary m-1 p-1" uk-tooltip="Click this button to load the previous background image"><</button>
 
-          <button id="next" class="buttons uk-button-primary m-1 p-1">></button>
+          <button id="next" class="buttons uk-button-primary m-1 p-1" uk-tooltip="Click this button to load the next background image">></button>
 
           <!-- open the terms to know modal -->
 
-          <button id="termsModalOpenButton" class="buttons uk-button-primary uk-align-right m-1 p-1">Terms to Know</button>
+          <button id="termsModalOpenButton" class="buttons uk-button-primary uk-align-right m-1 p-1" uk-tooltip="Click this button to see commonly used terms and their explanations">Terms to Know</button>
 
         </div>
 
@@ -48,7 +48,9 @@
 
           <div class="mx-auto local-modal">
 
-            <p>Welcome to our Nasa App. Our app uses a culmination of Google & Nasa API's to display upcoming astral events. Give it a go. Simply click below to get started.</p>
+            <h2>Welcome to [title]!</h2>
+            
+            <p>Look to the stars or a little closer to home with a combination of weather, space, and earth event information from NASA, OpenWeather, and Google. Give it a go!</p>
             
           </div>
           
@@ -218,32 +220,20 @@
         
         <div class="uk-position-center" id="termsModalContainer">
           
-          <div class="mx-auto local-modal">
+          <div class="mx-auto local-modal-results">
             
-            <button class="buttons uk-button-default uk-align-right" id="termsModalCloseButton">x</button>
+            <div class="uk-navbar-container uk-navbar-transparent local-navbar">
+
+              <button class="buttons uk-button-primary" id="termsPreviousButton"><</button>
+
+              <button class="buttons uk-button-primary" id="termsNextButton">></button>
+
+              <button class="buttons uk-button-primary uk-align-right" id="termsModalCloseButton">x</button>
+
+            </div>
+
+            <div id="termsContainer"></div>
             
-            <h2>Terms to Know</h2>
-
-            <ul>
-
-              <li>"CME" : "Coronal Mass Ejection": Is a significant release of plasma and accompanying magnetic field from the solar corona (eye).</li>
-
-              <li>"GST" : "Geomagnetic Storm": A geomagnetic storm is a temporary disturbance of the Earth's magnetosphere caused by a solar wind shock wave and/or cloud of magnetic field that interacts with the Earth's magnetic field.</li>
-
-              <li>"IPS" : "Interplanetary Shock": Interplanetary shocks are a type of collisionless shock — ones where particles transfer energy through electromagnetic fields instead of directly bouncing into one another.</li>
-
-              <li>"FLR" : "Solar Flare": A solar flare is a sudden flash of increased brightness on the Sun, usually observed near its surface and in close proximity to a sunspot group.</li>
-
-              <li>"SEP" : "Solar Energetic Particle": Solar energetic particles are high-energy radiation emitted from the sun during solar flares or coronal mass ejections. Once they are released from the sun, they travel through the magnetic fields of the solar corona and interplanetary medium.</li>
-
-              <li>"MPC" : "Magnetopause Crossing": The magnetopause is the boundary of the magnetosphere and it's crossing</li>
-
-              <li>"RBE" : "Radiation Belt Enhancement": The radiation belts are regions of space around the Earth that are known for their high‐energy particle populations, this is an enhancement of those areas</li>
-
-              <li>"HSS" : "Hight Speed Stream": This open, magnetic field line structure allows the solar wind to escape more readily into space, resulting in streams of relatively fast solar wind and is often referred to as a high speed stream.</li>
-
-            </ul>
-
           </div>
 
         </div>  

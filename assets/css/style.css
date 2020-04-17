@@ -67,6 +67,7 @@
     border: solid 1pt black;
     background-color: whitesmoke;
     overflow-wrap: break-word;
+    width: 100%;
 }
 .weather-small-box {
     text-align: center;
@@ -82,7 +83,7 @@
     z-index: -1;
 }
 .local-modal {
-    width: 75%;
+    /* width: 50%; */
     height: auto;
     padding: 5%;
     background-color: lightslategray;
@@ -91,14 +92,14 @@
     margin: 25%;
 }
 .local-modal-results {
-    width: auto;
+    width: 75%;
     background-color: none;
 }
 .outer-container {
-    width: 100%;
+    width: 75%;
 }
 .result-button {
-    width: 25%;
+    width: 100%;
 }
 .results-modal {
     background-color: none;

@@ -91,13 +91,47 @@ var dayNames = {
     6 : "Saturday",
     7 : "Sunday"
 };
+// used in terms to know modal
+var termsObject = [{
+        "title" : "Coronal Mass Ejection",
+        "text" : "A significant release of plasma and accompanying magnetic field form the solar corona (eye) of the sun (or a star)."
+    },
+    {
+        "title" : "Geomagnetic Storm",
+        "text" : "A temporary disturbance of the Earth's magnetosphere caused by a solar wind shock wave and/or cloud of magnetic field that interacts with the Earth's magnetic field."
+    },
+    {
+        "title" : "Interplanetary Shock",
+        "text" : "A type of collisionless shock where particles transfer energy through electromagnetic fields instead of directly bouncing into one another."
+    },
+    {
+        "title" : "Solar Flare",
+        "text" : "A sudden flash of increased brightness on the sun (or a star) that is usually observed near its surface and in close proximity to a sunspot group."
+    },
+    {
+        "title" : "Solar Energetic Particle",
+        "text" : "High-energy radiation emitted from the sun (or a star) during solar flares or coronal mass ejections. Once released, they travel through the magnetic fields of the solar corona and interplanetary medium."
+    },
+    {
+        "title" : "Magnetopause Crossing",
+        "text" : "The boundary of the magnetosphere and its crossing."
+    },
+    {
+        "title" : "Radiation Belt Enhancement",
+        "text" : "An enhancement of the regions of space around the Earth that are known for their high-energy particle populations."
+    },
+    {
+        "title" : "Hight Speed Stream",
+        "text" : "An open magnetic field line structure that allows the solar wind to escape more readily into space, resulting in streams of relatively fast solar wind."
+    },
+];
 
 // FUNCTIONS
 
 // displays modals based on input by updating the show/hide classes for the applicable container elements
 function display(page) {
-    var inputModalClassName = "uk-position-large uk-position-top-center uk-container outer-container"
-    var resultsModalClassName = "uk-position-large uk-position-top-center uk-container outer-container results-modal"
+    var inputModalClassName = "uk-position-large uk-position-top-center outer-container"
+    var resultsModalClassName = "uk-position-large uk-position-top-center outer-container results-modal"
     switch (page) {
         case "modal-1":
             // show: modal 1
@@ -356,6 +390,26 @@ function eventSearch() {
             });
     }
 }
+// render terms to know information
+function renderTerms(termsIndexNumber) {
+    // clear existing information in terms modal
+    $("#termsContainer").empty();
+    // update data-index attribute
+    $("#termsContainer").attr("data-index", termsIndexNumber);
+    // create and update html elements
+    var titleElement = $("<div>");
+    var textElement = $("<div>");
+    var containerElement = $("<div>");
+    titleElement.attr("class", "small-box");
+    textElement.attr("class", "small-box");
+    titleElement.text(termsObject[termsIndexNumber].title);
+    textElement.text(termsObject[termsIndexNumber].text);
+    containerElement.attr("class", "big-box");
+    // append html elements
+    containerElement.append(titleElement);
+    containerElement.append(textElement);
+    $("#termsContainer").append(containerElement);
+}
 // renders weather information
 function renderWeather(response, weatherIndexNumber) {
     // clear existing information in weather results modal
@@ -548,6 +602,8 @@ $(document).on("click", ".buttons", function(event) {
     }    
     // front page "Terms to Know" button click
     else if (targetID === "termsModalOpenButton") {
+        // renders terms html elements
+        renderTerms(0);
         // displays terms modal
         display("terms");
     }    
@@ -710,6 +766,26 @@ $(document).on("click", ".buttons", function(event) {
             weatherIndexNumber++;
         }
         renderWeather(weatherObject, weatherIndexNumber);
+    }
+    else if (targetID === "termsPreviousButton") {
+        var termsIndexNumber = $("#termsContainer").attr("data-index");
+        if (termsIndexNumber <= 0) {
+            termsIndexNumber = termsObject.length - 1;
+        }
+        else {
+            termsIndexNumber--;
+        }
+        renderTerms(termsIndexNumber);
+    }
+    else if (targetID === "termsNextButton") {
+        var termsIndexNumber = $("#termsContainer").attr("data-index");
+        if (termsIndexNumber >= termsObject.length - 1) {
+            termsIndexNumber = 0;
+        }
+        else {
+            termsIndexNumber++;
+        }
+        renderTerms(termsIndexNumber);
     }
 });
 // STARTING SCRIPT
