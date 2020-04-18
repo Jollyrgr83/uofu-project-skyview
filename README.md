@@ -1,19 +1,19 @@
 
-# project-1
+# Skyvi3w
 
-This project is a search engine that uses your location and desired inputs to provide you with a weather forecast and associated information regarding current and upcoming space and earth events in order to maximize your viewing experience all against a backdrop of striking visuals provided to you by NASA's Astronomy Picture of the Day.
+Skyvi3w is a search engine that uses your location and desired inputs to provide you with a weather forecast and associated information regarding current and upcoming space and earth events in order to maximize your viewing experience all against a backdrop of striking visuals provided to you by NASA's Astronomy Picture of the Day.
 
 # Requirements
 
-This project was designed to be used on any web browser.
+Skyvi3w was designed to be used on any web browser.
 
 # Installation
 
-This project does not require installation.
+Skyvi3w does not require installation.
 
 # Technology/Framework
 
-This project was created using html, css, and javascript and incorporates bootstrap, UIKit, and jQuery libraries. This project uses NASA Open APIs and the OpenWeatherMap API.
+Skyvi3w was created using html, css, and javascript and incorporates bootstrap, UIKit, and jQuery libraries. This project uses NASA Open APIs and the OpenWeatherMap API.
 
 # How to Use
 
