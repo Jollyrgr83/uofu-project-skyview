@@ -1,36 +1,19 @@
-.show {
-    display: block;
-}
-.hide {
-    display: none;
-}
-.big-box {
-    margin: 2.5%;
-    padding: 2.5%;
-    border: solid 1pt black;
-    background-color: lightsteelblue;
-}
-.small-box {
-    margin: 1%;
-    padding: 1%;
-    border: solid 1pt black;
-    background-color: whitesmoke;
-    overflow-wrap: break-word;
-    width: 100%;
-}
-.weather-small-box {
-    text-align: center;
-    background-color: lightsteelblue;
-    margin: 1%;
-    padding: 1%;
-    overflow-wrap: break-word;
-    width: 150px;
-}
+/* used for background image effect */
 .image {
     width: 100%;
     height: auto;
     z-index: -1;
 }
+/* used for button effects */
+.result-button {
+    width: 100%;
+}
+.button-rounded {
+    border-radius: 40px;
+    width: 200px;
+    height: 100px%;
+}
+/* used for modal/overlay effects and layout */
 .local-modal {
     /* width: 50%; */
     height: auto;
@@ -50,18 +33,41 @@
 .outer-container {
     width: 75%;
 }
-.result-button {
-    width: 100%;
-}
 .results-modal {
     background-color: none;
+}
+/* used for dynamically generated elements and layout (results/weather) */
+.big-box {
+    margin: 2.5%;
+    padding: 2.5%;
+    border: solid 1pt black;
+    background-color: lightsteelblue;
+    opacity: 0.7;
+}
+.small-box {
+    margin: 1%;
+    padding: 1%;
+    border: solid 1pt black;
+    background-color: whitesmoke;
+    overflow-wrap: break-word;
+    width: 100%;
+}
+.weather-small-box {
+    text-align: center;
+    background-color: lightsteelblue;
+    margin: 1%;
+    padding: 1%;
+    overflow-wrap: break-word;
+    width: 150px;
 }
 .local-navbar {
     margin: 2.5% 2.5% 0 2.5%;
     padding: 2.5% 0 0 0;
 }
-.button-rounded {
-    border-radius: 40px;
-    width: 200px;
-    height: 100px%;
+/* used to hide and display container elements for modal/overlay effects */
+.show {
+    display: block;
+}
+.hide {
+    display: none;
 }

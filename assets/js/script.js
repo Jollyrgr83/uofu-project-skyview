@@ -327,7 +327,7 @@ function initializePage() {
 // retrieves weather and event information and renders to applicable modal
 function eventSearch() {
     if (eventType === "space") {
-        // run call to NASA SSD/CNEOS endpoint, update event results modal with information
+        // run call to NASA DONKI endpoint, update event results modal with information
         var queryURLNASADONKI = "https://api.nasa.gov/DONKI/notifications?api_key=" + apiKeyNASA;
         $.ajax({
             url: queryURLNASADONKI,
