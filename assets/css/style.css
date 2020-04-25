@@ -13,6 +13,14 @@
     width: 200px;
     height: 100px%;
 }
+.buttons {
+    background-color: #4666FF;
+    color: whitesmoke;
+}
+.buttons:hover {
+    background-color: whitesmoke;
+    color: #4666FF;
+}
 /* used for modal/overlay effects and layout */
 .local-modal {
     /* width: 50%; */

@@ -566,7 +566,18 @@ function getLocation() {
 
 $(document).on("click", ".buttons", function(event) {
     var targetID = $(event.target).attr("id");
+    console.log("targetID 001", targetID);
+    if (targetID === undefined || targetID === "") {
+        targetID = event.target.parentElement.id;
+        console.log("targetID 002", targetID);
+        if (targetID === undefined || targetID === "") {
+            targetID = event.target.parentElement.parentElement.id;
+            console.log("targetID 003", targetID);
+        }
+    }
     console.log("Button Click - ", targetID);
+    console.log("event.target", event.target);
+    console.log("event.target.parentElement", event.target.parentElement);
     // front page "Next" and "Previous" button click
     if (targetID === "next" || targetID === "previous") {
         //retrieve data-index property from background image element

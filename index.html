@@ -21,21 +21,15 @@
     <header>
 
       <div class="uk-navbar-container uk-navbar-transparent uk-position-top">
-
-          <!-- Previous and next buttons used to change pictures -->
-
-          <button id="previous" class="buttons uk-button-primary m-1 p-1" uk-tooltip="Click this button to load the previous background image"><</button>
-
-          <button id="next" class="buttons uk-button-primary m-1 p-1" uk-tooltip="Click this button to load the next background image">></button>
-
-          <!-- open the terms to know modal -->
-
-          <button id="termsModalOpenButton" class="buttons uk-button-primary uk-align-right m-1 p-1" uk-tooltip="Click this button to see commonly used terms and their explanations">?</button>
-
-        </div>
-
-      <div>
-
+        
+        <button uk-icon="icon: triangle-left; ratio: 10" class="buttons uk-icon-button" id="previous" uk-tooltip="Click this button to load the previous background image"></button>
+      
+        <button uk-icon="icon: triangle-right; ratio: 10" class="buttons uk-icon-button" id="next" uk-tooltip="Click this button to load the next background image"></button>
+      
+        <button href="#" uk-icon="icon: question; ratio: 10" class="buttons uk-icon-button uk-align-right" id="termsModalOpenButton" uk-tooltip="Click this button to see commonly used terms and their explanations"></button>
+      
+      </div>
+      
     </header>
 
     <img id="backgroundImage" class="image uk-background-top-center"/>
@@ -148,11 +142,11 @@
 
             <div class="uk-navbar-container uk-navbar-transparent local-navbar">
 
-              <button class="buttons uk-button-primary" id="eventsPreviousButton"><</button>
+              <button uk-icon="icon: triangle-left; ratio: 10" class="buttons uk-icon-button" id="eventsPreviousButton"></button>
 
-              <button class="buttons uk-button-primary" id="eventsNextButton">></button>
+              <button uk-icon="icon: triangle-right; ratio: 10" class="buttons uk-icon-button" id="eventsNextButton"></button>
 
-              <button class="buttons uk-button-primary uk-align-right" id="eventResultsModalCloseButton">x</button>
+              <button uk-icon="icon: close; ratio: 10" class="buttons uk-icon-button uk-align-right" id="eventResultsModalCloseButton"></button>
 
             </div>
             
@@ -170,11 +164,11 @@
 
             <div class="uk-navbar-container uk-navbar-transparent local-navbar">
 
-              <button class="buttons uk-button-primary" id="weatherPreviousButton"><</button>
+              <button uk-icon="icon: triangle-left; ratio: 10" class="buttons uk-icon-button" id="weatherPreviousButton"></button>
 
-              <button class="buttons uk-button-primary" id="weatherNextButton">></button>
+              <button uk-icon="icon: triangle-right; ratio: 10" class="buttons uk-icon-button" id="weatherNextButton"></button>
 
-              <button class="buttons uk-button-primary uk-align-right" id="weatherResultsModalCloseButton">x</button>
+              <button uk-icon="icon: close; ratio: 10" class="buttons uk-icon-button uk-align-right" id="weatherResultsModalCloseButton"></button>
 
             </div>
             
@@ -192,11 +186,11 @@
             
             <div class="uk-navbar-container uk-navbar-transparent local-navbar">
 
-              <button class="buttons uk-button-primary" id="termsPreviousButton"><</button>
+              <button uk-icon="icon: triangle-left; ratio: 10" class="buttons uk-icon-button" id="termsPreviousButton"></button>
 
-              <button class="buttons uk-button-primary" id="termsNextButton">></button>
+              <button uk-icon="icon: triangle-right; ratio: 10" class="buttons uk-icon-button" id="termsNextButton"></button>
 
-              <button class="buttons uk-button-primary uk-align-right" id="termsModalCloseButton">x</button>
+              <button uk-icon="icon: close; ratio: 10" class="buttons uk-icon-button uk-align-right" id="termsModalCloseButton"></button>
 
             </div>
 
