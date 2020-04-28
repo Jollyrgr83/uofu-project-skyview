@@ -5,27 +5,27 @@ Skyvi3w is a search engine that uses your location and desired inputs to provide
 
 <https://jollyrgr83.github.io/Project-1/>
 
-# Requirements
+## Requirements
 
 Skyvi3w was designed to be used on any web browser.
 
-# Installation
+## Installation
 
 Skyvi3w does not require installation.
 
-# Technology/Framework
+## Technology/Framework
 
 Skyvi3w was created using html, css, and javascript and incorporates bootstrap, UIKit, and jQuery libraries. This project uses NASA Open APIs and the OpenWeatherMap API.
 
-# How to Use
+## How to Use
 
 Use the next and previous buttons in the upper left corner to change the background image. New images are downloaded daily from the NASA Astronomical Picture of the Day API. At any time, click the "Terms to Know" button to access explanations for commonly used terms. To get started, click the "Get Started" button and select either "Earth" or "Space" events. Next, confirm your location (from local storage if you have saved a favorite location or from your browser's geolocation information) or enter your city. When the results screen is displayed, access upcoming weather forecasts by clicking the "Weather Results" button, access the events by clicking the "Event Results" button, or start over by clicking the "Search Again" button. Space events are retrieved from the NASA Space Weather Database of Notifications, Knowledge, and Information (DONKI) API. Earth events are retrieved from the NASA Earth Observation and Natural Event Tracker. A Google Earth link is provided to explore the indicated area.
 
-# Credits
+## Credits
 
 We would like to thank all the instructors, TAs, and staff at the University of Utah Coding Bootcamp for the instruction, curriculum, inspiration, and other support provided to assist me in the creation of this project.
 
-# License
+## License
 
 Released under MIT License
 
